@@ -443,21 +443,6 @@ if ($older_children >= "1") {
               </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
               <style type="text/css">
                 .inputs {
                   height: 200px;
@@ -1434,7 +1419,7 @@ if ($older_children >= "1") {
 
                   if ($diving_num == $diving1) { ?>
                     <div class="custom-control custom-radio mb-5">
-                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>" checked="">
+                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>" checked>
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
@@ -1447,11 +1432,11 @@ if ($older_children >= "1") {
                     </div>
                   <?php } else if ($diving_num == $diving2) { ?>
                     <div class="custom-control custom-radio mb-5">
-                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>">
+                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>" checked>
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
-                      <input type="radio" id="diving2" name="diving" class="custom-control-input" value="<?php echo $diving2; ?>" checked="">
+                      <input type="radio" id="diving2" name="diving" class="custom-control-input" value="<?php echo $diving2; ?>">
                       <label class="custom-control-label" for="diving2">ดำน้ำโซนนอก</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
@@ -1473,7 +1458,7 @@ if ($older_children >= "1") {
                     </div>
                   <?php } else { ?>
                     <div class="custom-control custom-radio mb-5">
-                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>">
+                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>" checked>
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
@@ -1515,7 +1500,7 @@ if ($older_children >= "1") {
 
                 <div class="custom-control custom-checkbox mb-12">
 
-                  <input type="checkbox" readonly checked class="custom-control-input" id="customCheck6" name="insurance">
+                  <input type="checkbox" readonly checked class="custom-control-input" id="customCheck6" name="insurance" checked disabled>
 
                   <label class="custom-control-label" for="customCheck6">ประกันภัย</label>
                 </div>
@@ -1934,7 +1919,7 @@ if ($older_children >= "1") {
                   <?php if ($car != "") { ?>
                     <tr>
                       <th scope="row">ค่ารถ</th>
-                      <th scope="row"><?php echo $car ?></th>
+                      <th scope="row"><?php echo $car_num1; ?></th>
                     </tr>
                   <?php } else {
                   } ?>
@@ -1942,7 +1927,7 @@ if ($older_children >= "1") {
                   <?php if ($boat != "") { ?>
                     <tr>
                       <th scope="row">ค่าเรือ</th>
-                      <th scope="row"><?php echo $boat ?></th>
+                      <th scope="row"><?php echo $boat_num1 ?></th>
                     </tr>
                   <?php } else {
                   } ?>
@@ -1950,7 +1935,7 @@ if ($older_children >= "1") {
                   <?php if ($diving != "") { ?>
                     <tr>
                       <th scope="row">ค่าดำน้ำ</th>
-                      <th scope="row"><?php echo $diving ?></th>
+                      <th scope="row"><?php echo $diving_num ?></th>
                     </tr>
                   <?php } else {
                   } ?>

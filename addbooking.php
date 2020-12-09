@@ -3,12 +3,6 @@
 //require( "PHPMailer/PHPMailerAutoload.php" );
 include_once( 'connectdb.php' );
 
-
-
-
-
-
-
     $month =  date('m');
     $transaction_date =  date('d-m-Y');
     $name =  $_POST['name'];
@@ -110,7 +104,7 @@ if ( move_uploaded_file( $_FILES[ 'file' ][ 'tmp_name' ], $uploaded_file ) ) {
 			$in = " UPDATE `tb_report` SET `id_booking` = '".$text."' WHERE `tb_report`.`id` ='" . $ss[ 'id' ] . "'";
 			$a = mysqli_query( $con, $in );
             }
-    echo "<script> window.location.href = 'report.php?resort_name=$resort_name'</script > ";
+    echo "<script> window.location.href = 'report.php'</script > ";
 
 
 /*
@@ -170,21 +164,3 @@ if ( move_uploaded_file( $_FILES[ 'file' ][ 'tmp_name' ], $uploaded_file ) ) {
 
 
 */
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

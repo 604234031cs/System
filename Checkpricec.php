@@ -177,25 +177,32 @@ error_reporting(0);
 
                   <input hidden type="text" name="id_tb_resort" value="<?php echo $id_tb_resort; ?>">
 
-                  <script>
+                  <!-- <script>
                     $(document).ready(function() {
 
                       let startday = document.getElementById("type1-start").value
                       var d = new Date(startday);
                       // console.log(d.getFullYear());
+                      d.setDate(d.getDate() + 2)
                       var year = d.getFullYear();
-                      var month = d.getMonth();
-                      var day = d.getDay();
+                      var month = d.getMonth() + 1;
+                      var day = d.getDate();
+                      var mkDay = new String(day)
                       if (month < 10) {
                         month = "0" + month;
                       }
-                      if (day < 10) {
-                        day = "0" + day;
+                      if (mkDay.length == 1) {
+                        mkDay = "0" + mkDay;
                       }
-                      let fulldate = year + "-" + month + "-" + day;
-                      console.log(fulldate);
+                      let fulldate = year + "-" + month + "-" + mkDay;
+                      document.getElementById('type1-deadline').value = fulldate;
                     });
-                  </script>
+
+
+                    function clickautodate() {
+                      console.log(document.getElementById("type1-start").value);
+                    }
+                  </script> -->
 
 
 
@@ -208,7 +215,7 @@ error_reporting(0);
                       <div id="id_startCalendar" class="calendar-widget default-today" data-next="#id_deadlineCalendar" date-min="today" tabindex="-1">
                         <div class="input-wrapper">
                           <label for="type1-start">Starting Date</label>
-                          <input class="date-field form-control" id="type1-start" type="text" placeholder="Starting Date" name="Checkin" readonly>
+                          <input class="date-field form-control" id="type1-start" type="text" placeholder="Starting Date" name="Checkin" onclick="clickautodate()" readonly>
                         </div>
 
 
@@ -1334,7 +1341,7 @@ error_reporting(0);
 
 
                     <div class="custom-control custom-radio mb-5">
-                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1 ?>">
+                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1 ?>" checked>
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">

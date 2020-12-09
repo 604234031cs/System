@@ -28,7 +28,7 @@ session_start();
       
      
      // $connect = mysqli_connect("localhost", "thechic_resort", "Aa123654", "thechic_resort");
-      $connect = mysqli_connect("localhost", "root", "sbayroo007", "booking");  
+      $connect = mysqli_connect("localhost", "root", "", "booking");  
       $sql1 = "SELECT * FROM tb_report   WHERE id ='".$_GET["id"]."'";  
       $result1 = mysqli_query($connect, $sql1); 
       
@@ -116,7 +116,7 @@ session_start();
         <td width="25%" ><b style="font-size: 1em;">วันที่เขาพัก : <br> Arrival :</b></td>
         <td width="25%" align="center">'.$row1['checkin'].'</td>
         <td style="background-color: #DCDCDC" width="25%" ><b style="font-size: 1em;">เด็ก : <br> Number of Children :</b></td>
-        <td style="background-color: #DCDCDC" width="25%" align="center">-</td>
+        <td style="background-color: #DCDCDC" width="25%" align="center">'.$row1['ch1'].'</td>
         
     </tr>
     <tr>
@@ -124,7 +124,7 @@ session_start();
         <td width="25%"><b style="font-size: 1em;">วันที่เช็ดเอาท : <br> Departure  :</b></td>
         <td width="25%" align="center">'.$row1['checkout'].'</td>
         <td style="background-color: #DCDCDC" width="25%"><b style="font-size: 1em;">อายุของเด็ก  : <br> Age of Children  :</b></td>
-        <td style="background-color: #DCDCDC" width="25%" align="center">-</td>
+        <td style="background-color: #DCDCDC" width="25%" align="center">'.$row1['ch2'].'</td>
     </tr>
 
 
@@ -171,5 +171,4 @@ session_start();
 
       $obj_pdf->writeHTML($content);
       $name = 'Invoice-'.$id_booking.'.pdf';
-      $obj_pdf->Output($name, 'I');  
-?>
+      $obj_pdf->Output($name, 'I');
