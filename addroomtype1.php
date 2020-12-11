@@ -63,6 +63,7 @@ if ($_POST['id'] != "") {
                                         <option value="<?php echo $results["id"]; ?>"><?php echo $results["resort_name"]; ?></option>
                                     <?php  } ?>
                                 </select>
+                                
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">

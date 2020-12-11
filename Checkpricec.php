@@ -103,7 +103,7 @@ error_reporting(0);
 
                       <script>
                         function autoselect(value) {
-                          // console.log(value);
+                          console.log(value);
                           $.ajax({
                             url: "ajaxdata.php?page=checkprice&&id=" + value,
                             type: "GET",
@@ -215,7 +215,7 @@ error_reporting(0);
                       <div id="id_startCalendar" class="calendar-widget default-today" data-next="#id_deadlineCalendar" date-min="today" tabindex="-1">
                         <div class="input-wrapper">
                           <label for="type1-start">Starting Date</label>
-                          <input class="date-field form-control" id="type1-start" type="text" placeholder="Starting Date" name="Checkin" onclick="clickautodate()" readonly>
+                          <input class="date-field form-control" id="type1-start" type="text" placeholder="Starting Date" name="Checkin"  readonly>
                         </div>
 
 
@@ -1341,7 +1341,7 @@ error_reporting(0);
 
 
                     <div class="custom-control custom-radio mb-5">
-                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1 ?>" checked>
+                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1 ?>" >
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
@@ -1358,7 +1358,7 @@ error_reporting(0);
 
                   <div class="col-md-2 col-sm-12">
                     <label class="weight-600">
-                      <h4 class="text-blue h4">เเพคเกจเสริม</h4>
+                      <h4 class="text-blue h4">เเพคเกจเสริม<?php echo $diving3; ?></h4>
                     </label>
                     <div class="custom-control custom-checkbox mb-12">
                       <input type="checkbox" class="custom-control-input" id="customCheck1" name="car">

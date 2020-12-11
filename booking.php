@@ -45,6 +45,7 @@ $typser = $_POST["typser"];
     <?php include "header.php"; ?>
 
     <div class="main-container">
+
         <div class="pd-ltr-20">
             <div class="card-box pd-20 height-100-p mb-30">
                 <div class="row align-items-center">
@@ -77,7 +78,7 @@ $typser = $_POST["typser"];
                                 <label>
                                     <h4 class="text-blue h4">เบอร์โทรศัพท์ </h4>
                                 </label>
-                                <input type="number" class="form-control" name="phone" id="phone" placeholder="ระบุเบอร์โทรศัพท์" required>
+                                <input type="number" class="form-control" name="phone" id="phone" placeholder="ระบุเบอร์โทรศัพท์" max="10" pattern="[0-9]{10}" title="ใส่ข้อมูลให้ถูกต้อง" required>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
@@ -93,7 +94,7 @@ $typser = $_POST["typser"];
                                 <label>
                                     <h4 class="text-blue h4">ทริปเที่ยว </h4>
                                 </label>
-                                <select class="custom-select col-12" id="adult" name="adult">
+                                <select class="custom-select col-12" id="adult" name="adult" required>
                                     <option value=""></option>
                                     <option value="หลีเป๊ะโซนใน">หลีเป๊ะโซนใน</option>
                                     <option value="หลีเป๊ะโซนนอก">หลีเป๊ะโซนนอก</option>
@@ -167,7 +168,6 @@ $typser = $_POST["typser"];
                                     document.getElementById("deposit").setAttribute("color", "green");
                                     var deposit55 = document.getElementById("deposit").value = s;
                                     document.getElementById("deposit").value = deposit55;
-
                                 }
                             }
                         </script>
@@ -179,7 +179,7 @@ $typser = $_POST["typser"];
                                 <label>
                                     <h4 class="text-blue h4">จ่ายมัดจำ </h4>
                                 </label>
-                                <input type="text" class="form-control" name="Sales" id="Sales" value="" onchange="a()" />
+                                <input type="text" class="form-control" name="Sales" id="Sales" value="" onchange="a() " required/>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
@@ -264,13 +264,18 @@ $typser = $_POST["typser"];
                         <?php } ?>     -->
 
 
-
+                        <?php
+                        $sql = "SELECT resort_name FROM tb_resort where '$name'";
+                        $query33 = mysqli_query($con, $sql);
+                        $results33 = mysqli_fetch_assoc($query33);
+                        // echo $results33['resort_name'];
+                        ?>
 
 
 
 
                         <input hidden type="text" name="typser" value="<?php echo $typser; ?>">
-                        <input hidden type="text" name="room_name" id="room_name" value="<?php echo $name; ?>" />
+                        <input hidden type="text" name="room_name" id="room_name" value="<?php echo $results33['resort_name']; ?>" />
                         <input hidden type="text" name="days" id="days" value="<?php echo $days; ?> " />
                         <input hidden type="text" name="name_roomtype" id="name_roomtype" value="<?php echo $name_roomtype ?>" />
                         <input hidden type="text" name="package" id="package" value="<?php echo $days; ?>" />

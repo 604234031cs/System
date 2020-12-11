@@ -14,13 +14,14 @@ if ($_SESSION['Username'] == "") {
 include_once('connectdb.php');
 
 error_reporting(level);
-$name = $_REQUEST['name'];
+$name = $_REQUEST['id'];
 $name_roomtype = $_REQUEST['name_roomtype'];
 $Checkin = $_REQUEST['Checkin'];
 $Checkout = $_REQUEST['Checkout'];
 $car = $_REQUEST['car'];
 $boat = $_REQUEST['boat'];
 $diving = $_REQUEST['diving'];
+
 $insurance = $_REQUEST['insurance'];
 
 $car55 = $_REQUEST['car'];
@@ -50,7 +51,7 @@ $results33 = mysqli_fetch_assoc($query33);
 // while ($results33 = mysqli_fetch_assoc($query33)) {
 
 $car_num1 = $results33["price"];
-echo $car_num1;
+// echo $car_num1;
 // }
 
 
@@ -148,7 +149,7 @@ if ($older_children >= "1") {
   <?php include "header.php"; ?>
 
   <div class="main-container">
-
+    <?php echo $_POST['boat']; ?>
     <div class="pd-ltr-20">
       <div class="card-box pd-20 height-100-p mb-30">
         <div class="row align-items-center">
@@ -257,7 +258,7 @@ if ($older_children >= "1") {
                 <div class="form-group">
 
                   <label>
-                    <h4 class="text-blue h4">ที่พัก</h4>
+                    <h4 class="text-blue h4">ที่พัก <?php echo $diving_num; ?></h4>
                   </label>
                   <!-- <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" readonly=""> -->
                   <select class="custom-select col-12" id="id" name="id" onchange="autoselect(this.value)">
@@ -1432,17 +1433,18 @@ if ($older_children >= "1") {
                     </div>
                   <?php } else if ($diving_num == $diving2) { ?>
                     <div class="custom-control custom-radio mb-5">
-                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>" checked>
+                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>">
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
-                      <input type="radio" id="diving2" name="diving" class="custom-control-input" value="<?php echo $diving2; ?>">
+                      <input type="radio" id="diving2" name="diving" class="custom-control-input" value="<?php echo $diving2; ?>" checked>
                       <label class="custom-control-label" for="diving2">ดำน้ำโซนนอก</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving3" name="diving" class="custom-control-input" value="<?php echo $diving3; ?>">
                       <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก</label>
                     </div>
+                    <!-- <?php $diving_num; ?> -->
                   <?php } else if ($diving_num == $diving3) { ?>
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>">
@@ -1453,12 +1455,12 @@ if ($older_children >= "1") {
                       <label class="custom-control-label" for="diving2">ดำน้ำโซนนอก</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
-                      <input type="radio" id="diving3" name="diving" class="custom-control-input" value="<?php echo $diving3; ?>" checked="">
+                      <input type="radio" id="diving3" name="diving" class="custom-control-input" value="<?php echo $diving3; ?>" checked>
                       <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก</label>
                     </div>
                   <?php } else { ?>
                     <div class="custom-control custom-radio mb-5">
-                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>" checked>
+                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>">
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">

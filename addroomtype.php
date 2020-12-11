@@ -50,14 +50,19 @@ if ($_POST['id'] != "") {
 
 
                 <form action="add_1.php" id="frmMain" name="frmMain" method="post">
+
+
+
+
+
                     <div class="row" style="padding-top: 35px;">
                         <div class="col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>
                                     <h4 class="text-blue h4">ที่พัก</h4>
                                 </label>
-                                <select class="custom-select col-12" name="id_resort" id="id_resort" required>
-                                    <option selected value="">โปรดเลือกที่พัก...</option>
+                                <select class="custom-select col-12" name="id_resort" id="id_resort">
+                                    <option selected="">โปรดเลือกที่พัก...</option>
                                     <?php
                                     $sql = "SELECT * FROM `tb_resort` ";
                                     $query = mysqli_query($con, $sql);
@@ -72,7 +77,7 @@ if ($_POST['id'] != "") {
 
 
 
-                            <table class="table">
+                            <table class="table" id="myTable">
                                 <!-- head table -->
                                 <thead>
                                     <tr>

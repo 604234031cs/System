@@ -21,8 +21,24 @@ if ($_REQUEST['resort_name'] != "") {
     $date_star = '';
     $date_end = '';
 }
-
-
+$sql = "SELECT * FROM tb_car_boat_diving where name = 'car'";
+$querycar = mysqli_query($con, $sql);
+// $value =  mysqli_fetch_assoc($query1);
+while ($value =  mysqli_fetch_assoc($querycar)) {
+    $pricecar = $value['price'];
+}
+$sql = "SELECT * FROM tb_car_boat_diving where name = 'boat'";
+$queryboat = mysqli_query($con, $sql);
+// $value =  mysqli_fetch_assoc($query1);
+while ($value =  mysqli_fetch_assoc($queryboat)) {
+    $priceboat = $value['price'];
+}
+$sql = "SELECT * FROM tb_car_boat_diving where name = 'boat'";
+$querydriving = mysqli_query($con, $sql);
+// $value =  mysqli_fetch_assoc($query1);
+while ($value =  mysqli_fetch_assoc($querydriving)) {
+    $pricedriving = $value['price'];
+}
 ?>
 
 <body>
@@ -79,7 +95,7 @@ if ($_REQUEST['resort_name'] != "") {
                                         $query1 = mysqli_query($con, $sql1);
                                         while ($results1 = mysqli_fetch_assoc($query1)) {  ?>
 
-                                            <option value="<?php echo $results1["resort_name"]; ?>"><?php echo $results1["resort_name"]; ?></option>
+                                            <option value="<?php echo $results1["resort_name"]; ?>" required><?php echo $results1["resort_name"]; ?></option>
                                         <?php  } ?>
                                     </select>
                                 </div>
@@ -89,7 +105,7 @@ if ($_REQUEST['resort_name'] != "") {
                                     <label>
                                         <h4 class="text-blue h4">วันที่เริ่มต้น</h4>
                                     </label>
-                                    <input type="date" class="form-control" name="date_star">
+                                    <input type="date" class="form-control" name="date_star" required>
 
                                 </div>
                             </div>
@@ -98,7 +114,7 @@ if ($_REQUEST['resort_name'] != "") {
                                     <label>
                                         <h4 class="text-blue h4">วันที่สิ้นสุด</h4>
                                     </label>
-                                    <input type="date" class="form-control" name="date_end">
+                                    <input type="date" class="form-control" name="date_end" required>
 
                                 </div>
                             </div>
@@ -122,6 +138,7 @@ if ($_REQUEST['resort_name'] != "") {
 
             <div class="card-box mb-30">
                 <div class="pd-20">
+                    <?php $results["diving"]; ?>
                     <h4 class="text-blue h4">รายงานการจอง</h4>
                 </div>
 
@@ -136,12 +153,13 @@ if ($_REQUEST['resort_name'] != "") {
                                         <h4 class="text-blue h4">ที่พัก</h4>
                                     </label>
                                     <select class="custom-select col-12" name="resort_name">
-                                        <option selected=""><?php echo $resort_name ?></option>
+                                        <option required><?php echo $resort_name; ?></option>
                                         <?php
-                                        $sql1 = "SELECT * FROM `tb_resort` ";
+
+                                        $sql1 = "SELECT * FROM `tb_resort`";
                                         $query1 = mysqli_query($con, $sql1);
                                         while ($results1 = mysqli_fetch_assoc($query1)) {  ?>
-                                            <option value="<?php echo $results1["resort_name"]; ?>"><?php echo $results1["resort_name"]; ?></option>
+                                            <option value="<?php echo $results1["resort_name"]; ?>" required><?php echo $results1["resort_name"]; ?></option>
                                         <?php  } ?>
                                     </select>
                                 </div>
@@ -151,7 +169,7 @@ if ($_REQUEST['resort_name'] != "") {
                                     <label>
                                         <h4 class="text-blue h4">วันที่เริ่มต้น</h4>
                                     </label>
-                                    <input type="date" class="form-control" name="date_star" value="<?php echo $date_star ?>">
+                                    <input type="date" class="form-control" name="date_star" value="<?php echo $date_star ?>" required>
 
                                 </div>
                             </div>
@@ -160,7 +178,7 @@ if ($_REQUEST['resort_name'] != "") {
                                     <label>
                                         <h4 class="text-blue h4">วันที่สิ้นสุด</h4>
                                     </label>
-                                    <input type="date" class="form-control" name="date_end" value="<?php echo $date_end ?>">
+                                    <input type="date" class="form-control" name="date_end" value="<?php echo $date_end ?>" required>
 
                                 </div>
                             </div>
@@ -230,11 +248,12 @@ if ($_REQUEST['resort_name'] != "") {
                             <?php
                             //$sql ="SELECT * FROM `tb_resort` ";
 
+                            $datenow = date("-m-");
+                            // echo $datenow;
 
                             if ($all == 'all') {
-                                $sql = "SELECT * FROM tb_report ";
+                                $sql = "SELECT * FROM tb_report where checkin like '%$datenow%' ORDER BY id DESC";
                             } else {
-
                                 if ($_REQUEST["resort_name"] == "1") {
                                     $sql = "SELECT *  FROM tb_report  WHERE transaction_date >= '$date_star' AND transaction_date <= '$date_end' ";
                                 } else {
@@ -242,19 +261,19 @@ if ($_REQUEST['resort_name'] != "") {
                                 }
                             }
 
-
-
-
-
                             $query = mysqli_query($con, $sql);
                             while ($results = mysqli_fetch_assoc($query)) {
                                 $typ_ser = $results["typ_ser"];
                                 $txt_ser = "";
                                 $dch1 = 0;
                                 $dch2 = 0;
+
                                 if ($typ_ser != "") {
+
                                     $typ_ser = substr($typ_ser, 1);
+
                                     $ex = explode(":", $typ_ser);
+                                    // echo $ex[1];
                                     if ($ex[0]) {
                                         $dch1 = 1;
                                     }
@@ -262,22 +281,25 @@ if ($_REQUEST['resort_name'] != "") {
                                         $dch2 = 1;
                                     }
                                 } else {
+                                    // echo $typ_ser;
                                     $txt_ser = "";
                                 }
-
-
                             ?>
 
-
-
-
-
                                 <tr align="center">
-                                    <td class="table-plus" style="padding-left: 40px!important;text-align:left!important"><?php echo $results["id_booking"]; ?> <?php if ($results["noid_booking"] != "") {
-                                                                                                                                                                    echo "<font color='#17a2b8'>&#9888;</font>";
-                                                                                                                                                                } else {
-                                                                                                                                                                    echo "&nbsp;";
-                                                                                                                                                                } ?></td>
+                                    <td class="table-plus" style="padding-left: 40px!important;text-align:left!important"><?php echo $results["id_booking"]; ?>
+                                        <?php if ($results["noid_booking"] != "") { ?>
+                                            <i class='ion-plus-round' onclick='openlog()'>
+                                            <?php } else { ?>
+                                                <?php echo "&nbsp;"; ?>
+                                            <?php } ?></td>
+
+                                    <script>
+                                        function openlog() {
+                                            console.log("เปืด");
+                                        }
+                                    </script>
+                                    </td>
                                     <!-- <td><?php //echo $results["month"]; 
                                                 ?></td> -->
                                     <td><?php echo $results["transaction_date"]; ?></td>
@@ -323,6 +345,7 @@ if ($_REQUEST['resort_name'] != "") {
                                     <td>
                                         <?php
                                         $stdata = 0;
+                                        // echo "report_status:" . $results["report_status"];
                                         if ($results["report_status"] == 2) {
                                             $stdata = 1;
                                         ?>
@@ -357,36 +380,42 @@ if ($_REQUEST['resort_name'] != "") {
                                     </td>
                                     <td>
 
+                                        <?php if ($results["car"] == $pricecar) { ?>
 
-
-
-
-
-                                        <?php if ($results["car"] == 400) { ?>
-
-
+                                            <!-- <?php echo "dch1:" . $dch1; ?> -->
                                             <?php if ($stdata == 1 && $dch1 == 1) { ?>
+
                                                 <a target="" data-toggle="modal" data-target="#myModalcar<?php echo $results["id"]; ?>" type="button" class="btn btn-warning">ออกใบ BOOK รถ</a>
+
                                             <?php } else if ($results["deposit"] != 0 && $dch1 == 1) { ?>
                                                 <a data-toggle="modal" data-target="#myModal" type="button" class="btn btn-danger" style="color:#fff">ค้างค่ามัดจำ <b style="color:yellow">รถ</b></a>
+
                                             <?php } else if ($results["report_status"] == '2') { ?>
                                                 <b style="color: red;">ชำระเงินเรียบร้อย</b>
+
                                             <?php } else { ?>
                                                 <a target="" data-toggle="modal" data-target="#myModalcar<?php echo $results["id"]; ?>" type="button" class="btn btn-warning">ออกใบ BOOK รถ</a>
                                             <?php } ?>
 
+
+
                                         <?php  } else if ($results["car"] == 1) { ?>
+
                                             <a target="_blank" href="report4.php?id=<?php echo $results['id']; ?>&type=รถ&status=1" type="button" class="btn btn-success">รายงานรถ</a>
+
                                         <?php } else { ?>
-                                            <a target="" href="#" type="button" class="btn btn-danger">BOOK รถ</a>
+
+                                            <a target="" type="button" class="btn btn-secondary ">BOOK รถ</a>
+
                                         <?php } ?>
 
 
-                                        <?php if ($results["boat"] == 800) { ?>
-
+                                        <?php if ($results["boat"] == $priceboat) { ?>
+                                            <!-- <?php echo "dch2:" . $dch2; ?> -->
                                             <?php if ($stdata == 1 && $dch2 == 1) { ?>
                                                 <a target="" data-toggle="modal" data-target="#myModalboat<?php echo $results["id"]; ?>" type="button" class="btn btn-warning">ออกใบ BOOK เรือ</a>
                                             <?php } else if ($results["deposit"] != 0 && $dch2 == 1) { ?>
+
                                                 <a data-toggle="modal" data-target="#myModal" type="button" class="btn btn-danger" style="color:#fff">ค้างค่ามัดจำ <b style="color:yellow">เรือ</b></a>
                                             <?php } else if ($results["report_status"] == '2') { ?>
                                                 <b style="color: red;">ชำระเงินเรียบร้อย</b>
@@ -394,19 +423,16 @@ if ($_REQUEST['resort_name'] != "") {
                                                 <a target="" data-toggle="modal" data-target="#myModalboat<?php echo $results["id"]; ?>" type="button" class="btn btn-warning">ออกใบ BOOK เรือ</a>
                                             <?php } ?>
 
-
-
                                         <?php  } else if ($results["boat"] == 1) { ?>
                                             <a target="_blank" href="report4.php?id=<?php echo $results['id']; ?>&type=เรือ&status=2" type="button" class="btn btn-success">รายงานเรือ</a>
                                         <?php } else { ?>
-                                            <a target="" href="#" type="button" class="btn btn-danger">BOOK เรือ</a>
+                                            <a target="" type="button" class="btn btn-secondary">BOOK เรือ</a>
                                         <?php } ?>
 
 
 
-                                        <?php if ($results["diving"] >= 200) { ?>
 
-
+                                        <?php if ($results["diving"] >= $pricedriving) { ?>
                                             <?php if ($stdata == 1) { ?>
                                                 <a target="" data-toggle="modal" data-target="#myModaldiving<?php echo $results["id"]; ?>" type="button" class="btn btn-warning">ออกใบ BOOK ดำน้ำ</a>
                                             <?php } else if ($results["deposit"] != 0) { ?>
@@ -422,25 +448,12 @@ if ($_REQUEST['resort_name'] != "") {
                                         <?php  } else if ($results["diving"] == 1) { ?>
                                             <a target="_blank" href="report3.php?id=<?php echo $results['id']; ?>&type=ดำน้ำ" type="button" class="btn btn-success">รายงานดำน้ำ</a>
                                         <?php } else { ?>
-                                            <a target="" href="#" type="button" class="btn btn-danger">BOOK ดำน้ำ</a>
+                                            <a target="" type="button" class="btn btn-secondary">BOOK ดำน้ำ</a>
                                         <?php } ?>
 
 
-
-
-
-
-
-
-
                                         <a target="_blank" href="report2.php?id=<?php echo $results['id']; ?>" type="button" class="btn btn-success">รายงานห้องพัก</a>
-
-
-
                                         <a target="_blank" href="report5.php?id=<?php echo $results['id']; ?>" type="button" class="btn btn-success">รายงาน</a>
-
-
-
                                         <?php if ($results['insurance'] == "9") { ?>
                                             <a target="_blank" href="reportinsurance.php?id_booking=<?php echo $results['id_booking']; ?>" type="button" class="btn btn-success">รายงานประกันภัย</a>
                                         <?php } else { ?>
@@ -493,7 +506,7 @@ if ($_REQUEST['resort_name'] != "") {
                                                                     <?php
                                                                     $balance = $results["sum"] - $results["Sales"];
                                                                     ?>
-                                                                    <input type="numbeer" class="form-control" name="deposit" id="deposit" value="<?php echo $balance; ?>" />
+                                                                    <input type="numbeer" class="form-control" name="   " id="deposit" value="<?php echo $balance; ?>" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-sm-12">

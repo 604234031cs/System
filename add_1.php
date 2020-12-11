@@ -203,7 +203,7 @@ if ($type == "addresort") {
 
 
 	//$sql = "UPDATE `tb_report` SET `Sales` = '".$Sales2."', `deposit` = '".$deposi2."' WHERE `tb_report`.`id_booking` = '$id_booking';";
-	$sql = "UPDATE `tb_report` SET `report_status` = '2'  WHERE `tb_report`.`id_booking` = '$id_booking';";
+	$sql = "UPDATE `tb_report` SET `report_status` = '2'  WHERE `tb_report`.`id_booking` = '$id_booking'";
 
 	if (mysqli_query($con, $sql)) {
 
@@ -243,7 +243,7 @@ if ($type == "addresort") {
 
 
 		$fileName = $_FILES['file']['name'];
-		$name_roomtype = $_REQUEST['name_roomtype'];
+		// $name_roomtype = $ss5['name_roomtype'];
 
 		$upload_dir = "img/slips/";
 		$uploaded_file = $upload_dir . $fileName;
@@ -253,13 +253,13 @@ if ($type == "addresort") {
 		if (move_uploaded_file($_FILES['file']['tmp_name'], $uploaded_file)) {
 
 
-			echo	  $strSQL = "INSERT INTO `tb_report` (`id`, `id_booking`, `month`, `transaction_date`, `name`, `phone`, `line`, `room_name`, `name_resort`, `package`, `number_of_rooms`, `extrabed`, `customers`, `checkin`, `checkout`, `Sales`, `deposit`, `sum`, `car`, `boat`, `diving`, `payment_status`, `occupancy_status`, `collection_date`, `com`, `commission_value`, `insurance`, `slip`, `Byyy`, `adult`,`noid_booking`, `note`, `details`, `report_status`,ch1,ch2,typ_ser,status_pay) VALUES (NULL, '', '$month', NOW(), '$name', '$phone', '$line', '$room_name', '$name_resort', '$package', '$number_of_rooms', '$extrabed', '$customers', '$checkin', '$checkout', '0 ', '$deposi2', '$sum', '$car ', '$boat', '$diving', '1', '1', NOW(), '$com', '$commission_value', '$insurance', '$fileName', '$Byyy', '$adult', '$id_booking', '$note', '', '3',$ch1,$ch2,'$typ_ser',$status_pay);";
-
+			$strSQL = "INSERT INTO `tb_report` (`id`, `id_booking`, `month`, `transaction_date`, `name`, `phone`, `line`, `room_name`, `name_resort`, `package`, `number_of_rooms`, `extrabed`, `customers`, `checkin`, `checkout`, `Sales`, `deposit`, `sum`, `car`, `boat`, `diving`, `payment_status`, `occupancy_status`, `collection_date`, `com`, `commission_value`, `insurance`, `slip`, `Byyy`, `adult`,`noid_booking`, `note`, `details`, `report_status`,ch1,ch2,typ_ser,status_pay) VALUES (NULL,'', '$month', NOW(), '$name', '$phone', '$line', '$room_name', '$name_resort', '$package', '$number_of_rooms', '$extrabed', '$customers', '$checkin', '$checkout', '0 ', '$deposi2', '$sum', '$car ', '$boat', '$diving', '1', '1', NOW(), '$com', '$commission_value', '$insurance', '$fileName', '$Byyy', '$adult', '$id_booking', '$note', '', '3','$ch1','$ch2','$typ_ser','$status_pay')";
 
 
 			$objQuery = mysqli_query($con, $strSQL);
 
 			if ($objQuery === TRUE) {
+			
 				$last = "SELECT * FROM tb_report ORDER BY id DESC LIMIT 1";
 				$re = mysqli_query($con, $last);
 				$ss = mysqli_fetch_assoc($re);
@@ -274,50 +274,49 @@ if ($type == "addresort") {
 				$in = " UPDATE `tb_report` SET `id_booking` = '" . $text . "' WHERE `tb_report`.`id` ='" . $ss['id'] . "'";
 				$a = mysqli_query($con, $in);
 
-
-				echo "<script> alert('ได้ทำการลบประเภทรีสอร์ท เรียบร้อย!!');window.location.href='edit.php?id=$resort_name';</script>";
+				// echo "<script> alert('ได้ทำการลบประเภทรีสอร์ท เรียบร้อย!!');window.location.href='edit.php?id=$resort_name';</script>";
 
 				//----------------------- LINE-------------------
-				$Token = "LLHQCmiOVjOjpwiAAiblUjOONK5kUqEVyObBCNwdTIL";
-				$message = "\nเลขที่ " . $text . "\nชื่อลูกค้า :" . $name . " \nโรงเเรมที่จอง: " . $room_name . "\nวันที่เช็คอิน: " . $checkin . "\nวันที่เช็คเอาท์: " . $checkout . "\nยอดคงเหลือ 0\nยอดเงินในการชำระ: " . $deposit1 . "\nยอดสุทธิ: " . $sum;
+				// $Token = "LLHQCmiOVjOjpwiAAiblUjOONK5kUqEVyObBCNwdTIL";
+				// $message = "\nเลขที่ " . $text . "\nชื่อลูกค้า :" . $name . " \nโรงเเรมที่จอง: " . $room_name . "\nวันที่เช็คอิน: " . $checkin . "\nวันที่เช็คเอาท์: " . $checkout . "\nยอดคงเหลือ 0\nยอดเงินในการชำระ: " . $deposit1 . "\nยอดสุทธิ: " . $sum;
 
 
 
-				$lineapi = $Token; // ใส่ token key ที่ได้มา
-				$mms = trim($message); // ข้อความที่ต้องการส่ง
+				// $lineapi = $Token; // ใส่ token key ที่ได้มา
+				// $mms = trim($message); // ข้อความที่ต้องการส่ง
 
-				date_default_timezone_set("Asia/Bangkok");
-				$chOne = curl_init();
-				curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
-				// SSL USE 
-				curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
-				curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
-				//POST 
-				curl_setopt($chOne, CURLOPT_POST, 1);
-				curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=$mms");
-				curl_setopt($chOne, CURLOPT_FOLLOWLOCATION, 1);
-				$headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer ' . $lineapi . '',);
-				curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
-				curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
-				$result = curl_exec($chOne);
-				//Check error 
-				if (curl_error($chOne)) {
-					echo "<script> alert(''error:'" . curl_error($chOne) . "');</script>";
-				} else {
-					$result_ = json_decode($result, true);
-					// echo "status : ".$result_['status']; echo "message : ". $result_['message'];
-				}
-				curl_close($chOne);
+				// date_default_timezone_set("Asia/Bangkok");
+				// $chOne = curl_init();
+				// curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
+				// // SSL USE 
+				// curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
+				// curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
+				// //POST 
+				// curl_setopt($chOne, CURLOPT_POST, 1);
+				// curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=$mms");
+				// curl_setopt($chOne, CURLOPT_FOLLOWLOCATION, 1);
+				// $headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer ' . $lineapi . '',);
+				// curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
+				// curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
+				// $result = curl_exec($chOne);
+				// //Check error 
+				// if (curl_error($chOne)) {
+				// 	echo "<script> alert(''error:'" . curl_error($chOne) . "');</script>";
+				// } else {
+				// 	$result_ = json_decode($result, true);
+				// 	// echo "status : ".$result_['status']; echo "message : ". $result_['message'];
+				// }
+				// curl_close($chOne);
 
 				//------------------------------------end LINE----------------------------------------------
 
 
 
-				echo "<script> alert('ได้ทำการจ่ายยอดที่เหลือ เรียบร้อย!!');window.location.href='report.php?resort_name=$room_name';</script>";
+				echo "<script> alert('ได้ทำการจ่ายยอดที่เหลือ เรียบร้อย!!');window.location.href='report.php?';</script>";
 			}
 		}
 
-		echo "<script> alert('ได้ทำการลบประเภทรีสอร์ท เรียบร้อย!!');window.location.href='edit.php?id=$resort_name';</script>";
+		// echo "<script> alert('ได้ทำการลบประเภทรีสอร์ท เรียบร้อย!!');window.location.href='edit.php?id=$resort_name';</script>";
 	}
 }
 
