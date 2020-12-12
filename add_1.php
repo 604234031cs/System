@@ -24,38 +24,42 @@ if ($type == "addresort") {
 	}
 } else if ($type == "addroomtype") {
 	// เพิ่มประเภทห้องพัก , ราคาห้องพัก
-	echo "***-**-*--";
+	// echo "***-**-*--";
 	// $name_roomtype = $_REQUEST[ 'name_roomtype' ];
 	// $price_roomtype = $_REQUEST[ 'price_roomtype' ];
 	// $price_monday = $_REQUEST[ 'price_monday' ];
 	// $price_friday = $_REQUEST[ 'price_friday' ];
 	// $extrabed = $_REQUEST[ 'extrabed' ];
-	$id_resort = $_REQUEST['id_resort'];
-
+	$id_resort = $_POST['id_resort'];
+	echo (int)$_POST["hdnCount"];
+	// echo $_REQUEST['id_resort'];
 	// $high_season1 = $_REQUEST[ 'high_season1' ];
 	// $peak_season = $_REQUEST[ 'peak_season' ];
 	// $high_season2 = $_REQUEST[ 'high_season2' ];
 	// $green_season = $_REQUEST[ 'green_season' ];
+	// echo $_POST["name_roomtype1"];
 
+	// for ($i = 1; $i <= (int)$_POST["hdnCount"]; $i++) {
+	
+	// 	if (isset($_POST["name_roomtype$i"])) {
+	
+	// 		if ($_POST["name_roomtype$i"] != "" && $_POST["price_roomtype$i"] != "" &&$_POST["extrabed$i"] != "" &&$_POST["capacity$i"] != "") {
 
-	for ($i = 1; $i <= (int)$_POST["hdnCount"]; $i++) {
-		echo $i. "<br>";
+	// 			// $sql = "INSERT INTO `tb_roomtype` (`id`, `name_roomtype`, `price_roomtype`, `price_monday`, `price_friday`, `extrabed`, `high_season1`, `peak_season`, `high_season2`, `green_season`, `id_resort`, `capacity`, `status`) VALUES (NULL, '" . $_POST["name_roomtype$i"] . "', '" . $_POST["price_roomtype$i"] . "', '0', '0', '" . $_POST["extrabed$i"] . "', '0', '0', '0', '0', '" . $id_resort . "', '" . $_POST["capacity$i"] . "', '1');";
+	// 			// $query = mysqli_query($con, $sql);
+	// 			echo "<script> alert('ได้ทำการเพิ่มประเภทห้องพัก , ราคาห้องพัก เรียบร้อย!!');window.location.href='addroomtype.php';</script>";
+	// 		} else {
+	// 			echo "Err";
+	// 			echo "<script> alert('!!เกิดข้อผิดพลาด ไม่มีข้อมูล , ราคาห้องพัก เรียบร้อย!!');window.location.href='addroomtype.php';</script>";
+	// 		}
+	// 	}else{
+	// 		echo "ไม่มีข้อมูลห้อง";
+	// 	}
 		
-		if (isset($_POST["name_roomtype$i"])) {
-		
-			if ($_POST["name_roomtype$i"] != "" && $_POST["price_roomtype$i"] != "" &&$_POST["extrabed$i"] != "" &&$_POST["capacity$i"] != "") {
+	// }
 
-				$sql = "INSERT INTO `tb_roomtype` (`id`, `name_roomtype`, `price_roomtype`, `price_monday`, `price_friday`, `extrabed`, `high_season1`, `peak_season`, `high_season2`, `green_season`, `id_resort`, `capacity`, `status`) VALUES (NULL, '" . $_POST["name_roomtype$i"] . "', '" . $_POST["price_roomtype$i"] . "', '0', '0', '" . $_POST["extrabed$i"] . "', '0', '0', '0', '0', '" . $id_resort . "', '" . $_POST["capacity$i"] . "', '1');";
-				$query = mysqli_query($con, $sql);
-				echo "<script> alert('ได้ทำการเพิ่มประเภทห้องพัก , ราคาห้องพัก เรียบร้อย!!');window.location.href='addroomtype.php';</script>";
-			} else {
-				echo "Err";
-				echo "<script> alert('!!เกิดข้อผิดพลาด ไม่มีข้อมูล , ราคาห้องพัก เรียบร้อย!!');window.location.href='addroomtype.php';</script>";
-			}
-		}else{
-			echo "ok";
-		}
-	}
+	
+	
 } else if ($type == "addprice") {
 	// echo $_POST['name'];
 	// echo $_POST['price'];

@@ -61,8 +61,8 @@ if ($_POST['id'] != "") {
                                 <label>
                                     <h4 class="text-blue h4">ที่พัก</h4>
                                 </label>
-                                <select class="custom-select col-12" name="id_resort" id="id_resort">
-                                    <option selected="" value="">โปรดเลือกที่พัก...</option>
+                                <select class="custom-select col-12" name="id_resort" id="id_resort" required >
+                                    <option value=''>โปรดเลือกที่พัก...</option>
                                     <?php
                                     $sql = "SELECT * FROM `tb_resort` ";
                                     $query = mysqli_query($con, $sql);
@@ -106,7 +106,7 @@ if ($_POST['id'] != "") {
                             <input class="btn btn-success" type="button" id="clearRows" value="Clear">
                             <input hidden type="text" id="hdnCount" name="hdnCount">
                             <input type="text" class="form-control" name="type" id="type" value="addroomtype" hidden />
-                            <input class="btn btn-primary" type="submit" value="บันทึก" style="color: #fff;">
+                            <input class="btn btn-primary" type="submit" value="บันทึก" id="save" style="color: #fff;" disabled>
 
 
                         </div>
@@ -130,7 +130,7 @@ if ($_POST['id'] != "") {
             <script type="text/javascript">
                 $(document).ready(function() {
 
-                    var rows = 1;
+                    var rows = 0;
                     $("#createRows").click(function() {
                         var tr = "<tr>";
                         // tr = tr + "<td><input class='form-control' type='text' name='ids"+rows+"' id='ids"+rows+"' size='5' ></td>";
@@ -138,27 +138,65 @@ if ($_POST['id'] != "") {
                         tr = tr + "<td><input class='form-control' type='number' name='price_roomtype" + rows + "' id='price_roomtype" + rows + "' size='10' pattern='([^0-9]{,})' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
                         tr = tr + "<td><input class='form-control' type='number' name='extrabed" + rows + "' id='extrabed" + rows + "' size='10' pattern='([0-9])' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
                         tr = tr + "<td><input class='form-control' type='number' name='capacity" + rows + "' id='capacity" + rows + "' size='10' pattern='([0-9])' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
-
                         tr = tr + "</tr>";
                         $('#myTable > tbody:last').append(tr);
-
-                        $('#hdnCount').val(rows);
                         rows = rows + 1;
+                        $('#hdnCount').val(rows);
+                        if($("#id_resort").val() !="" && rows !=0){
+                            document.getElementById("save").disabled = false;
+                        }else{
+                            document.getElementById("save").disabled = true;
+                        }
+                        
+                      
                     });
 
                     $("#deleteRows").click(function() {
                         if ($("#myTable tr").length != 1) {
                             $("#myTable tr:last").remove();
+                            rows = rows -1;
+                            $('#hdnCount').val(rows);
+                            if(rows !=0){
+                                document.getElementById("save").disabled = false;
+                            }else{
+                                document.getElementById("save").disabled = true;
+                            }
+                            console.log(rows);
                         }
                     });
 
                     $("#clearRows").click(function() {
-                        rows = 1;
+                        rows = 0;
                         $('#hdnCount').val(rows);
                         $('#myTable > tbody:last').empty(); // remove all
+                        if($("#id_resort").val() !="" && rows !=0){
+                            document.getElementById("save").disabled = false;
+                        }else{
+                            document.getElementById("save").disabled = true;
+                        }
+
                     });
 
+                    $("#id_resort").change(function(){
+                        // console.log($('#id_resort').val());
+                        var value = $("#id_resort").val();
+                        if(value !="" && $('#hdnCount').val() !=0){
+                            document.getElementById("save").disabled = false;
+                        }else{
+                            document.getElementById("save").disabled = true;
+                        }
+                    })
+
+                    $("#save").click(function(){
+                    if($('#id_resort').val() !="" && $("#hdnCount").val() !=0 ){
+                        document.getElementById("save").disabled = false;
+                    }else{
+                        document.getElementById("save").disabled = true;
+                    }
+                })
                 });
+
+                
             </script>
 
 
