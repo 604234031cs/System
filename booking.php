@@ -78,7 +78,7 @@ $typser = $_POST["typser"];
                                 <label>
                                     <h4 class="text-blue h4">เบอร์โทรศัพท์ </h4>
                                 </label>
-                                <input type="number" class="form-control" name="phone" id="phone" placeholder="ระบุเบอร์โทรศัพท์" max="10" pattern="[0-9]{10}" title="ใส่ข้อมูลให้ถูกต้อง" required>
+                                <input type="text" class="form-control" name="phone" id="phone" placeholder="ระบุเบอร์โทรศัพท์" maxlength="10" pattern="[0][0-9]{9}" title="ใส่ข้อมูลให้ถูกต้อง" required>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
@@ -107,7 +107,7 @@ $typser = $_POST["typser"];
                                 <label>
                                     <h4 class="text-blue h4">บริการโดย </h4>
                                 </label>
-                                <select class="custom-select col-12" id="By" name="By">
+                                <select class="custom-select col-12" id="By" name="By" required>
                                     <option value=""></option>
                                     <option value="เรือไม้ (JOIN)">เรือไม้ (JOIN)</option>
                                     <option value="เรือไม้ (PRIVATE)">เรือไม้ (PRIVATE)</option>
@@ -158,10 +158,11 @@ $typser = $_POST["typser"];
                                 var int2 = document.getElementById("Sales").value;
                                 var n1 = parseInt(int1);
                                 var n2 = parseInt(int2);
+                                // console.log(isNaN(int1));
                                 if ((isNaN(n1)) || (isNaN(n2))) {
-                                    document.getElementById("deposit").setAttribute("color", "red");
+                                     document.getElementById("deposit").setAttribute("color", "red");
                                     var deposit55 = document.getElementById("deposit").value = s;
-                                    document.getElementById("deposit").value = "ERROR";
+                                    document.getElementById("deposit").value = int1;
 
                                 } else {
                                     s = n1 - n2;
@@ -179,7 +180,7 @@ $typser = $_POST["typser"];
                                 <label>
                                     <h4 class="text-blue h4">จ่ายมัดจำ </h4>
                                 </label>
-                                <input type="text" class="form-control" name="Sales" id="Sales" value="" onchange="a() " required/>
+                                <input type="text" class="form-control" name="Sales" id="Sales" value="" onkeyup="a() " required/>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
@@ -195,7 +196,7 @@ $typser = $_POST["typser"];
                                 <label>
                                     <h4 class="text-blue h4">ราคารวมทั้งหมด </h4>
                                 </label>
-                                <input type="number" min="<?php echo $sum; ?>" class="form-control" name="sum" id="sum" value="<?php echo $sum; ?>" onchange="a()" />
+                                <input type="number" min="<?php echo $sum; ?>" class="form-control" name="sum" id="sum" value="<?php echo $sum; ?>" onkeyup="a()" />
                             </div>
                         </div>
 
@@ -301,9 +302,9 @@ $typser = $_POST["typser"];
 
                         <div class="col-md-4 col-sm-12">
                             <input type="text" name="type" id="type" hidden="" value="addresort">
-                            <button type="button" onclick="submit();" class="btn btn-warning">บันทึก</button>
+                            <button type="submit" class="btn btn-warning">บันทึก</button>
                         </div>
-
+                        <!-- onclick="submit();" -->
 
                     </div>
                 </form>
@@ -314,11 +315,11 @@ $typser = $_POST["typser"];
             <div class="footer-wrap pd-20 mb-20 card-box">Welcome Akira Lipe , Ananya Lipe , Thechic Lipe <a href="https://ananyalipe.com" target="_blank">แบบฟอร์มเช็คราคาห้องพักของแต่ละรีสอร์ท</a></div>
         </div>
     </div>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         function submit() {
             document.getElementById('form1').submit();
         }
-    </script>
+    </script> -->
 
     <?php include "footer.php"; ?>
 </body>

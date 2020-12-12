@@ -24,6 +24,10 @@ $diving = $_REQUEST['diving'];
 
 $insurance = $_REQUEST['insurance'];
 
+
+
+
+
 $car55 = $_REQUEST['car'];
 $boat55 = $_REQUEST['boat'];
 $diving55 = $_REQUEST['diving'];
@@ -41,6 +45,12 @@ $interval = $datetime1->diff($datetime2);
 // $diff_result = $interval->format('%y ปี %m เดือน  %d วัน');
 $diff_result = $interval->format('%d');
 
+$sql = "SELECT * FROM tb_resort WHERE  id = '$name'";
+$querydata = mysqli_query($con, $sql);
+$resort = mysqli_fetch_assoc($querydata);
+// while($resort = mysqli_fetch_assoc($querydata)){
+//     $res_name = $resort['resort_name'];
+// }
 
 
 
@@ -258,7 +268,7 @@ if ($older_children >= "1") {
                 <div class="form-group">
 
                   <label>
-                    <h4 class="text-blue h4">ที่พัก <?php echo $diving_num; ?></h4>
+                    <h4 class="text-blue h4">ที่พัก </h4>
                   </label>
                   <!-- <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" readonly=""> -->
                   <select class="custom-select col-12" id="id" name="id" onchange="autoselect(this.value)">
@@ -308,12 +318,12 @@ if ($older_children >= "1") {
                     <h4 class="text-blue h4">Checkin</h4>
                   </label>
 
-
+                           
 
                   <div id="id_startCalendar" class="calendar-widget default-today" data-next="#id_deadlineCalendar" date-min="today" tabindex="-1">
                     <div class="input-wrapper">
                       <label for="type1-start"><b>วันที่เข้าพัก <?php echo $Checkin = $_REQUEST['Checkin']; ?></b></label>
-
+                           
                       <input class="date-field form-control" id="type1-start" type="text" placeholder="Starting Date" name="Checkin" value="<?php echo $Checkin; ?>" readonly>
                     </div>
 
@@ -1214,23 +1224,69 @@ if ($older_children >= "1") {
                   }
                   // The current widget data
                   const dateField = widget.querySelector(".date-field");
-
                   const nextId = widget.getAttribute("data-next");
                   const nextWidget = document.querySelector(nextId);
                   const nextDateField = nextWidget.querySelector(".date-field");
-
-                  //Change the value only if it is empty
                   if (nextDateField.value === "") {
-                    nextDateField.value = dateField.value;
-                  }
+                        nextDateField.value = dateField.value;
+                       
+                      }
+                      // console.log("!!"+dateField.value);
+                  //Change the value only if it is empty
+                  let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November	', 'December'];
+                      const currDate = new Date(dateField.value);
+                      // console.log("วันนี้" + dateField.value);
+                      currDate.setDate(currDate.getDate() + 2);
+                      var day = currDate.getDate();
+                      var mkDay = new String(day)
+                      var year = currDate.getFullYear();
+                      var month = monthNames[currDate.getMonth()];
 
-                  //If the next widget date existing value is smaller than the date value of the current widget, change it to the current widget date value.
-                  const currDate = new Date(dateField.value);
-                  const nextDate = new Date(nextDateField.value);
+                      // const nextDate = new Date(nextDateField.value);
 
-                  if (nextDate < currDate) {
-                    nextDateField.value = dateField.value;
-                  }
+                      var full2day = mkDay + " " + month + " " + year;
+                      // console.log("2 วันถัดมา" + full2day);
+                      // // dateField.value = mkDay + " " + month + " " + year;
+                      // // nextDateField.value = dateField.value;
+
+                      if (nextDateField.value < dateField.value) {
+                        // console.log("LL");
+                        // dateField.value = mkDay + " " + month + " " + year;
+                        nextDateField.value = full2day;
+                        // console.log("nextDate");
+                        // console.log("วัน CheckOUT " + nextDateField.value);
+                      } else {
+                        nextDateField.value = full2day;
+                      }
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                   nextWidget.click();
                   nextWidget.focus();
@@ -1286,8 +1342,9 @@ if ($older_children >= "1") {
 
                   if (widget.classList.contains("default-today")) {
                     dateField.readonly = false;
-                    dateField.value = `${currDate} ${thisMonth.longName} ${thisYear}`;
+                    dateField.value = `<?php echo $Checkin;?>`;
                     dateField.readonly = true;
+                    // ${currDate} ${thisMonth.longName} ${thisYear}
                   }
 
                   const calendarWrapper = widget.querySelector(".calendar-wrapper");
@@ -1898,16 +1955,17 @@ if ($older_children >= "1") {
             <div id="table20" style="height: 90%; display: none;">
               <h4 class="text-blue h4" align="center">ราคา 20%</h4>
               <table class="table table-bordered">
-                <thead align="center">
+              <thead align="center">
                   <tr>
                     <th scope="col">ชื่อรีสอร์ด</th>
-                    <th scope="col">ประเภทห้องพัก</th>
+                    <th scope="col"><?php echo $resort['resort_name'];?></th>
                   </tr>
                 </thead>
                 <tbody align="center">
                   <tr>
-                    <th scope="row"><?php echo $name; ?></th>
+                    <th scope="row">ประเภทห้องพัก</th>
                     <th scope="row"><?php echo $results["name_roomtype"] ?></th>
+
                   </tr>
 
                   <?php if ($older_children != "") { ?>
@@ -2019,8 +2077,7 @@ if ($older_children >= "1") {
 
 
 
-
-
+                  
 
 
             <div id="table15" style="height: 90%;display: none;">
@@ -2030,14 +2087,12 @@ if ($older_children >= "1") {
                 <thead align="center">
                   <tr>
                     <th scope="col">ชื่อรีสอร์ด</th>
-                    <th scope="col">ประเภทห้องพัก</th>
-
-
+                    <th scope="col"><?php echo $resort['resort_name'];?></th>
                   </tr>
                 </thead>
                 <tbody align="center">
                   <tr>
-                    <th scope="row"><?php echo $name; ?></th>
+                    <th scope="row">ประเภทห้องพัก</th>
                     <th scope="row"><?php echo $results["name_roomtype"] ?></th>
 
                   </tr>
@@ -2162,17 +2217,15 @@ if ($older_children >= "1") {
               <h4 class="text-blue h4" align="center">ราคา 10%</h4>
               <table class="table table-bordered">
 
-                <thead align="center">
+              <thead align="center">
                   <tr>
                     <th scope="col">ชื่อรีสอร์ด</th>
-                    <th scope="col">ประเภทห้องพัก</th>
-
-
+                    <th scope="col"><?php echo $resort['resort_name'];?></th>
                   </tr>
                 </thead>
                 <tbody align="center">
                   <tr>
-                    <th scope="row"><?php echo $name; ?></th>
+                    <th scope="row">ประเภทห้องพัก</th>
                     <th scope="row"><?php echo $results["name_roomtype"] ?></th>
 
                   </tr>

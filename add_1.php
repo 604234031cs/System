@@ -24,7 +24,7 @@ if ($type == "addresort") {
 	}
 } else if ($type == "addroomtype") {
 	// เพิ่มประเภทห้องพัก , ราคาห้องพัก
-
+	echo "***-**-*--";
 	// $name_roomtype = $_REQUEST[ 'name_roomtype' ];
 	// $price_roomtype = $_REQUEST[ 'price_roomtype' ];
 	// $price_monday = $_REQUEST[ 'price_monday' ];
@@ -39,20 +39,21 @@ if ($type == "addresort") {
 
 
 	for ($i = 1; $i <= (int)$_POST["hdnCount"]; $i++) {
+		echo $i. "<br>";
+		
 		if (isset($_POST["name_roomtype$i"])) {
-			if (
-				$_POST["name_roomtype$i"] != "" &&
-				$_POST["price_roomtype$i"] != "" &&
-				$_POST["extrabed$i"] != "" &&
-				$_POST["capacity$i"] != ""
-			) {
+		
+			if ($_POST["name_roomtype$i"] != "" && $_POST["price_roomtype$i"] != "" &&$_POST["extrabed$i"] != "" &&$_POST["capacity$i"] != "") {
 
 				$sql = "INSERT INTO `tb_roomtype` (`id`, `name_roomtype`, `price_roomtype`, `price_monday`, `price_friday`, `extrabed`, `high_season1`, `peak_season`, `high_season2`, `green_season`, `id_resort`, `capacity`, `status`) VALUES (NULL, '" . $_POST["name_roomtype$i"] . "', '" . $_POST["price_roomtype$i"] . "', '0', '0', '" . $_POST["extrabed$i"] . "', '0', '0', '0', '0', '" . $id_resort . "', '" . $_POST["capacity$i"] . "', '1');";
 				$query = mysqli_query($con, $sql);
 				echo "<script> alert('ได้ทำการเพิ่มประเภทห้องพัก , ราคาห้องพัก เรียบร้อย!!');window.location.href='addroomtype.php';</script>";
 			} else {
+				echo "Err";
 				echo "<script> alert('!!เกิดข้อผิดพลาด ไม่มีข้อมูล , ราคาห้องพัก เรียบร้อย!!');window.location.href='addroomtype.php';</script>";
 			}
+		}else{
+			echo "ok";
 		}
 	}
 } else if ($type == "addprice") {
@@ -199,7 +200,7 @@ if ($type == "addresort") {
 	$sum = $_REQUEST['sum'];
 	$note = $_REQUEST['note'];
 	$Sales2 = $Sales1 + $deposit1;
-	$deposi2 = $Sales1 - $deposit1;
+	$deposi2 = $sum - $Sales2;
 
 
 	//$sql = "UPDATE `tb_report` SET `Sales` = '".$Sales2."', `deposit` = '".$deposi2."' WHERE `tb_report`.`id_booking` = '$id_booking';";
@@ -316,7 +317,7 @@ if ($type == "addresort") {
 			}
 		}
 
-		// echo "<script> alert('ได้ทำการลบประเภทรีสอร์ท เรียบร้อย!!');window.location.href='edit.php?id=$resort_name';</script>";
+		// echo "<script> alert('ได้ทำการลบประเภทรีสอร์ท เรียบร้อย!!');window.location.href='report.php?';</script>";
 	}
 }
 

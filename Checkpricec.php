@@ -103,7 +103,7 @@ error_reporting(0);
 
                       <script>
                         function autoselect(value) {
-                          console.log(value);
+                          // console.log(value);
                           $.ajax({
                             url: "ajaxdata.php?page=checkprice&&id=" + value,
                             type: "GET",
@@ -177,32 +177,32 @@ error_reporting(0);
 
                   <input hidden type="text" name="id_tb_resort" value="<?php echo $id_tb_resort; ?>">
 
-                  <!-- <script>
+                  <script>
                     $(document).ready(function() {
 
+                      let dayNamesMin = ["จันทร์", "อังคาร", "พุทธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิต"];
+                      let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November	', 'December'];
                       let startday = document.getElementById("type1-start").value
-                      var d = new Date(startday);
-                      // console.log(d.getFullYear());
+                      var d = new Date(startday);;
                       d.setDate(d.getDate() + 2)
                       var year = d.getFullYear();
-                      var month = d.getMonth() + 1;
+                      var month = monthNames[d.getMonth()];
+                      // console.log(monthNames[month]);
                       var day = d.getDate();
                       var mkDay = new String(day)
+                      console.log(monthNames[d.getMonth()])
                       if (month < 10) {
                         month = "0" + month;
                       }
                       if (mkDay.length == 1) {
                         mkDay = "0" + mkDay;
                       }
-                      let fulldate = year + "-" + month + "-" + mkDay;
+                      let fulldate = mkDay + " " + month + " " + year;
                       document.getElementById('type1-deadline').value = fulldate;
+
+
                     });
-
-
-                    function clickautodate() {
-                      console.log(document.getElementById("type1-start").value);
-                    }
-                  </script> -->
+                  </script>
 
 
 
@@ -215,7 +215,7 @@ error_reporting(0);
                       <div id="id_startCalendar" class="calendar-widget default-today" data-next="#id_deadlineCalendar" date-min="today" tabindex="-1">
                         <div class="input-wrapper">
                           <label for="type1-start">Starting Date</label>
-                          <input class="date-field form-control" id="type1-start" type="text" placeholder="Starting Date" name="Checkin"  readonly>
+                          <input class="date-field form-control" id="type1-start" type="text" placeholder="Starting Date" name="Checkin" onchange="autotwodate()">
                         </div>
 
 
@@ -759,7 +759,9 @@ error_reporting(0);
                     }
 
                     function updateSelData(e, dateField) {
+                      // console.log("!!",dateField);
                       let fullDate = dateField.value.split(" ");
+                      // console.log("*/*/*"+fullDate);
                       let selData = [];
                       if (fullDate !== "") {
                         selDate = Number(fullDate[0]);
@@ -778,8 +780,9 @@ error_reporting(0);
                       if (e) {
                         // console.log(`Update Date Field called by: ${e.target.tagName}.${e.target.className}`)
                       }
-
+                      // console.log("##"+fullDate);
                       dateField.value = fullDate;
+                      console.log("---------------" + dateField.value);
                       return fullDate;
                     }
 
@@ -857,10 +860,17 @@ error_reporting(0);
                         } else if (minDate === "link") {
                           const linkedWidget = document.querySelector(widget.getAttribute("data-link"));
                           const linkedDateField = linkedWidget.querySelector(".date-field");
+                          // console.log(linkedWidget);
                           minDate = linkedDateField.value.split(" ");
                           let monthIndex = getMonthIndex(minDate[1]);
                           minDate[1] = monthIndex;
-                          console.log(`Linked min Date is: ${minDate}`);
+                          console.log("****************");
+
+                          // var dateauto =
+
+                          // $('#type1-deadline').val(autodate);
+                          // console.log($('#type1-deadline').val());
+
                         } else {
                           minDate = minDate.split("-")
                         }
@@ -875,6 +885,7 @@ error_reporting(0);
                       // console.log(`Min Date is: ${minDate}`)
 
                       // console.log(`Current Selected Date: ${currSelDate}`)
+
                       const tableBody = calendar.querySelector(".date-table-body");
                       while (count <= monthDays) {
                         let row = document.createElement("div"); // Create date rows
@@ -948,6 +959,7 @@ error_reporting(0);
 
                                 let dateField = widget.querySelector(".date-field");
                                 let fullDate = `${cellText.textContent} ${month.longName} ${year} `
+                                // console.log(fullDate);
                                 updateDateField(e, fullDate, dateField);
                                 updateSelData(e, dateField);
                                 hideCalendar(e, cell.closest(".calendar-widget"));
@@ -993,9 +1005,11 @@ error_reporting(0);
                       } else if (widget.getAttribute("date-min") === "link") {
                         const linkedWidget = document.querySelector(widget.getAttribute("data-link"));
                         const linkedDateField = linkedWidget.querySelector(".date-field");
+                        // console.log("????"+linkedDateField);
                         minData = linkedDateField.value.split(" ");
                         minYear = Number(minData[2]);
                         minMonth = new Month(getMonthIndex(minData[1]));
+
                       }
 
                       // console.log(`Current Year: ${currYear}, Minimum Year: ${minYear}`);
@@ -1089,9 +1103,11 @@ error_reporting(0);
                           updateSelData(e, dateField);
                           currMonth = selMonth;
                           currYear = selYear;
+                          console.log("PASS");
+                          // console.log(`!!!!Selected Date: ${selDate} ${selMonth.shortName} ${selYear}`);
+
                         }
 
-                        // console.log(`Selected Date: ${selDate} ${selMonth.shortName} ${selYear}`);
 
                         calendars.forEach(calendar => {
                           clearTable(e, calendar);
@@ -1135,21 +1151,43 @@ error_reporting(0);
 
                       const nextId = widget.getAttribute("data-next");
                       const nextWidget = document.querySelector(nextId);
+                      ///value ช่อง checkout
                       const nextDateField = nextWidget.querySelector(".date-field");
-
+                      // console.log("ช่อง Checkout " + nextDateField.value);
                       //Change the value only if it is empty
                       if (nextDateField.value === "") {
                         nextDateField.value = dateField.value;
+                        // console.log(dateField.value);
                       }
 
                       //If the next widget date existing value is smaller than the date value of the current widget, change it to the current widget date value.
+                      let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November	', 'December'];
                       const currDate = new Date(dateField.value);
-                      const nextDate = new Date(nextDateField.value);
+                      // console.log("วันนี้" + dateField.value);
+                      currDate.setDate(currDate.getDate() + 2);
+                      var day = currDate.getDate();
+                      var mkDay = new String(day)
+                      var year = currDate.getFullYear();
+                      var month = monthNames[currDate.getMonth()];
 
-                      if (nextDate < currDate) {
-                        nextDateField.value = dateField.value;
+                      // const nextDate = new Date(nextDateField.value);
+
+                      var full2day = mkDay + " " + month + " " + year;
+                      // console.log("2 วันถัดมา" + full2day);
+                      // // dateField.value = mkDay + " " + month + " " + year;
+                      // // nextDateField.value = dateField.value;
+
+                      if (nextDateField.value < dateField.value) {
+                        // console.log("LL");
+                        // dateField.value = mkDay + " " + month + " " + year;
+                        nextDateField.value = full2day;
+                        // console.log("nextDate");
+                        // console.log("วัน CheckOUT " + nextDateField.value);
+                      } else {
+                        nextDateField.value = full2day;
                       }
-
+                      // console.log("วัน CheckOUT " + nextDateField.value);
+                      // 
                       nextWidget.click();
                       nextWidget.focus();
                       return;
@@ -1214,11 +1252,13 @@ error_reporting(0);
                       // Not sure if OK to use
                       calendarWrapper.addEventListener("click", function(e) {
                         // Stop all the click event from bubbling to the widget.
+
                         e.stopPropagation();
                       });
 
                       widget.addEventListener("click", function(e) {
                         toggleCalendar(e, widget)
+
                       })
 
                       //Hide on focus out
@@ -1341,7 +1381,7 @@ error_reporting(0);
 
 
                     <div class="custom-control custom-radio mb-5">
-                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1 ?>" >
+                      <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1 ?>">
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
                     </div>
                     <div class="custom-control custom-radio mb-5">

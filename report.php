@@ -505,8 +505,9 @@ while ($value =  mysqli_fetch_assoc($querydriving)) {
                                                                     </label>
                                                                     <?php
                                                                     $balance = $results["sum"] - $results["Sales"];
+                                                                   
                                                                     ?>
-                                                                    <input type="numbeer" class="form-control" name="   " id="deposit" value="<?php echo $balance; ?>" />
+                                                                    <input type="number" class="form-control" name="deposit" id="deposit" value="<?php echo $balance; ?>" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-sm-12">
@@ -514,7 +515,7 @@ while ($value =  mysqli_fetch_assoc($querydriving)) {
                                                                     <label>
                                                                         <h4 class="text-blue h4">ราคาสุทธิ</h4>
                                                                     </label>
-                                                                    <input type="numbeer" class="form-control" name="sum" id="sum" value="<?php echo $results["sum"]; ?>" readonly />
+                                                                    <input type="number" class="form-control" name="sum" id="sum" value="<?php echo $results["sum"]; ?>" readonly />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-sm-12">

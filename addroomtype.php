@@ -62,7 +62,7 @@ if ($_POST['id'] != "") {
                                     <h4 class="text-blue h4">ที่พัก</h4>
                                 </label>
                                 <select class="custom-select col-12" name="id_resort" id="id_resort">
-                                    <option selected="">โปรดเลือกที่พัก...</option>
+                                    <option selected="" value="">โปรดเลือกที่พัก...</option>
                                     <?php
                                     $sql = "SELECT * FROM `tb_resort` ";
                                     $query = mysqli_query($con, $sql);
@@ -135,9 +135,9 @@ if ($_POST['id'] != "") {
                         var tr = "<tr>";
                         // tr = tr + "<td><input class='form-control' type='text' name='ids"+rows+"' id='ids"+rows+"' size='5' ></td>";
                         tr = tr + "<td><input class='form-control' type='text' name='name_roomtype" + rows + "' id='name_roomtype" + rows + "' size='20' required></td>";
-                        tr = tr + "<td><input class='form-control' type='text' name='price_roomtype" + rows + "' id='price_roomtype" + rows + "' size='10' pattern='([0-9]{,})' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
-                        tr = tr + "<td><input class='form-control' type='text' name='extrabed" + rows + "' id='extrabed" + rows + "' size='10' pattern='([0-9]{,})' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
-                        tr = tr + "<td><input class='form-control' type='text' name='capacity" + rows + "' id='capacity" + rows + "' size='10' pattern='([0-9])' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
+                        tr = tr + "<td><input class='form-control' type='number' name='price_roomtype" + rows + "' id='price_roomtype" + rows + "' size='10' pattern='([^0-9]{,})' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
+                        tr = tr + "<td><input class='form-control' type='number' name='extrabed" + rows + "' id='extrabed" + rows + "' size='10' pattern='([0-9])' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
+                        tr = tr + "<td><input class='form-control' type='number' name='capacity" + rows + "' id='capacity" + rows + "' size='10' pattern='([0-9])' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
 
                         tr = tr + "</tr>";
                         $('#myTable > tbody:last').append(tr);
