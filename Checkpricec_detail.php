@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html>
+
 <?php include "head.php"; ?>
 <?php
 $page = 'index';
@@ -18,12 +20,16 @@ $name = $_REQUEST['id'];
 $name_roomtype = $_REQUEST['name_roomtype'];
 $Checkin = $_REQUEST['Checkin'];
 $Checkout = $_REQUEST['Checkout'];
+
 $car = $_REQUEST['car'];
 $boat = $_REQUEST['boat'];
 $diving = $_REQUEST['diving'];
 
 $insurance = $_REQUEST['insurance'];
 
+$t1 = $_SESSION['tdiving'];
+$t2 =  $_SESSION['tboast'];
+$t3 = $_SESSION['tcar'];
 
 
 
@@ -54,18 +60,20 @@ $resort = mysqli_fetch_assoc($querydata);
 
 
 
-$sql33 = "SELECT * FROM tb_car_boat_diving WHERE name = 'car'";
+
+
+$sql33 = "SELECT * FROM tb_car_boat_diving WHERE name='$t3'";
 $query33 = mysqli_query($con, $sql33);
 $results33 = mysqli_fetch_assoc($query33);
 
 // while ($results33 = mysqli_fetch_assoc($query33)) {
 
 $car_num1 = $results33["price"];
-// echo $car_num1;
+
 // }
 
 
-$sql44 = "SELECT * FROM `tb_car_boat_diving` WHERE `name` = 'boat'";
+$sql44 = "SELECT * FROM `tb_car_boat_diving` WHERE `name` = '$t2'";
 $query44 = mysqli_query($con, $sql44);
 while ($results44 = mysqli_fetch_assoc($query44)) {
 
@@ -318,12 +326,12 @@ if ($older_children >= "1") {
                     <h4 class="text-blue h4">Checkin</h4>
                   </label>
 
-                           
+
 
                   <div id="id_startCalendar" class="calendar-widget default-today" data-next="#id_deadlineCalendar" date-min="today" tabindex="-1">
                     <div class="input-wrapper">
-                      <label for="type1-start"><b>วันที่เข้าพัก <?php echo $Checkin = $_REQUEST['Checkin']; ?></b></label>
-                           
+                      <label for="type1-start"><b>วันที่ Checkin <?php echo $Checkin = $_REQUEST['Checkin']; ?></b></label>
+
                       <input class="date-field form-control" id="type1-start" type="text" placeholder="Starting Date" name="Checkin" value="<?php echo $Checkin; ?>" readonly>
                     </div>
 
@@ -392,7 +400,7 @@ if ($older_children >= "1") {
 
                   <div id="id_deadlineCalendar" class="calendar-widget linked" tabindex="-1" data-link="#id_startCalendar" date-min="link">
                     <div class="input-wrapper">
-                      <label for="type1-deadline"><b>วันที่Checkout <?php echo $Checkout = $_REQUEST['Checkout']; ?></b></label>
+                      <label for="type1-deadline"><b>วันที่ Checkout <?php echo $Checkout = $_REQUEST['Checkout']; ?></b></label>
                       <input class="date-field form-control" id="type1-deadline" name="Checkout" type="text" placeholder="Deadline" value="<?php echo $Checkout; ?>" readonly>
                     </div>
                     <div class="calendar-wrapper" style="border:solid 1px #000">
@@ -1228,39 +1236,39 @@ if ($older_children >= "1") {
                   const nextWidget = document.querySelector(nextId);
                   const nextDateField = nextWidget.querySelector(".date-field");
                   if (nextDateField.value === "") {
-                        nextDateField.value = dateField.value;
-                       
-                      }
-                      // console.log("!!"+dateField.value);
+                    nextDateField.value = dateField.value;
+
+                  }
+                  // console.log("!!"+dateField.value);
                   //Change the value only if it is empty
                   let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November	', 'December'];
-                      const currDate = new Date(dateField.value);
-                      // console.log("วันนี้" + dateField.value);
-                      currDate.setDate(currDate.getDate() + 2);
-                      var day = currDate.getDate();
-                      var mkDay = new String(day)
-                      var year = currDate.getFullYear();
-                      var month = monthNames[currDate.getMonth()];
+                  const currDate = new Date(dateField.value);
+                  // console.log("วันนี้" + dateField.value);
+                  currDate.setDate(currDate.getDate() + 2);
+                  var day = currDate.getDate();
+                  var mkDay = new String(day)
+                  var year = currDate.getFullYear();
+                  var month = monthNames[currDate.getMonth()];
 
-                      // const nextDate = new Date(nextDateField.value);
+                  // const nextDate = new Date(nextDateField.value);
 
-                      var full2day = mkDay + " " + month + " " + year;
-                      // console.log("2 วันถัดมา" + full2day);
-                      // // dateField.value = mkDay + " " + month + " " + year;
-                      // // nextDateField.value = dateField.value;
+                  var full2day = mkDay + " " + month + " " + year;
+                  // console.log("2 วันถัดมา" + full2day);
+                  // // dateField.value = mkDay + " " + month + " " + year;
+                  // // nextDateField.value = dateField.value;
 
-                      if (nextDateField.value < dateField.value) {
-                        // console.log("LL");
-                        // dateField.value = mkDay + " " + month + " " + year;
-                        nextDateField.value = full2day;
-                        // console.log("nextDate");
-                        // console.log("วัน CheckOUT " + nextDateField.value);
-                      } else {
-                        nextDateField.value = full2day;
-                      }
+                  if (nextDateField.value < dateField.value) {
+                    // console.log("LL");
+                    // dateField.value = mkDay + " " + month + " " + year;
+                    nextDateField.value = full2day;
+                    // console.log("nextDate");
+                    // console.log("วัน CheckOUT " + nextDateField.value);
+                  } else {
+                    nextDateField.value = full2day;
+                  }
 
 
-                
+
 
 
 
@@ -1342,7 +1350,7 @@ if ($older_children >= "1") {
 
                   if (widget.classList.contains("default-today")) {
                     dateField.readonly = false;
-                    dateField.value = `<?php echo $Checkin;?>`;
+                    dateField.value = `<?php echo $Checkin; ?>`;
                     dateField.readonly = true;
                     // ${currDate} ${thisMonth.longName} ${thisYear}
                   }
@@ -1383,7 +1391,7 @@ if ($older_children >= "1") {
                   </label>
                   <select class="custom-select col-12" id="adult" name="adult">
                     <option value="<?php echo $adult; ?>"><?php echo $adult; ?></option>
-                    <option value="0">0</option>
+                    <!-- <option value="0">0</option> -->
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -1472,7 +1480,21 @@ if ($older_children >= "1") {
                   } ?>
 
 
+
+                  <script>
+                    $(document).ready(function() {
+                      $("#clearradio").click(function() {
+                        $("#diving1").prop("checked", false);
+                        $("#diving2").prop("checked", false);
+                        $("#diving3").prop("checked", false);
+                        console.log("Clear Radio Success");
+                      });
+                    });
+                  </script>
+
                   <?php
+
+
 
 
                   if ($diving_num == $diving1) { ?>
@@ -1488,6 +1510,7 @@ if ($older_children >= "1") {
                       <input type="radio" id="diving3" name="diving" class="custom-control-input" value="<?php echo $diving3; ?>">
                       <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก</label>
                     </div>
+                    <button type="button" id="clearradio" class="btn btn-warning form-control" style="color:#fff">ยกเลิกดำน้ำ</button>
                   <?php } else if ($diving_num == $diving2) { ?>
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>">
@@ -1501,6 +1524,7 @@ if ($older_children >= "1") {
                       <input type="radio" id="diving3" name="diving" class="custom-control-input" value="<?php echo $diving3; ?>">
                       <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก</label>
                     </div>
+                    <button type="button" id="clearradio" class="btn btn-warning form-control" style="color:#fff">ยกเลิกดำน้ำ</button>
                     <!-- <?php $diving_num; ?> -->
                   <?php } else if ($diving_num == $diving3) { ?>
                     <div class="custom-control custom-radio mb-5">
@@ -1515,6 +1539,7 @@ if ($older_children >= "1") {
                       <input type="radio" id="diving3" name="diving" class="custom-control-input" value="<?php echo $diving3; ?>" checked>
                       <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก</label>
                     </div>
+                    <button type="button" id="clearradio" class="btn btn-warning form-control" style="color:#fff">ยกเลิกดำน้ำ</button>
                   <?php } else { ?>
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>">
@@ -1523,11 +1548,14 @@ if ($older_children >= "1") {
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving2" name="diving" class="custom-control-input" value="<?php echo $diving2; ?>">
                       <label class="custom-control-label" for="diving2">ดำน้ำโซนนอก</label>
+
                     </div>
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving3" name="diving" class="custom-control-input" value="<?php echo $diving3; ?>">
                       <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก</label>
+
                     </div>
+                    <button type="button" id="clearradio" class="btn btn-warning form-control" style="color:#fff">ยกเลิกดำน้ำ</button>
                   <?php } ?>
 
 
@@ -1739,7 +1767,7 @@ if ($older_children >= "1") {
 
 
 
-              <?php if ($older_children != "") { ?>
+              <?php if ($older_children != "" && $older_children !=0 ) { ?>
                 <tr>
                   <th scope="row" style="padding-left: 3%!important;text-align:left!important">เด็ก อายุ 4-10 ปี </th>
                   <th scope="row">
@@ -1772,8 +1800,10 @@ if ($older_children >= "1") {
                   <th scope="row">-</th>
                 </tr>
               <?php } else {
+
+                
               } ?>
-              <?php if ($child != "") { ?>
+              <?php if ($child != "" && $child!=0) { ?>
                 <tr>
                   <th scope="row" style="padding-left: 3%!important;text-align:left!important">เด็ก อายุ 0-3 ปี (ฟรี)</th>
                   <th scope="row"><span class="badge badge-primary">-</span></th>
@@ -1784,9 +1814,10 @@ if ($older_children >= "1") {
                 </tr>
 
               <?php } else {
+               
               } ?>
 
-              <?php if ($older_children != "") { ?>
+              <?php if ($older_children != "" && $older_children !=0) { ?>
 
                 <tr>
                   <th scope="row" style="padding-left: 3%!important;text-align:left!important">ค่ารถไป-กลับ ต่อท่าน</th>
@@ -1812,7 +1843,7 @@ if ($older_children >= "1") {
               <?php } else {
               } ?>
 
-              <?php if ($older_children != "") { ?>
+              <?php if ($older_children != "" && $older_children !=0) { ?>
                 <tr>
                   <th scope="row" style="padding-left: 3%!important;text-align:left!important">ค่าเรือไป-กลับ ต่อท่าน</th>
                   <th scope="row">
@@ -1837,7 +1868,7 @@ if ($older_children >= "1") {
               <?php } else {
               } ?>
 
-              <?php if ($older_children != "") { ?>
+              <?php if ($older_children != "" && $older_children != 0) { ?>
                 <tr>
 
 
@@ -1864,7 +1895,7 @@ if ($older_children >= "1") {
               <?php } else {
               } ?>
 
-              <?php if ($older_children != "") { ?>
+              <?php if ($older_children != "" && $older_children!=0) { ?>
                 <tr style="color: red;">
                   <th scope="row" style="padding-left: 3%!important;text-align:left!important;color:red">ราคารวมสำหรับ <br>เด็ก อายุ 4-10 ปี ต่อท่าน <?php echo $text; ?> </th>
                   <th scope="row">
@@ -1955,10 +1986,10 @@ if ($older_children >= "1") {
             <div id="table20" style="height: 90%; display: none;">
               <h4 class="text-blue h4" align="center">ราคา 20%</h4>
               <table class="table table-bordered">
-              <thead align="center">
+                <thead align="center">
                   <tr>
                     <th scope="col">ชื่อรีสอร์ด</th>
-                    <th scope="col"><?php echo $resort['resort_name'];?></th>
+                    <th scope="col"><?php echo $resort['resort_name']; ?></th>
                   </tr>
                 </thead>
                 <tbody align="center">
@@ -1968,7 +1999,7 @@ if ($older_children >= "1") {
 
                   </tr>
 
-                  <?php if ($older_children != "") { ?>
+                  <?php if ($older_children != "" && $older_children != 0) { ?>
                     <tr>
                       <th scope="row"></th>
                       <th scope="row">Extra Bed</th>
@@ -2077,7 +2108,7 @@ if ($older_children >= "1") {
 
 
 
-                  
+
 
 
             <div id="table15" style="height: 90%;display: none;">
@@ -2087,7 +2118,7 @@ if ($older_children >= "1") {
                 <thead align="center">
                   <tr>
                     <th scope="col">ชื่อรีสอร์ด</th>
-                    <th scope="col"><?php echo $resort['resort_name'];?></th>
+                    <th scope="col"><?php echo $resort['resort_name']; ?></th>
                   </tr>
                 </thead>
                 <tbody align="center">
@@ -2217,10 +2248,10 @@ if ($older_children >= "1") {
               <h4 class="text-blue h4" align="center">ราคา 10%</h4>
               <table class="table table-bordered">
 
-              <thead align="center">
+                <thead align="center">
                   <tr>
                     <th scope="col">ชื่อรีสอร์ด</th>
-                    <th scope="col"><?php echo $resort['resort_name'];?></th>
+                    <th scope="col"><?php echo $resort['resort_name']; ?></th>
                   </tr>
                 </thead>
                 <tbody align="center">

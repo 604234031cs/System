@@ -33,10 +33,37 @@ include_once('connectdb.php'); ?>
                     </div>
                 </div>
             </div>
+            <script>
+                $(document).ready(function() {
 
+                    if ($('#resort_name').val() != "") {
+                        $('#submitformadd').removeAttr('disabled');
+                       
+                    } else {
+                        $('#submitformadd').prop('disabled', 'true');
+                       
+                    }
+
+                    $('#resort_name').keyup(function() {
+                        if ($('#resort_name').val() != '') {
+                            $('#submitformadd').removeAttr('disabled');
+                          
+                        } else {
+                            $('#submitformadd').prop('disabled', 'true');
+                            
+                        }
+                        
+                    });
+
+                    // $('#submitformadd').click(function(){
+
+                    // });
+
+                });
+            </script>
             <div class="pd-20 card-box mb-30">
 
-                <form action="add_1.php" method="POST">
+                <form action="add_1.php" method="POST" id="myForm" name="myForm">
                     <div class="row" style="padding-top: 35px;">
                         <div class="col-md-12 col-sm-12">
                             <div class="form-group">
@@ -49,7 +76,7 @@ include_once('connectdb.php'); ?>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <input type="text" name="type" id="type" hidden="" value="addresort">
-                            <button type="submit" class="btn btn-warning">บันทึก</button>
+                            <button type="submit" class="btn btn-warning" id="submitformadd">บันทึก</button>
                         </div>
 
 
@@ -103,13 +130,13 @@ include_once('connectdb.php'); ?>
                                                                     </label>
                                                                     <input hidden="" class="form-control" name="id" id="id" value="<?php echo $results["id"]; ?>" />
                                                                     <input hidden="" class="form-control" name="type" id="type" value="editresort" />
-                                                                    <input type="text" class="form-control" name="resort_name" id="resort_name" value="<?php echo $results["resort_name"]; ?>" />
+                                                                    <input type="text" class="form-control" name="resort_name" id="resort_name" value="<?php echo $results["resort_name"]; ?>" required />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <input class="btn btn-primary" type="submit" value="บันทึก" style="color: #fff;">
+                                                        <input class="btn btn-primary" type="submit" value="บันทึก" style="color: #fff;" id="saveedit">
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                                     </div>
                                                 </form>

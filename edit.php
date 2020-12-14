@@ -187,7 +187,8 @@ if ($_REQUEST['id'] != "") {
                                                         <input hidden type="text" name="resort_name" value="<?php echo $results["resort_name"]; ?>">
                                                         <input hidden type="text" name="id" value="<?php echo $results["id"]; ?>">
                                                         <input class="btn form-control btn-primary" type="submit" value="บันทึก" style="color: #fff;">
-                                                        <input class="btn form-control btn-danger" type="submit" value="Close" style="color: #fff;">
+                                                        <button type="button" class="btn form-control btn-danger" data-dismiss="modal" style="color: #fff;">Close</button>
+                                                        <!-- <input class="btn form-control btn-danger" type="button" value="Close" style="color: #fff;"> -->
                                                     </div>
                                                 </form>
 

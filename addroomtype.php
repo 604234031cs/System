@@ -148,7 +148,7 @@ if ($_POST['id'] != "") {
                             document.getElementById("save").disabled = true;
                         }
                         
-                      
+                        console.log(rows);
                     });
 
                     $("#deleteRows").click(function() {
@@ -174,7 +174,7 @@ if ($_POST['id'] != "") {
                         }else{
                             document.getElementById("save").disabled = true;
                         }
-
+                        console.log(rows);
                     });
 
                     $("#id_resort").change(function(){
@@ -185,6 +185,7 @@ if ($_POST['id'] != "") {
                         }else{
                             document.getElementById("save").disabled = true;
                         }
+                        
                     })
 
                     $("#save").click(function(){

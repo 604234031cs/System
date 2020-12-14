@@ -35,9 +35,9 @@ include_once('connectdb.php'); ?>
             </div>
 
             <div class="pd-20 card-box mb-30">
-                <div class="card-header">
+                <!-- <div class="card-header">
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">เพิ่ม</button>
-                </div>
+                </div> -->
                 <!--              <form action="add_1.php" method="POST">
                         <div class="row" style="padding-top: 35px;">
                             <div class="col-md-12 col-sm-12">
@@ -150,7 +150,7 @@ include_once('connectdb.php'); ?>
 
 
 
-    <div class="modal" id="myModal">
+    <!-- <div class="modal" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -187,7 +187,7 @@ include_once('connectdb.php'); ?>
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
     <?php include "footer.php"; ?>
 </body>
 

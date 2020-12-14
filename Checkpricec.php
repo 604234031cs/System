@@ -2,7 +2,7 @@
 <html>
 <?php include "head.php";
 include_once('connectdb.php');
-
+session_start(); 
 error_reporting(0);
 ?>
 
@@ -1362,23 +1362,34 @@ error_reporting(0);
                     <?php
                     $sql11 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '9'";
                     $query11 = mysqli_query($con, $sql11);
-                    while ($results11 = mysqli_fetch_assoc($query11)) {
+                    $results11 = mysqli_fetch_assoc($query11);
                       $diving1 = $results11["price"];
-                    } ?>
+                      // $tcar = $results11["name"];
+                      $_SESSION['tcar'] = $results11["name"];
+                   
+                      $sql22 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '99'";
+                      $query22 = mysqli_query($con, $sql22);
+                      $results22 = mysqli_fetch_assoc($query22);
+                        $diving2 = $results22["price"];
+                        $_SESSION['tboast'] = $results22["name"];
 
-                    <?php
-                    $sql22 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '99'";
-                    $query22 = mysqli_query($con, $sql22);
-                    while ($results22 = mysqli_fetch_assoc($query22)) {
-                      $diving2 = $results22["price"];
-                    } ?>
-                    <?php
-                    $sql33 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '999'";
-                    $query33 = mysqli_query($con, $sql33);
-                    while ($results33 = mysqli_fetch_assoc($query33)) {
+                       $sql33 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '999'";
+                     $query33 = mysqli_query($con, $sql33);
+                       $results33 = mysqli_fetch_assoc($query33);
                       $diving3 = $results33["price"];
-                    } ?>
+                      // $tdiving = $results33["name"];
+                      $_SESSION['tdiving'] = $results33["name"];
 
+                     ?>
+                    <script>
+                      $(document).ready(function() {
+                        $("#clearradio").click(function() {
+                          $("#diving1").prop("checked", false);
+                          $("#diving2").prop("checked", false);
+                          $("#diving3").prop("checked", false);
+                        });
+                      });
+                    </script>
 
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1 ?>">
@@ -1392,20 +1403,23 @@ error_reporting(0);
                       <input type="radio" id="diving3" name="diving" class="custom-control-input" value="<?php echo $diving3 ?>">
                       <label class="custom-control-label" for="diving3">ดำน้ำโซนใน + โซนนอก</label>
                     </div>
+                    <button type="button" id="clearradio" class="btn btn-warning form-control" style="color:#fff">ยกเลิกดำน้ำ</button>
                   </div>
 
 
 
                   <div class="col-md-2 col-sm-12">
                     <label class="weight-600">
-                      <h4 class="text-blue h4">เเพคเกจเสริม<?php echo $diving3; ?></h4>
+                      <h4 class="text-blue h4">เเพคเกจเสริม<?php echo $tcar; ?></h4>
                     </label>
                     <div class="custom-control custom-checkbox mb-12">
-                      <input type="checkbox" class="custom-control-input" id="customCheck1" name="car">
+                      <input type="checkbox" class="custom-control-input" id="customCheck1" name="car" value="car">
+                      
                       <label class="custom-control-label" for="customCheck1">รถ</label>
                     </div>
                     <div class="custom-control custom-checkbox mb-12">
                       <input type="checkbox" class="custom-control-input" id="customCheck2" name="boat">
+                    
                       <label class="custom-control-label" for="customCheck2">เรือ</label>
                     </div>
 
@@ -1420,6 +1434,14 @@ error_reporting(0);
                     <input class="btn btn-primary" type="submit" value="ตรวจสอบ">
                   </div>
                 </div>
+
+             
+
+
+                    <!-- <input type="text" value="<?php echo $_SESSION['tdiving']; ?>" name="t1" hidden>
+                      <input type="text" value="<?php echo $_SESSION['tboast']; ?>" name="t2" hidden>
+                      <input type="text" value="<?php echo $_SESSION['tcar']; ?>"  name="t3" hidden> -->
+
                 </form>
       </div>
 
