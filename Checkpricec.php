@@ -2,10 +2,31 @@
 <html>
 <?php include "head.php";
 include_once('connectdb.php');
-session_start(); 
+session_start();
 error_reporting(0);
 ?>
+<?php
+$sql11 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '9'";
+$query11 = mysqli_query($con, $sql11);
+$results11 = mysqli_fetch_assoc($query11);
+$diving1 = $results11["price"];
+// $tcar = $results11["name"];
+$_SESSION['tcar'] = $results11["name"];
 
+$sql22 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '99'";
+$query22 = mysqli_query($con, $sql22);
+$results22 = mysqli_fetch_assoc($query22);
+$diving2 = $results22["price"];
+$_SESSION['tboast'] = $results22["name"];
+
+$sql33 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '999'";
+$query33 = mysqli_query($con, $sql33);
+$results33 = mysqli_fetch_assoc($query33);
+$diving3 = $results33["price"];
+// $tdiving = $results33["name"];
+$_SESSION['tdiving'] = $results33["name"];
+
+?>
 
 
 <body>
@@ -32,7 +53,7 @@ error_reporting(0);
           </div>
           <div class="col-md-8">
             <h4 class="font-20 weight-500 mb-10 text-capitalize">
-              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe
+              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe 
               <div class="weight-600 font-30 text-blue">เช็คราคาห้องพักของแต่ละรีสอร์ท</div>
             </h4>
           </div>
@@ -1313,7 +1334,7 @@ error_reporting(0);
                         <h4 class="text-blue h4">เด็ก อายุ 4-10 ปี</h4>
                       </label>
                       <select class="custom-select col-12" id="older_children" name="older_children">
-                        <option value="">0</option>
+                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -1335,7 +1356,7 @@ error_reporting(0);
                         <h4 class="text-blue h4">เด็ก อายุ 0-3 ปี</h4>
                       </label>
                       <select class="custom-select col-12" id="child" name="child">
-                        <option value="">0</option>
+                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -1359,28 +1380,7 @@ error_reporting(0);
                     <label class="weight-600">
                       <h4 class="text-blue h4">ประเภทการดำน้ำ</h4>
                     </label>
-                    <?php
-                    $sql11 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '9'";
-                    $query11 = mysqli_query($con, $sql11);
-                    $results11 = mysqli_fetch_assoc($query11);
-                      $diving1 = $results11["price"];
-                      // $tcar = $results11["name"];
-                      $_SESSION['tcar'] = $results11["name"];
-                   
-                      $sql22 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '99'";
-                      $query22 = mysqli_query($con, $sql22);
-                      $results22 = mysqli_fetch_assoc($query22);
-                        $diving2 = $results22["price"];
-                        $_SESSION['tboast'] = $results22["name"];
 
-                       $sql33 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '999'";
-                     $query33 = mysqli_query($con, $sql33);
-                       $results33 = mysqli_fetch_assoc($query33);
-                      $diving3 = $results33["price"];
-                      // $tdiving = $results33["name"];
-                      $_SESSION['tdiving'] = $results33["name"];
-
-                     ?>
                     <script>
                       $(document).ready(function() {
                         $("#clearradio").click(function() {
@@ -1413,13 +1413,13 @@ error_reporting(0);
                       <h4 class="text-blue h4">เเพคเกจเสริม<?php echo $tcar; ?></h4>
                     </label>
                     <div class="custom-control custom-checkbox mb-12">
-                      <input type="checkbox" class="custom-control-input" id="customCheck1" name="car" value="car">
-                      
+                      <input type="checkbox" class="custom-control-input" id="customCheck1" name="car">
+
                       <label class="custom-control-label" for="customCheck1">รถ</label>
                     </div>
                     <div class="custom-control custom-checkbox mb-12">
                       <input type="checkbox" class="custom-control-input" id="customCheck2" name="boat">
-                    
+
                       <label class="custom-control-label" for="customCheck2">เรือ</label>
                     </div>
 
@@ -1435,10 +1435,10 @@ error_reporting(0);
                   </div>
                 </div>
 
-             
 
 
-                    <!-- <input type="text" value="<?php echo $_SESSION['tdiving']; ?>" name="t1" hidden>
+
+                <!-- <input type="text" value="<?php echo $_SESSION['tdiving']; ?>" name="t1" hidden>
                       <input type="text" value="<?php echo $_SESSION['tboast']; ?>" name="t2" hidden>
                       <input type="text" value="<?php echo $_SESSION['tcar']; ?>"  name="t3" hidden> -->
 

@@ -88,7 +88,7 @@ include_once('connectdb.php'); ?>
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">แก้ไขชื่อรีสอร์ท</h4>
+                                                    <h4 class="modal-title">แก้ไขราคา</h4>
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
                                                 <form action="add_1.php" method="POST">

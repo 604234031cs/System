@@ -4,8 +4,6 @@ require( "PHPMailer/PHPMailerAutoload.php" );
 include_once( 'connectdb.php' );
 
 
-
-
     $month =  date('m');
     $transaction_date =  date('d-m-Y');
     $type = $_REQUEST['type']; 
@@ -46,7 +44,7 @@ include_once( 'connectdb.php' );
 			 $resort_name = $ss[ 'room_name' ];
 			
 			if ($type == '1') {
-			echo	$in = " UPDATE `tb_report` SET `car` = '1'   WHERE `tb_report`.`id` ='" . $ss[ 'id' ] . "'";
+				$in = " UPDATE `tb_report` SET `car` = '1'   WHERE `tb_report`.`id` ='" . $ss[ 'id' ] . "'";
 			}else if ($type == '2') {
 				$in = " UPDATE `tb_report` SET `boat` = '1'   WHERE `tb_report`.`id` ='" . $ss[ 'id' ] . "'";
 			}else{
@@ -55,22 +53,10 @@ include_once( 'connectdb.php' );
 			}
 
 			
+			$a = mysqli_query( $con, $in);
 
 
-
-			$a = mysqli_query( $con, $in );
-
-
-
-
-
-
-
-
-
-
-
-			echo "<script> window.location.href = 'report.php?resort_name=$resort_name';</script > ";
+			echo "<script> window.location.href = 'report.php;</script > ";
 
 		}
 			

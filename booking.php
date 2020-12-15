@@ -115,13 +115,60 @@ $typser = $_POST["typser"];
 
                             </div>
                         </div>
+                        <link rel="stylesheet" href="/path/to/dist/css/image-zoom.css" />
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.20/jquery.zoom.min.js"></script>
+                        <script language="JavaScript">
+                        $(document).ready(function(){
+			                    $('#produto').zoom();
+
+                                
+
+		                        });
+                           
+                                function readURL(input) {
+                                if (input.files && input.files[0]) {
+                                    console.log(input.files);
+                                    var reader = new FileReader();
+                                    reader.onload = function(e) {
+                                        $('#blah').attr('src', e.target.result);
+                                    }
+                                    reader.readAsDataURL(input.files[0]);
+                                    // $('#blah').show();
+                                }
+                                // else {
+                                //     $('#blah').hide();
+                                // }
+                            }
+                            
+                        </script>
+
+
+<style>
+		.zoom {
+			display:inline-block;
+			position: relative;
+		}
+
+		.zoom img {
+			display: block;
+		}
+	</style>
+
+
 
                         <div class="col-md-4 col-sm-12">
                             <div class="form-group">
                                 <label>
                                     <h4 class="text-blue h4">slip </h4>
                                 </label>
-                                <input type="file" class="form-control" name="file" id="file" placeholder="ระบุ slip" required>
+                                <!-- <img id="image<a href='https://www.jqueryscript.net/zoom/'>Zoom </a>" src="https://source.unsplash.com/CkW90N_oro8/1200x900" /> -->
+                                <div class="zoom" id="produto">
+                          
+                                <img id="blah" src="#" alt="your image"  width="500px"/>
+                                </div>
+                              
+                                <input type="file" class="form-control" name="file" id="file" placeholder="ระบุ slip" onchange="readURL(this);" required>
                             </div>
                         </div>
                         <!--  <div class="col-md-4 col-sm-12">
@@ -150,7 +197,6 @@ $typser = $_POST["typser"];
 
 
 
-
                         <script language="javascript">
                             function a() {
 
@@ -160,7 +206,7 @@ $typser = $_POST["typser"];
                                 var n2 = parseInt(int2);
                                 // console.log(isNaN(int1));
                                 if ((isNaN(n1)) || (isNaN(n2))) {
-                                     document.getElementById("deposit").setAttribute("color", "red");
+                                    document.getElementById("deposit").setAttribute("color", "red");
                                     var deposit55 = document.getElementById("deposit").value = s;
                                     document.getElementById("deposit").value = int1;
 
@@ -180,7 +226,7 @@ $typser = $_POST["typser"];
                                 <label>
                                     <h4 class="text-blue h4">จ่ายมัดจำ </h4>
                                 </label>
-                                <input type="text" class="form-control" name="Sales" id="Sales" value="" onkeyup="a() " required/>
+                                <input type="text" class="form-control" name="Sales" id="Sales" value="" onkeyup="a() " required />
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">

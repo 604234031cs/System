@@ -24,4 +24,14 @@ if ($page == "checkprice") {
         array_push($arr, $results);
     }
     echo json_encode($arr);
+} else if ($page == "pricerooms") {
+    $id = $_GET['id_resort'];
+    $sql = "SELECT * FROM tb_roomtype where id_resort = '$id'";
+    $query = mysqli_query($con, $sql);
+    $results11 = mysqli_fetch_assoc($query);
+    $arr = array();
+    while ($results = mysqli_fetch_assoc($query)) {
+        array_push($arr, $results);
+    }
+    echo json_encode($arr);
 }

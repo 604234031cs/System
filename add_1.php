@@ -31,7 +31,7 @@ if ($type == "addresort") {
 	// $price_friday = $_REQUEST[ 'price_friday' ];
 	// $extrabed = $_REQUEST[ 'extrabed' ];
 	$id_resort = $_POST['id_resort'];
-	echo (int)$_POST["hdnCount"];
+	// echo (int)$_POST["hdnCount"];
 	// echo $_REQUEST['id_resort'];
 	// $high_season1 = $_REQUEST[ 'high_season1' ];
 	// $peak_season = $_REQUEST[ 'peak_season' ];
@@ -76,6 +76,7 @@ if ($type == "addresort") {
 	$id = $_POST['id'];
 	$sql = "UPDATE tb_car_boat_diving SET name='$name',price='$price' where id='$id'";
 	if (mysqli_query($con, $sql)) {
+
 		echo "<script> alert('ได้ทำการแก้ไขข้อมูล เรียบร้อย!!');window.location.href='editprice.php';</script>";
 	} else {
 		echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
@@ -140,7 +141,7 @@ if ($type == "addresort") {
 
 	// แก้ไขชื่อรีสอร์ท
 	$Username = $_REQUEST['Username'];
-	$Password = $_REQUEST['Password'];
+	$Password = md5($_REQUEST['Password']);
 	$Name = $_REQUEST['Name'];
 	$status = $_REQUEST['status'];
 

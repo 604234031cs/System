@@ -162,7 +162,8 @@ while ($row1 = mysqli_fetch_array($result1)) {
     </tr>   
 </table>
 </td></tr></table>
-<table class="first" cellpadding="4" cellspacing="0" width="100%"><tr><td>
+
+<table class="first"  width="100%" ><tr><td>
     <table class="first" cellpadding="4" cellspacing="0" width="100%" >
     <tr><td colspan="6"><b>รายละเอียดการชำระเงิน(Payment Detail:)</b></td></tr>
     <tr>

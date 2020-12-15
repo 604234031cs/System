@@ -114,8 +114,22 @@ header("Content-Disposition: attachment; filename=testing.xls");
 		<?php
 		if ($_REQUEST["resort_name"] == "1") {
 			$sql1 = "SELECT *  FROM tb_report  WHERE transaction_date >= '$date_star' AND transaction_date <= '$date_end' ";
+			// $sql1 = "SELECT tb_report.id, tb_report.id_booking, tb_report.month, tb_report.transaction_date, tb_report.name, tb_report.phone, tb_report.line, tb_report.room_name, tb_report.name_resort,tb_report.package, tb_report.number_of_rooms, tb_report.extrabed, tb_report.customers, tb_report.checkin, tb_report.checkout, 
+			// tb_report.Sales, tb_report.deposit, tb_report.sum, tb_report.car, tb_report.boat, tb_report.diving, tb_report.payment_status, tb_report.occupancy_status, tb_report.collection_date, tb_report.com, tb_report.commission_value, tb_report.insurance, tb_report.slip, tb_report.Byyy, tb_report.adult, tb_report.note, tb_report.details, tb_report.noid_booking,
+			//  tb_report.report_status, tb_report.ch1, tb_report.ch2, tb_report.typ_ser, tb_report.status_pay,
+			// tb_voucher.service_name,tb_voucher.voucher_date, tb_voucher.status
+			//  FROM tb_report,tb_voucher
+			// WHERE tb_report.id_booking = tb_voucher.id_bookink
+			// and tb_report.transaction_date  >= '$date_star' and transaction_date <= '$date_end'";
 		} else {
 			$sql1 = "SELECT *  FROM tb_report  WHERE transaction_date >= '$date_star' AND transaction_date <= '$date_end' AND room_name = '$resort_name'";
+			// $sql ="SELECT tb_report.id, tb_report.id_booking, tb_report.month, tb_report.transaction_date, tb_report.name, tb_report.phone, tb_report.line, tb_report.room_name, tb_report.name_resort,tb_report.package, tb_report.number_of_rooms, tb_report.extrabed, tb_report.customers, tb_report.checkin, tb_report.checkout, 
+			// tb_report.Sales, tb_report.deposit, tb_report.sum, tb_report.car, tb_report.boat, tb_report.diving, tb_report.payment_status, tb_report.occupancy_status, tb_report.collection_date, tb_report.com, tb_report.commission_value, tb_report.insurance, tb_report.slip, tb_report.Byyy, tb_report.adult, tb_report.note, tb_report.details, tb_report.noid_booking,
+			//  tb_report.report_status, tb_report.ch1, tb_report.ch2, tb_report.typ_ser, tb_report.status_pay,
+			// tb_voucher.service_name,tb_voucher.voucher_date, tb_voucher.status
+			//  FROM tb_report,tb_voucher
+			// WHERE tb_report.id_booking = tb_voucher.id_bookink
+			// and tb_report.transaction_date  >= '$date_star' and transaction_date <= '$date_end' and tb_report.room_name = '$resort_name'";
 		}
 
 
@@ -175,22 +189,58 @@ header("Content-Disposition: attachment; filename=testing.xls");
 				<td><?php echo $results1["deposit"]; ?></td>
 				<td><?php echo $results1["sum"]; ?></td>
 				<td><?php
-					if ($results1["car"] != 0) {
-						echo "เพิ่ม";
+
+					if ($results1["car"] != 0 ) {
+						$id=$results1["id_booking"];
+						$sqlc = "SELECT tb_voucher.service_name 
+						FROM tb_voucher,tb_report
+						where tb_voucher.id_bookink =tb_report.id_booking
+						and tb_report.id_booking='$id'";
+						$queryc = mysqli_query($con, $sqlc);
+						while($resultscar = mysqli_fetch_assoc($queryc)){
+							echo $resultscar['service_name'];
+						}
+						
 					} else {
-						echo "เพิ่ม";
+						
 					}
 					?>
 
 				</td>
 				<td><?php
 					if ($results1["boat"] != 0) {
-						echo "เพิ่ม";
+						$id=$results1["id_booking"];
+						$sqlb = "SELECT tb_voucher.service_name 
+						FROM tb_voucher,tb_report
+						where tb_voucher.id_bookink =tb_report.id_booking
+						and tb_report.id_booking='$id'";
+						$queryb = mysqli_query($con, $sqlb);
+						while($resultsboat = mysqli_fetch_assoc($queryb)){
+							echo $resultsboat['service_name'];
+						}
+						
 					} else {
-						echo "ไม่เพิ่ม";
+					
 					}
 					?></td>
-				<td><?php echo $results1["diving"]; ?></td>
+				<td>
+				<?php 
+				if($results1["diving"]!=0){
+					$id=$results1["id_booking"];
+					$sqld = "SELECT tb_voucher.service_name 
+					FROM tb_voucher,tb_report
+					where tb_voucher.id_bookink = tb_report.id_booking
+					and tb_report.id_booking='$id'";
+					$queryd = mysqli_query($con, $sqld);
+					while($resultsdiving = mysqli_fetch_assoc($queryd)){
+						echo $resultsdiving['service_name'];
+					}
+					
+				}else{
+
+				}
+					?>
+				</td>
 				<td>
 					<?php
 					if ($results1["Sales"] == $results1["sum"]) { ?>
@@ -236,3 +286,7 @@ header("Content-Disposition: attachment; filename=testing.xls");
 </body>
 
 </html>
+
+
+
+

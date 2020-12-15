@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -176,7 +175,7 @@ if ($older_children >= "1") {
           </div>
           <div class="col-md-8">
             <h4 class="font-20 weight-500 mb-10 text-capitalize">
-              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe
+              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe <?php echo $_SESSION['tcar']; ?>
               <div class="weight-600 font-30 text-blue">รายละเอียดเช็คราคาห้องพักของแต่ละรีสอร์ท</div>
             </h4>
           </div>
@@ -1414,7 +1413,11 @@ if ($older_children >= "1") {
                     <h4 class="text-blue h4">เด็ก อายุ 4-10 ปี</h4>
                   </label>
                   <select class="custom-select col-12" id="older_children" name="older_children">
-                    <option value="<?php echo $older_children; ?>"><?php echo $older_children; ?></option>
+                    <?php if ($older_children <= 0) { ?>
+                      <option value="0">0</option>
+                    <?php } else { ?>
+                      <option value="<?php echo $older_children; ?>"><?php echo $older_children; ?></option>
+                    <?php } ?>
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -1436,7 +1439,12 @@ if ($older_children >= "1") {
                     <h4 class="text-blue h4">เด็ก อายุ 0-3 ปี</h4>
                   </label>
                   <select class="custom-select col-12" id="child" name="child">
-                    <option value="<?php echo $child; ?>"><?php echo $child; ?></option>
+                    <?php if ($child <= 0) { ?>
+                      <option value="0">0</option>
+                    <?php } else { ?>
+                      <option value="<?php echo $child; ?>"><?php echo $child; ?></option>
+                    <?php } ?>
+                
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -1767,7 +1775,7 @@ if ($older_children >= "1") {
 
 
 
-              <?php if ($older_children != "" && $older_children !=0 ) { ?>
+              <?php if ($older_children != "" && $older_children != 0) { ?>
                 <tr>
                   <th scope="row" style="padding-left: 3%!important;text-align:left!important">เด็ก อายุ 4-10 ปี </th>
                   <th scope="row">
@@ -1800,10 +1808,8 @@ if ($older_children >= "1") {
                   <th scope="row">-</th>
                 </tr>
               <?php } else {
-
-                
               } ?>
-              <?php if ($child != "" && $child!=0) { ?>
+              <?php if ($child != "" && $child != 0) { ?>
                 <tr>
                   <th scope="row" style="padding-left: 3%!important;text-align:left!important">เด็ก อายุ 0-3 ปี (ฟรี)</th>
                   <th scope="row"><span class="badge badge-primary">-</span></th>
@@ -1814,10 +1820,9 @@ if ($older_children >= "1") {
                 </tr>
 
               <?php } else {
-               
               } ?>
 
-              <?php if ($older_children != "" && $older_children !=0) { ?>
+              <?php if ($older_children != "" && $older_children != 0) { ?>
 
                 <tr>
                   <th scope="row" style="padding-left: 3%!important;text-align:left!important">ค่ารถไป-กลับ ต่อท่าน</th>
@@ -1843,7 +1848,7 @@ if ($older_children >= "1") {
               <?php } else {
               } ?>
 
-              <?php if ($older_children != "" && $older_children !=0) { ?>
+              <?php if ($older_children != "" && $older_children != 0) { ?>
                 <tr>
                   <th scope="row" style="padding-left: 3%!important;text-align:left!important">ค่าเรือไป-กลับ ต่อท่าน</th>
                   <th scope="row">
@@ -1895,7 +1900,7 @@ if ($older_children >= "1") {
               <?php } else {
               } ?>
 
-              <?php if ($older_children != "" && $older_children!=0) { ?>
+              <?php if ($older_children != "" && $older_children != 0) { ?>
                 <tr style="color: red;">
                   <th scope="row" style="padding-left: 3%!important;text-align:left!important;color:red">ราคารวมสำหรับ <br>เด็ก อายุ 4-10 ปี ต่อท่าน <?php echo $text; ?> </th>
                   <th scope="row">
@@ -2128,7 +2133,7 @@ if ($older_children >= "1") {
 
                   </tr>
 
-                  <?php if ($older_children != "") { ?>
+                  <?php if ($older_children != "" && $older_children != 0) { ?>
                     <tr>
                       <th scope="row"></th>
                       <th scope="row">Extra Bed</th>
@@ -2261,7 +2266,7 @@ if ($older_children >= "1") {
 
                   </tr>
 
-                  <?php if ($older_children != "") { ?>
+                  <?php if ($older_children != "" && $older_children != 0) { ?>
                     <tr>
                       <th scope="row"></th>
                       <th scope="row">Extra Bed</th>

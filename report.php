@@ -73,6 +73,93 @@ while ($value =  mysqli_fetch_assoc($querydriving)) {
                 </div>
             </div>
 
+<style>
+#blah {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#blah:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.popup {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.popup-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.popup-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .popup-content {
+    width: 100%;
+  }
+}
+</style>
 
             <div class="card-box mb-30">
                 <div class="pd-20">
@@ -213,7 +300,7 @@ bottom: .5em;
 
                 </style> -->
 
-       
+
 
 
                 <div class="pb-20 table-responsive">
@@ -305,16 +392,11 @@ bottom: .5em;
                                 <tr align="center">
                                     <td class="table-plus" style="padding-left: 40px!important;text-align:left!important"><?php echo $results["id_booking"]; ?>
                                         <?php if ($results["noid_booking"] != "") { ?>
-                                            <i class='ion-plus-round' onclick='openlog()'>
-                                            <?php } else { ?>
-                                                <?php echo "&nbsp;"; ?>
-                                            <?php } ?></td>
+                                            <!-- <i class='ion-plus-round' onclick='openlog()'> -->
+                                            <?php echo "(" . $results['noid_booking'] . ")"; ?>
+                                            <?php echo "&nbsp;"; ?>
+                                        <?php } ?></td>
 
-                                    <script>
-                                        function openlog() {
-                                            console.log("เปืด");
-                                        }
-                                    </script>
                                     </td>
                                     <!-- <td><?php //echo $results["month"]; 
                                                 ?></td> -->
@@ -373,7 +455,7 @@ bottom: .5em;
                                             <?php } else {
                                             if ($results["deposit"] != 0) {
                                             ?>
-                                                <a data-toggle="modal" data-target="#myModal<?php echo $results["id"]; ?>" type="button" class="btn btn-info" style="color:#fff">จ่ายมัดจำ</a>
+                                                <a data-toggle="modal" data-target="#myModal<?php echo $results["id"]; ?>" type="button" class="btn btn-info" style="color:#fff" >จ่ายมัดจำ</a>
                                                 <!--  <b style="color: red;">จ่ายมัดจำ</b> -->
                                         <?php }
                                         } ?>
@@ -421,7 +503,7 @@ bottom: .5em;
 
                                         <?php } else { ?>
 
-                                            <a target="" type="button" class="btn btn-secondary ">BOOK รถ</a>
+                                            <a target="" type="button" class="btn btn-secondary" style="color:#fff" >BOOK รถ</a>
 
                                         <?php } ?>
 
@@ -442,7 +524,7 @@ bottom: .5em;
                                         <?php  } else if ($results["boat"] == 1) { ?>
                                             <a target="_blank" href="report4.php?id=<?php echo $results['id']; ?>&type=เรือ&status=2" type="button" class="btn btn-success">รายงานเรือ</a>
                                         <?php } else { ?>
-                                            <a target="" type="button" class="btn btn-secondary">BOOK เรือ</a>
+                                            <a target="" type="button" class="btn btn-secondary" style="color:#fff">BOOK เรือ</a>
                                         <?php } ?>
 
 
@@ -464,7 +546,7 @@ bottom: .5em;
                                         <?php  } else if ($results["diving"] == 1) { ?>
                                             <a target="_blank" href="report3.php?id=<?php echo $results['id']; ?>&type=ดำน้ำ" type="button" class="btn btn-success">รายงานดำน้ำ</a>
                                         <?php } else { ?>
-                                            <a target="" type="button" class="btn btn-secondary">BOOK ดำน้ำ</a>
+                                            <a target="" type="button" class="btn btn-secondary" style="color:#fff">BOOK ดำน้ำ</a>
                                         <?php } ?>
 
 
@@ -521,7 +603,7 @@ bottom: .5em;
                                                                     </label>
                                                                     <?php
                                                                     $balance = $results["sum"] - $results["Sales"];
-                                                                   
+
                                                                     ?>
                                                                     <input type="number" class="form-control" name="deposit" id="deposit" value="<?php echo $balance; ?>" />
                                                                 </div>
@@ -534,12 +616,31 @@ bottom: .5em;
                                                                     <input type="number" class="form-control" name="sum" id="sum" value="<?php echo $results["sum"]; ?>" readonly />
                                                                 </div>
                                                             </div>
+                                                            <script>
+                                                            function readURL(input) {
+                                                                if (input.files && input.files[0]) {
+                                                                    // console.log(input.files);
+                                                                    var reader = new FileReader();
+                                                                    reader.onload = function(e) {
+                                                                        $('#blah').attr('src', e.target.result);
+                                                                    }
+                                                                    reader.readAsDataURL(input.files[0]);
+                                                                }
+                                                            }   
+                                                            </script>
+
+  
+                                                
                                                             <div class="col-md-12 col-sm-12">
                                                                 <div class="form-group">
                                                                     <label>
                                                                         <h4 class="text-blue h4">slip </h4>
                                                                     </label>
-                                                                    <input type="file" class="form-control" name="file" id="file" placeholder="ระบุ slip" required>
+                                                                   
+                                                                    <img id="blah" src="#" alt="your image"  width="500px"/>
+
+                                                                    <input type="file" class="form-control" name="file" id="file" placeholder="ระบุ slip" onchange="readURL(this)" required>
+                                                                   
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-sm-12">
@@ -572,7 +673,7 @@ bottom: .5em;
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">ออกใบBOOK</h4>
+                                                    <h4 class="modal-title">ออกใบBOOK รถ</h4>
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
                                                 <form action="book.php" method="POST">
@@ -587,12 +688,12 @@ bottom: .5em;
                                                                     <input type="text" class="form-control" name="service_name" id="service_name" value="" />
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="col-md-12 col-sm-12">
-                    <div class="form-group">
-                        <label><h4 class="text-blue h4">วันเข้าพัก</h4></label>
-                        <input type="date" class="form-control" name="voucher_date" id="voucher_date" value="" />
-                    </div>
-                </div> -->
+                                                            <div class="col-md-12 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label><h4 class="text-blue h4">วันเข้าพัก</h4></label>
+                                                                    <input type="date" class="form-control" name="voucher_date" id="voucher_date" value="" />
+                                                                </div>
+                                                            </div>
                                                             <div class="col-md-12 col-sm-12">
                                                                 <div class="form-group">
                                                                     <label>
@@ -620,7 +721,7 @@ bottom: .5em;
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">ออกใบBOOK</h4>
+                                                    <h4 class="modal-title">ออกใบBOOK เรือ</h4>
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
                                                 <form action="book.php" method="POST">
@@ -635,12 +736,12 @@ bottom: .5em;
                                                                     <input type="text" class="form-control" name="service_name" id="service_name" value="" />
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="col-md-12 col-sm-12">
-                    <div class="form-group">
-                        <label><h4 class="text-blue h4">วันเข้าพัก</h4></label>
-                        <input type="date" class="form-control" name="voucher_date" id="voucher_date" value="" />
-                    </div>
-                </div> -->
+                                                            <div class="col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label><h4 class="text-blue h4">วันเข้าพัก</h4></label>
+                                                                <input type="date" class="form-control" name="voucher_date" id="voucher_date" value="" />
+                                                            </div>
+                                                        </div>
                                                             <div class="col-md-12 col-sm-12">
                                                                 <div class="form-group">
                                                                     <label>
@@ -668,7 +769,7 @@ bottom: .5em;
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">ออกใบBOOK</h4>
+                                                    <h4 class="modal-title">ออกใบBOOK ดำน้ำ</h4>
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
                                                 <form action="book.php" method="POST">
@@ -729,8 +830,7 @@ bottom: .5em;
 
 
 
-
-
+    
 
 
 
@@ -746,3 +846,9 @@ bottom: .5em;
 </body>
 
 </html>
+
+<div id="popupimg" class="popup">
+  <span class="close">&times;</span>
+  <img class="popup-content" id="img01">
+  <div id="caption"></div>
+</div>

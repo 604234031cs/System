@@ -140,10 +140,11 @@ while ($row1 = mysqli_fetch_array($result1)) {
     <table cellpadding="0" cellspacing="0.1" width="100%"><tr><td ></td></tr></table>
     <table class="first" cellpadding="4" cellspacing="0" width="100%"><tr><td>
     <table cellpadding="2" cellspacing="0" width="100%">
+    
     <tr style="background-color: #DCDCDC">
-        <td width="25%" ><b style="font-size: 1em;">หมายเหตุ :</b></td>
-        <td width="75%" align="center">' . $row1['note'] . '</td>
-    </tr>
+        <td width="25%" ><b style="font-size: 1em;color:black">สิทธิประโยนชที่ไดรับ:</b></td>
+        <td width="75%" ><b style="font-size: 1.2em;color:black">' . $row1['note'] . '</b></td>
+    </tr> 
 </table>
 </td></tr></table>
     

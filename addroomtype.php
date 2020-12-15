@@ -94,6 +94,10 @@ if ($_POST['id'] != "") {
                                         <td width="198">
                                             <div align="center">จำนวนผู้เข้าพัก </div>
                                         </td>
+                                        <td width="198">
+                                            <div align="center">
+                                             </div>
+                                        </td>
 
                                     </tr>
                                 </thead>
@@ -132,13 +136,15 @@ if ($_POST['id'] != "") {
 
                     var rows = 0;
                     $("#createRows").click(function() {
-                        var tr = "<tr>";
+                        var tr = "<tr id='coltr"+rows+"'>";
                         // tr = tr + "<td><input class='form-control' type='text' name='ids"+rows+"' id='ids"+rows+"' size='5' ></td>";
                         tr = tr + "<td><input class='form-control' type='text' name='name_roomtype" + rows + "' id='name_roomtype" + rows + "' size='20' required></td>";
                         tr = tr + "<td><input class='form-control' type='number' name='price_roomtype" + rows + "' id='price_roomtype" + rows + "' size='10' pattern='([^0-9]{,})' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
                         tr = tr + "<td><input class='form-control' type='number' name='extrabed" + rows + "' id='extrabed" + rows + "' size='10' pattern='([0-9])' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
                         tr = tr + "<td><input class='form-control' type='number' name='capacity" + rows + "' id='capacity" + rows + "' size='10' pattern='([0-9])' title='กรุณาใส่ข้อมูลให้ถูกต้อง' required></td>";
+                        tr = tr + "<td><button type ='button' class='btn btn-danger' ' onclick='delcol(" + rows + ")'>ลบ</button ></td>";
                         tr = tr + "</tr>";
+                        // console.log(tr);
                         $('#myTable > tbody:last').append(tr);
                         rows = rows + 1;
                         $('#hdnCount').val(rows);
@@ -148,7 +154,7 @@ if ($_POST['id'] != "") {
                             document.getElementById("save").disabled = true;
                         }
                         
-                        console.log(rows);
+                        // console.log(rows);
                     });
 
                     $("#deleteRows").click(function() {
@@ -161,7 +167,7 @@ if ($_POST['id'] != "") {
                             }else{
                                 document.getElementById("save").disabled = true;
                             }
-                            console.log(rows);
+                            // console.log(rows);
                         }
                     });
 
@@ -195,9 +201,16 @@ if ($_POST['id'] != "") {
                         document.getElementById("save").disabled = true;
                     }
                 })
+
+                
                 });
 
                 
+                function delcol(x){
+                    var str = "#coltr"+ x
+                   console.log($(str));
+                   $(str).remove();
+                }
             </script>
 
 
