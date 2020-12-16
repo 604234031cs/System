@@ -2,7 +2,11 @@
 <html>
 <?php include "head.php";
 include_once('connectdb.php');
+session_start();
 error_reporting(0);
+$t1 = $_SESSION['tcar'];
+$t2 = $_SESSION['tboast'];
+$t3 = $_SESSION['tdiving'];
 if ($_REQUEST['resort_name'] != "") {
     $resort_name = $_REQUEST['resort_name'];
     $all = 'noall';
@@ -21,23 +25,23 @@ if ($_REQUEST['resort_name'] != "") {
     $date_star = '';
     $date_end = '';
 }
-$sql = "SELECT * FROM tb_car_boat_diving where name = 'car'";
+$sql = "SELECT * FROM tb_car_boat_diving where name = '$t1'";
 $querycar = mysqli_query($con, $sql);
 // $value =  mysqli_fetch_assoc($query1);
-while ($value =  mysqli_fetch_assoc($querycar)) {
-    $pricecar = $value['price'];
+while ($valuec =  mysqli_fetch_assoc($querycar)) {
+    $pricecar = $valuec['price'];
 }
-$sql = "SELECT * FROM tb_car_boat_diving where name = 'boat'";
+$sql = "SELECT * FROM tb_car_boat_diving where name = '$t2'";
 $queryboat = mysqli_query($con, $sql);
 // $value =  mysqli_fetch_assoc($query1);
-while ($value =  mysqli_fetch_assoc($queryboat)) {
-    $priceboat = $value['price'];
+while ($valueb =  mysqli_fetch_assoc($queryboat)) {
+    $priceboat = $valueb['price'];
 }
-$sql = "SELECT * FROM tb_car_boat_diving where name = 'boat'";
+$sql = "SELECT * FROM tb_car_boat_diving where name = '$t3'";
 $querydriving = mysqli_query($con, $sql);
 // $value =  mysqli_fetch_assoc($query1);
-while ($value =  mysqli_fetch_assoc($querydriving)) {
-    $pricedriving = $value['price'];
+while ($valued =  mysqli_fetch_assoc($querydriving)) {
+    $pricedriving = $valued['price'];
 }
 ?>
 
@@ -73,93 +77,115 @@ while ($value =  mysqli_fetch_assoc($querydriving)) {
                 </div>
             </div>
 
-<style>
-#blah {
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+            <style>
+                #blah {
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: 0.3s;
+                }
 
-#blah:hover {opacity: 0.7;}
+                #blah:hover {
+                    opacity: 0.7;
+                }
 
-/* The Modal (background) */
-.popup {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
+                /* The Modal (background) */
+                .popup {
+                    display: none;
+                    /* Hidden by default */
+                    position: fixed;
+                    /* Stay in place */
+                    z-index: 1;
+                    /* Sit on top */
+                    padding-top: 100px;
+                    /* Location of the box */
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    /* Full width */
+                    height: 100%;
+                    /* Full height */
+                    overflow: auto;
+                    /* Enable scroll if needed */
+                    background-color: rgb(0, 0, 0);
+                    /* Fallback color */
+                    background-color: rgba(0, 0, 0, 0.9);
+                    /* Black w/ opacity */
+                }
 
-/* Modal Content (image) */
-.popup-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-}
+                /* Modal Content (image) */
+                .popup-content {
+                    margin: auto;
+                    display: block;
+                    width: 80%;
+                    max-width: 700px;
+                }
 
-/* Caption of Modal Image */
-#caption {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-  height: 150px;
-}
+                /* Caption of Modal Image */
+                #caption {
+                    margin: auto;
+                    display: block;
+                    width: 80%;
+                    max-width: 700px;
+                    text-align: center;
+                    color: #ccc;
+                    padding: 10px 0;
+                    height: 150px;
+                }
 
-/* Add Animation */
-.popup-content, #caption {  
-  -webkit-animation-name: zoom;
-  -webkit-animation-duration: 0.6s;
-  animation-name: zoom;
-  animation-duration: 0.6s;
-}
+                /* Add Animation */
+                .popup-content,
+                #caption {
+                    -webkit-animation-name: zoom;
+                    -webkit-animation-duration: 0.6s;
+                    animation-name: zoom;
+                    animation-duration: 0.6s;
+                }
 
-@-webkit-keyframes zoom {
-  from {-webkit-transform:scale(0)} 
-  to {-webkit-transform:scale(1)}
-}
+                @-webkit-keyframes zoom {
+                    from {
+                        -webkit-transform: scale(0)
+                    }
 
-@keyframes zoom {
-  from {transform:scale(0)} 
-  to {transform:scale(1)}
-}
+                    to {
+                        -webkit-transform: scale(1)
+                    }
+                }
 
-/* The Close Button */
-.close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
-}
+                @keyframes zoom {
+                    from {
+                        transform: scale(0)
+                    }
 
-.close:hover,
-.close:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
-}
+                    to {
+                        transform: scale(1)
+                    }
+                }
 
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-  .popup-content {
-    width: 100%;
-  }
-}
-</style>
+                /* The Close Button */
+                .close {
+                    position: absolute;
+                    top: 15px;
+                    right: 35px;
+                    color: #f1f1f1;
+                    font-size: 40px;
+                    font-weight: bold;
+                    transition: 0.3s;
+                }
+
+                .close:hover,
+                .close:focus {
+                    color: #bbb;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+
+                /* 100% Image Width on Smaller Screens */
+                @media only screen and (max-width: 700px) {
+                    .popup-content {
+                        width: 100%;
+                    }
+                }
+            </style>
 
             <div class="card-box mb-30">
                 <div class="pd-20">
@@ -225,11 +251,9 @@ while ($value =  mysqli_fetch_assoc($querydriving)) {
 
             <div class="card-box mb-30">
                 <div class="pd-20">
-                    <?php $results["diving"]; ?>
+
                     <h4 class="text-blue h4">รายงานการจอง</h4>
                 </div>
-
-
                 <div class="pd-20 card-box mb-30">
 
                     <form action="report.php" method="POST">
@@ -379,8 +403,6 @@ bottom: .5em;
                                     // echo $ex[1];
                                     if ($ex[0]) {
                                         $dch1 = 1;
-                                    }
-                                    if ($ex[1]) {
                                         $dch2 = 1;
                                     }
                                 } else {
@@ -393,7 +415,7 @@ bottom: .5em;
                                     <td class="table-plus" style="padding-left: 40px!important;text-align:left!important"><?php echo $results["id_booking"]; ?>
                                         <?php if ($results["noid_booking"] != "") { ?>
                                             <!-- <i class='ion-plus-round' onclick='openlog()'> -->
-                                            <?php echo "(" . $results['noid_booking'] . ")"; ?>
+                                            <?php echo "Ref.(" . $results['noid_booking'] . ")"; ?>
                                             <?php echo "&nbsp;"; ?>
                                         <?php } ?></td>
 
@@ -455,7 +477,7 @@ bottom: .5em;
                                             <?php } else {
                                             if ($results["deposit"] != 0) {
                                             ?>
-                                                <a data-toggle="modal" data-target="#myModal<?php echo $results["id"]; ?>" type="button" class="btn btn-info" style="color:#fff" >จ่ายมัดจำ</a>
+                                                <a data-toggle="modal" data-target="#myModal<?php echo $results["id"]; ?>" type="button" class="btn btn-info" style="color:#fff">จ่ายมัดจำ</a>
                                                 <!--  <b style="color: red;">จ่ายมัดจำ</b> -->
                                         <?php }
                                         } ?>
@@ -503,13 +525,13 @@ bottom: .5em;
 
                                         <?php } else { ?>
 
-                                            <a target="" type="button" class="btn btn-secondary" style="color:#fff" >BOOK รถ</a>
+                                            <a target="" type="button" class="btn btn-secondary" style="color:#fff">BOOK รถ</a>
 
                                         <?php } ?>
 
 
                                         <?php if ($results["boat"] == $priceboat) { ?>
-                                            <!-- <?php echo "dch2:" . $dch2; ?> -->
+                                            <?php echo "dch2:" . $dch2; ?>
                                             <?php if ($stdata == 1 && $dch2 == 1) { ?>
                                                 <a target="" data-toggle="modal" data-target="#myModalboat<?php echo $results["id"]; ?>" type="button" class="btn btn-warning">ออกใบ BOOK เรือ</a>
                                             <?php } else if ($results["deposit"] != 0 && $dch2 == 1) { ?>
@@ -528,9 +550,9 @@ bottom: .5em;
                                         <?php } ?>
 
 
+                                        <?php echo $results["diving"] . "!!!=>" . $pricedriving; ?>
 
-
-                                        <?php if ($results["diving"] >= $pricedriving) { ?>
+                                        <?php if ($results["diving"] >= 500) { ?>
                                             <?php if ($stdata == 1) { ?>
                                                 <a target="" data-toggle="modal" data-target="#myModaldiving<?php echo $results["id"]; ?>" type="button" class="btn btn-warning">ออกใบ BOOK ดำน้ำ</a>
                                             <?php } else if ($results["deposit"] != 0) { ?>
@@ -617,30 +639,30 @@ bottom: .5em;
                                                                 </div>
                                                             </div>
                                                             <script>
-                                                            function readURL(input) {
-                                                                if (input.files && input.files[0]) {
-                                                                    // console.log(input.files);
-                                                                    var reader = new FileReader();
-                                                                    reader.onload = function(e) {
-                                                                        $('#blah').attr('src', e.target.result);
+                                                                function readURL(input) {
+                                                                    if (input.files && input.files[0]) {
+                                                                        // console.log(input.files);
+                                                                        var reader = new FileReader();
+                                                                        reader.onload = function(e) {
+                                                                            $('#blah').attr('src', e.target.result);
+                                                                        }
+                                                                        reader.readAsDataURL(input.files[0]);
                                                                     }
-                                                                    reader.readAsDataURL(input.files[0]);
                                                                 }
-                                                            }   
                                                             </script>
 
-  
-                                                
+
+
                                                             <div class="col-md-12 col-sm-12">
                                                                 <div class="form-group">
                                                                     <label>
                                                                         <h4 class="text-blue h4">slip </h4>
                                                                     </label>
-                                                                   
-                                                                    <img id="blah" src="#" alt="your image"  width="500px"/>
+
+                                                                    <img id="blah" src="#" alt="your image" width="500px" />
 
                                                                     <input type="file" class="form-control" name="file" id="file" placeholder="ระบุ slip" onchange="readURL(this)" required>
-                                                                   
+
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-sm-12">
@@ -673,7 +695,7 @@ bottom: .5em;
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">ออกใบBOOK รถ</h4>
+                                                    <h4 class="modal-title">ออกใบBOOK รถ <?php echo $results["id"]; ?></h4>
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
                                                 <form action="book.php" method="POST">
@@ -690,7 +712,9 @@ bottom: .5em;
                                                             </div>
                                                             <div class="col-md-12 col-sm-12">
                                                                 <div class="form-group">
-                                                                    <label><h4 class="text-blue h4">วันเข้าพัก</h4></label>
+                                                                    <label>
+                                                                        <h4 class="text-blue h4">วันเข้าพัก</h4>
+                                                                    </label>
                                                                     <input type="date" class="form-control" name="voucher_date" id="voucher_date" value="" />
                                                                 </div>
                                                             </div>
@@ -721,7 +745,7 @@ bottom: .5em;
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">ออกใบBOOK เรือ</h4>
+                                                    <h4 class="modal-title">ออกใบBOOK เรือ <?php echo $results["id"]; ?></h4>
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
                                                 <form action="book.php" method="POST">
@@ -737,11 +761,13 @@ bottom: .5em;
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-sm-12">
-                                                            <div class="form-group">
-                                                                <label><h4 class="text-blue h4">วันเข้าพัก</h4></label>
-                                                                <input type="date" class="form-control" name="voucher_date" id="voucher_date" value="" />
+                                                                <div class="form-group">
+                                                                    <label>
+                                                                        <h4 class="text-blue h4">วันเข้าพัก</h4>
+                                                                    </label>
+                                                                    <input type="date" class="form-control" name="voucher_date" id="voucher_date" value="" />
+                                                                </div>
                                                             </div>
-                                                        </div>
                                                             <div class="col-md-12 col-sm-12">
                                                                 <div class="form-group">
                                                                     <label>
@@ -830,7 +856,7 @@ bottom: .5em;
 
 
 
-    
+
 
 
 
@@ -848,7 +874,7 @@ bottom: .5em;
 </html>
 
 <div id="popupimg" class="popup">
-  <span class="close">&times;</span>
-  <img class="popup-content" id="img01">
-  <div id="caption"></div>
+    <span class="close">&times;</span>
+    <img class="popup-content" id="img01">
+    <div id="caption"></div>
 </div>

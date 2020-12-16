@@ -1444,7 +1444,7 @@ if ($older_children >= "1") {
                     <?php } else { ?>
                       <option value="<?php echo $child; ?>"><?php echo $child; ?></option>
                     <?php } ?>
-                
+
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -1508,15 +1508,15 @@ if ($older_children >= "1") {
                   if ($diving_num == $diving1) { ?>
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>" checked>
-                      <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
+                      <label class="custom-control-label" for="diving1">ดำน้ำโซนใน<?php echo $diving1; ?></label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving2" name="diving" class="custom-control-input" value="<?php echo $diving2; ?>">
-                      <label class="custom-control-label" for="diving2">ดำน้ำโซนนอก</label>
+                      <label class="custom-control-label" for="diving2">ดำน้ำโซนนอก<?php echo $diving2; ?></label>
                     </div>
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving3" name="diving" class="custom-control-input" value="<?php echo $diving3; ?>">
-                      <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก</label>
+                      <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก<?php echo $diving3; ?></label>
                     </div>
                     <button type="button" id="clearradio" class="btn btn-warning form-control" style="color:#fff">ยกเลิกดำน้ำ</button>
                   <?php } else if ($diving_num == $diving2) { ?>

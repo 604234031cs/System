@@ -106,7 +106,7 @@ if ($_POST['id'] != "") {
                             </table>
                             <br />
                             <input class="btn btn-warning" type="button" id="createRows" value="Add">
-                            <input class="btn btn-danger" type="button" id="deleteRows" value="Del">
+                            <!-- <input class="btn btn-danger" type="button" id="deleteRows" value="Del"> -->
                             <input class="btn btn-success" type="button" id="clearRows" value="Clear">
                             <input hidden type="text" id="hdnCount" name="hdnCount">
                             <input type="text" class="form-control" name="type" id="type" value="addroomtype" hidden />
@@ -123,12 +123,6 @@ if ($_POST['id'] != "") {
 
                 </form>
             </div>
-
-
-
-
-
-
 
             <script src="vendors/scripts/jquery-latest.js"></script>
             <script type="text/javascript">

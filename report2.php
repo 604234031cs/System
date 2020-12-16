@@ -75,6 +75,11 @@ while ($row1 = mysqli_fetch_array($result1)) {
     <tr><td style="padding:0px!important;margin:0px!important">E- mail : sale@khemtis.com, Website : www.khemtis.com</td></tr>
     <tr><td style="padding:0px!important;margin:0px!important">ใบอนุญาติประกอบธุรกิจนำเทียว : <b style="font-size: 1.2em;color:black">42/00299</b></td></tr>
   </table>
+  <table class="first" cellpadding="2" cellspacing="0"  width="100%">
+     <tr>
+     <td colspan=4><table class="first"  width="100%" cellpadding="0" cellspacing="3"><tr><td style="height:1px;width:100%;border-bottom: 3px solid #99c5d6">&nbsp;</td></tr></table></td></tr>
+       
+    </table>
     ';
 
     $content .= '
@@ -113,7 +118,7 @@ while ($row1 = mysqli_fetch_array($result1)) {
         <td width="25%" ><p style="font-size: 1em;color:black">เบอร์โทร : <br> Phone Number   :</p></td>
         <td width="25%" align="center"><b style="font-size: 1.2em;">' . $row1['phone'] . '</b></td>
         <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">เตียงเสริม  : <br>Number of Extra Beds  :</p></td>
-        <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $bed . '</b></td></tr></table></td>
+        <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $row1['extrabed'] . '</b></td></tr></table></td>
  
     </tr>
     <tr>
@@ -132,7 +137,7 @@ while ($row1 = mysqli_fetch_array($result1)) {
     </tr>
     <tr>
        
-        <td width="25%"><p style="font-size: 1em;color:black">ชื่วันที่เช็ดเอาท : <br> Departure  :</p></td>
+        <td width="25%"><p style="font-size: 1em;color:black">วันที่เช็ดเอาท : <br> Departure  :</p></td>
         <td width="25%" align="center"><b style="font-size: 1.2em;">' . $row1['checkout'] . '</b></td>
         <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">อายุของเด็ก  : <br>Age of Children  :</p></td>
         <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $row1['ch2'] . '</b></td></tr></table></td>

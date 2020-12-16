@@ -291,13 +291,13 @@ if ($_POST['id'] != "") {
                 // console.log("str" + str);
                 txtm += "<div class='col-md-2'  ><div class='boxdata'   onclick='changm(" + str + ")'>" + str.padStart(2, '0') + " : " + monthNames[m] + "</div></div>";
             }
-            console.log("M" + m);
+            // console.log("M" + m);
             txtm += "<div class='col-md-2'><div class='boxdata' onclick='changm(" + str + ")'>" + str.padStart(2, '0') + " : " + monthNames[m] + "</div></div>";
         }
         $('#mbox').html("<div class='row'>" + txtm + "</div>");
 
         reloadpage(mont, year);
-        console.log($('#nameresort').val());
+        // console.log($('#nameresort').val());
 
 
 
@@ -337,7 +337,7 @@ if ($_POST['id'] != "") {
                         txtrow += "<tr class='hoverrow'><td style=' width: 220px!important;text-align:left!important;'>" + getdata[rdm]['name_roomtype'] + "</td>";
                         for (dayn = 1; dayn <= b; dayn++) {
                             var txtd = "" + dayn;
-                            txtrow += "<td><input type='text' style='width:100%' value=' " + maxday + "'" + "name='priceroom" + maxday + "'" + "></td>";
+                            txtrow += "<td><input type='text' style='width:100%' id='cell"+maxday+"' value='' onchange=\"autosave("+maxday+")\" name='priceroom" + maxday + "'" + "></td>";
                             maxday++;
                         }
                         txtrow += "</tr>";
@@ -405,7 +405,7 @@ if ($_POST['id'] != "") {
             weekday[0] = "อาทิต";
             weekday[1] = "จันทร์";
             weekday[2] = "อังคาร";
-            weekday[3] = "พุทธ์";
+            weekday[3] = "พุทธ";
             weekday[4] = "พฤหัส";
             weekday[5] = "ศุกร์";
             weekday[6] = "เสาร์";
@@ -459,6 +459,27 @@ if ($_POST['id'] != "") {
 
                 reloadpage(mont, y2)
             }
+
+        }
+
+        function autosave(max){
+        var val = $('#cell'+max).val();
+            // console.log("ช่องที่:"+max+"ค่า:"+celval);
+            $.ajax({ 
+                type: 'POST', 
+                url: 'saveroom.php', 
+                data: {
+                    price:val,
+                    dy:dy,
+                    idrm:idr
+                    }, 
+                dataType: 'html',
+                success: function (data) { 
+                //alert(data);
+       
+                }
+            });
+
 
         }
     </script>

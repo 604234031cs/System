@@ -40,10 +40,10 @@ if ($type == "addresort") {
 	// echo $_POST["name_roomtype1"];
 
 	for ($i = 0; $i <= (int)$_POST["hdnCount"]; $i++) {
-	
+
 		if (isset($_POST["name_roomtype$i"])) {
-	
-			if ($_POST["name_roomtype$i"] != "" && $_POST["price_roomtype$i"] != "" &&$_POST["extrabed$i"] != "" &&$_POST["capacity$i"] != "") {
+
+			if ($_POST["name_roomtype$i"] != "" && $_POST["price_roomtype$i"] != "" && $_POST["extrabed$i"] != "" && $_POST["capacity$i"] != "") {
 
 				$sql = "INSERT INTO `tb_roomtype` (`id`, `name_roomtype`, `price_roomtype`, `price_monday`, `price_friday`, `extrabed`, `high_season1`, `peak_season`, `high_season2`, `green_season`, `id_resort`, `capacity`, `status`) VALUES (NULL, '" . $_POST["name_roomtype$i"] . "', '" . $_POST["price_roomtype$i"] . "', '0', '0', '" . $_POST["extrabed$i"] . "', '0', '0', '0', '0', '" . $id_resort . "', '" . $_POST["capacity$i"] . "', '1');";
 				$query = mysqli_query($con, $sql);
@@ -52,14 +52,10 @@ if ($type == "addresort") {
 				// echo "Err";
 				echo "<script> alert('!!เกิดข้อผิดพลาด ไม่มีข้อมูล , ราคาห้องพัก เรียบร้อย!!');window.location.href='addroomtype.php';</script>";
 			}
-		}else{
+		} else {
 			echo "ไม่มีข้อมูลห้อง";
 		}
-		
 	}
-
-	
-	
 } else if ($type == "addprice") {
 	// echo $_POST['name'];
 	// echo $_POST['price'];
@@ -259,13 +255,13 @@ if ($type == "addresort") {
 		if (move_uploaded_file($_FILES['file']['tmp_name'], $uploaded_file)) {
 
 
-			$strSQL = "INSERT INTO `tb_report` (`id`, `id_booking`, `month`, `transaction_date`, `name`, `phone`, `line`, `room_name`, `name_resort`, `package`, `number_of_rooms`, `extrabed`, `customers`, `checkin`, `checkout`, `Sales`, `deposit`, `sum`, `car`, `boat`, `diving`, `payment_status`, `occupancy_status`, `collection_date`, `com`, `commission_value`, `insurance`, `slip`, `Byyy`, `adult`,`noid_booking`, `note`, `details`, `report_status`,ch1,ch2,typ_ser,status_pay) VALUES (NULL,'', '$month', NOW(), '$name', '$phone', '$line', '$room_name', '$name_resort', '$package', '$number_of_rooms', '$extrabed', '$customers', '$checkin', '$checkout', '0 ', '$deposi2', '$sum', '$car ', '$boat', '$diving', '1', '1', NOW(), '$com', '$commission_value', '$insurance', '$fileName', '$Byyy', '$adult', '$id_booking', '$note', '', '3','$ch1','$ch2','$typ_ser','$status_pay')";
+			$strSQL = "INSERT INTO `tb_report` (`id`, `id_booking`, `month`, `transaction_date`, `name`, `phone`, `line`, `room_name`, `name_resort`, `package`, `number_of_rooms`, `extrabed`, `customers`, `checkin`, `checkout`, `Sales`, `deposit`, `sum`, `car`, `boat`, `diving`, `payment_status`, `occupancy_status`, `collection_date`, `com`, `commission_value`, `insurance`, `slip`, `Byyy`, `adult`,`noid_booking`, `note`, `details`, `report_status`,ch1,ch2,typ_ser,status_pay) VALUES (NULL,'', '$month', NOW(), '$name', '$phone', '$line', '$room_name', '$name_resort', '$package', '$number_of_rooms', '$extrabed', '$customers', '$checkin', '$checkout', '$Sales1' , '$deposi2', '$sum', '$car ', '$boat', '$diving', '1', '1', NOW(), '$com', '$commission_value', '$insurance', '$fileName', '$Byyy', '$adult', '$id_booking', '$note', '', '3','$ch1','$ch2','$typ_ser','$status_pay')";
 
 
 			$objQuery = mysqli_query($con, $strSQL);
 
 			if ($objQuery === TRUE) {
-			
+
 				$last = "SELECT * FROM tb_report ORDER BY id DESC LIMIT 1";
 				$re = mysqli_query($con, $last);
 				$ss = mysqli_fetch_assoc($re);
