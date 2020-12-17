@@ -1,5 +1,6 @@
 <?php
-    required 'connectdb.php';
+    require 'connectdb.php';
 
+    
     
 ?>

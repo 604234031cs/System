@@ -47,6 +47,7 @@ if ($_POST['id'] != "") {
             text-align: left;
             font-size: 14px;
             background-image: linear-gradient(#e2e2e2, #fff);
+
         }
 
         .boxdata:hover {
@@ -62,19 +63,35 @@ if ($_POST['id'] != "") {
             cursor: pointer;
         }
 
+        .boxdatat {
+            padding: 2px;
+            margin: 3px;
+            padding-left: 5px;
+            border: solid 1px #ccc;
+            width: auto;
+            border-radius: 5px;
+            text-align: left;
+            font-size: 14px;
+            background-image: linear-gradient(#0b132b, #2e4382);
+            color: #fff;
+        }
+
+
         .tbborder tr td {
             border: solid 1px #ccc !important;
             text-align: center !important;
             font-size: 14px !important;
+            padding: 1px !important;
         }
 
         .hoverrow {
             background-image: linear-gradient(#fff, #fff);
+            color: #000 !important;
 
         }
 
         .hoverrow:hover {
-            background-image: linear-gradient(red, red);
+            background-image: linear-gradient(#0b132b, #2e4382);
             color: #fff !important;
         }
 
@@ -82,9 +99,11 @@ if ($_POST['id'] != "") {
             border: none !important;
         }
 
-        .box {
-            overflow-y: hidden !important;
-            overflow-x: scroll !important;
+        .hbox {
+            background-color: #ccc;
+            padding: 3px;
+            height: 4px;
+            width: 100%;
         }
     </style>
     <form action="showform.php" method="POST" id="myForm">
@@ -134,16 +153,17 @@ if ($_POST['id'] != "") {
 
                         <div id="main">
 
-
                             <input type="hidden" id="maxday" name="maxday">
                             <table style="width:100%!important;border:solid 1px #ccc!important" class="bdno">
                                 <tr>
-                                    <td colspan="2" style="text-align: center; background-image: linear-gradient(#ccc, #fff);border:solid 1px #dcdcdc; " id="showtitle"></td>
+                                    <td colspan="2" style="text-align: center; background-image: linear-gradient(#ccc, #fff);border:solid 1px #dcdcdc;background:#1f2e5c;color:#fff;" id="showtitle"></td>
                                 </tr>
                                 <tr>
                                     <td style="width:100%!important">
                                         <div id="calendar" style="width:100%!important;width:100%;border:solid 1px #ccc">
-                                            <select class="slbox" id="ybox" style="width:100%;" onchange="changyear()"></select>
+
+                                            <select class="slbox" id="ybox" style="width:10%;" onchange="changyear()"></select>
+                                            <br>
                                             <input type="hidden" id="monbox">
                                             <!-- <select class="slbox" id="nameresort" style="width:100%;" onchange="changroom()">
                                                 <?php foreach ($all_resort as $value) : ?>
@@ -251,8 +271,8 @@ if ($_POST['id'] != "") {
         var datecur = '<?php echo $datecur ?>';
         var year = <?php echo $ytsever ?>;
         var mont = <?php echo $mtsever ?>;
-
-
+        $('#ybox').val(year);
+        $('#monbox').val(mont);
 
         let dayNamesMin = ["จันทร์", "อังคาร", "พุทธ", "พฤหัส", "ศุกร์", "เสาร์", "อาทิต"];
         let monthNames = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
@@ -285,25 +305,51 @@ if ($_POST['id'] != "") {
         var txtm = "";
         var m = 0;
         var str = "";
-        for (m = 0; m <= 11; m++) {
-            str = "" + (m + 1);
-            if (tomonth == str) {
-                // console.log("str" + str);
-                txtm += "<div class='col-md-2'  ><div class='boxdata'   onclick='changm(" + str + ")'>" + str.padStart(2, '0') + " : " + monthNames[m] + "</div></div>";
-            }
-            // console.log("M" + m);
-            txtm += "<div class='col-md-2'><div class='boxdata' onclick='changm(" + str + ")'>" + str.padStart(2, '0') + " : " + monthNames[m] + "</div></div>";
-        }
-        $('#mbox').html("<div class='row'>" + txtm + "</div>");
+        // var mss = $('#monbox').val();
+        // for (m = 0; m <= 11; m++) {
+        //     str = "" + (m + 1);
+        //     if (tomonth == str) {
+        //         // console.log("str" + str);
+        //         txtm += "<div class='col-md-2'  ><div class='boxdata' style='background:#1f2e5c;color:#fff;'  onclick='changm(" + str + ")'>" + str.padStart(2, '0') + " : " + monthNames[m] + "</div></div>";
+        //     } else {
+        //         txtm += "<div class='col-md-2'><div class='boxdata' onclick='changm(" + str + ")'>" + str.padStart(2, '0') + " : " + monthNames[m] + "</div></div>";
+        //     }
+        //     // console.log("M" + m);
+
+        // }
+        // $('#mbox').html("<div class='row'>" + txtm + "</div>");
 
         reloadpage(mont, year);
         // console.log($('#nameresort').val());
+        function setmont() {
+            var txtm = "";
+            var m = 0;
+            var str = "";
+            var mss = $('#monbox').val();
+            for (m = 0; m <= 11; m++) {
+                str = "" + (m + 1);
+                if (str == mss) {
+                    txtm += "<div class='col-md-2'  ><div class='boxdata' style='background:#1f2e5c;color:#fff;'  onclick='changm(" + str + ")'>" + str.padStart(2, '0') + " : " + monthNames[m] + "</div></div>";
+                } else {
+                    txtm += "<div class='col-md-2'><div class='boxdata' onclick='changm(" + str + ")'>" + str.padStart(2, '0') + " : " + monthNames[m] + "</div></div>";
+                }
+                // console.log("M" + m);
+
+            }
+            $('#mbox').html("<div class='row'>" + txtm + "</div>");
+
+        }
 
 
+        function tocal(pr_room) {
 
-        function tocal(n1, n2, n3) {
+            $('#showpd').html('');
+            var n2 = $('#monbox').val();
+            var n3 = $('#ybox').val();
+            var maxpr = pr_room.length;
+            var run = 0;
+            var n1 = getDaysInMonth(n2, n3);
             var b = n1 * 1;
-            // console.log(b);
             var ystr = n3 * 1;
             var dayn = 0;
             var txtday = "";
@@ -320,34 +366,43 @@ if ($_POST['id'] != "") {
                 } else {
                     txtdayw += "<td><b>" + txtnm + "</b></td>";
                 }
-                txtday += "<td><b>" + txtd.padStart(2, '0') + "</b></td>";
+                txtday += "<td style='background:#1f2e5c;color:#fff;'><b>" + txtd.padStart(2, '0') + "</b></td>";
             }
             var idresort = $('#nameresort').val();
             // console.log(idresort);
-
             $.ajax({
                 url: "ajaxdata.php?page=pricerooms&id_resort=" + idresort,
                 type: "GET",
                 success: function(result) {
                     var getdata = JSON.parse(result);
                     var maxday = 1;
-                    // console.log(getdata.length);
+                    var run = 0;
+                    console.log(getdata[0]);
                     // console.log(getdata);
                     for (var rdm = 0; rdm < getdata.length; rdm++) {
-                        txtrow += "<tr class='hoverrow'><td style=' width: 220px!important;text-align:left!important;'>" + getdata[rdm]['name_roomtype'] + "</td>";
+                        var idrm = getdata[rdm]['id'];
+                        txtrow += "<tr class='hoverrow' ><td style=' width: 220px!important;text-align:left!important;'>" + getdata[rdm]['name_roomtype'] + "</td>";
                         for (dayn = 1; dayn <= b; dayn++) {
+                            run++;
                             var txtd = "" + dayn;
-                            txtrow += "<td><input type='text' style='width:100%' id='cell"+maxday+"' value='' onchange=\"autosave("+maxday+")\" name='priceroom" + maxday + "'" + "></td>";
+                            var prm = "";
+                            var txtcd = n3 + "-" + n2.padStart(2, '0') + "-" + txtd.padStart(2, '0');
+                            // console.log(pr_room);
+                            for (let ii = 0; ii < maxpr; ii++) {
+                                // console.log("pr_room=>" + pr_room[ii]['idroom'] + "txtcd=>" + idrm);
+                                if (pr_room[ii]['date_start'] == txtcd && pr_room[ii]['idroom'] == idrm) {
+
+                                    prm = pr_room[ii]['price_room'];
+
+                                }
+                            }
+                            txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "'></td>";
                             maxday++;
                         }
                         txtrow += "</tr>";
                     }
                     $('#maxday').val(maxday);
-                    // var daynum = "<input type='text' value='" + b + "' name='num' hidden>"
-                    // var openform = "<form action='showform.php' method='post' id='myForm'>";
-                    var sumbitform = "<center><input  type='button' onclick='myFunction()' value='บันทึกข้อมูล' ></center>";
-                    // var closeform = "</form";
-                    $('#showpd').html("<table style='width:100%' class='tbborder'><tr><td></td>" + txtdayw + "</tr><tr style='background-image: linear-gradient(#ccc, #fff)'><td>ห้องพัก</td>" + txtday + "</tr>" + txtrow + "</table><br>" + sumbitform + "<br>");
+                    $('#showpd').html("<table style='width:100%' class='tbborder'><tr><td></td>" + txtdayw + "</tr><tr style='background-image: linear-gradient(#ccc, #fff)'><td style='background:#1f2e5c;color:#fff;'>ห้องพัก</td>" + txtday + "</tr>" + txtrow + "</table><br>");
                 }
             });
 
@@ -356,13 +411,32 @@ if ($_POST['id'] != "") {
         }
 
 
-        function myFunction() {
-            document.getElementById("myForm").submit();
+        function getcellprice() {
+            var year = $('#ybox').val();
+            var mont = $('#monbox').val();
+            $.ajax({
+                type: 'POST',
+                url: "ajaxdata.php?page=showpriceroom&year=" + year + "&mont=" + mont,
+                dataType: 'json',
+                success: function(data) {
+                    pr_room = [];
+                    $.each(data, function(index, element) {
+                        let text = {
+                            'idroom': element.ID_room,
+                            'date_start': element.date_start,
+                            'price_room': element.price_room,
+                        }
+                        pr_room.push(text);
+                    });
+                    //console.log(pr_room[1]['date_start']);
+                    tocal(pr_room);
+                }
+            });
         }
+
 
         function changm(m) {
             $('#monbox').val(m);
-
             reloadpagenew();
         }
 
@@ -371,14 +445,15 @@ if ($_POST['id'] != "") {
             var m = $('#monbox').val();
             // console.log(m);
             $('#showtitle').html('ตารางจัดการราคาห้อง <b>' + monthNames[(m - 1)] + ' ปี ' + y + '</b>');
-
-
             var b = getDaysInMonth(m, y);
-            if (m != "") {
-                tocal(b, m, y);
-            } else {
-                tocal(b, mont, y);
-            }
+            // if (m != "") {
+            //     tocal(b, m, y);
+            // } else {
+            //     tocal(b, mont, y);
+            // }
+            getcellprice();
+            // tocal(b, m, y);
+            setmont();
 
         }
 
@@ -389,12 +464,14 @@ if ($_POST['id'] != "") {
         function reloadpage(m, y) {
             $('#showtitle').html('ตารางจัดการราคาห้อง <b>' + monthNames[(m - 1)] + ' ปี ' + y + '</b>');
             var b = getDaysInMonth(m, y);
-            if (m != "") {
-                tocal(b, m, y);
-            } else {
-                tocal(b, mont, y);
-            }
-
+            // if (m != "") {
+            //     tocal(b, m, y);
+            // } else {
+            //     tocal(b, mont, y);
+            // }
+            getcellprice();
+            // tocal(b, m, y);
+            setmont();
         }
 
 
@@ -462,61 +539,34 @@ if ($_POST['id'] != "") {
 
         }
 
-        function autosave(max){
-        var val = $('#cell'+max).val();
-            // console.log("ช่องที่:"+max+"ค่า:"+celval);
-            $.ajax({ 
-                type: 'POST', 
-                url: 'saveroom.php', 
-                data: {
-                    price:val,
-                    dy:dy,
-                    idrm:idr
-                    }, 
-                dataType: 'html',
-                success: function (data) { 
-                //alert(data);
-       
-                }
-            });
+        function autosave(max) {
+            var val = $('#cell' + max).val();
+            console.log("ช่องที่:" + max + "ค่า:" + val);
+            // $.ajax({ 
+            //     type: 'POST', 
+            //     url: 'saveroom.php', 
+            //     data: {
+            //         price:val,
+            //         dy:dy,
+            //         idrm:idr
+            //         }, 
+            //     dataType: 'html',
+            //     success: function (data) { 
+            //     //alert(data);
+
+            //     }
+            // });
 
 
         }
+    </script>
+    <script>
+
     </script>
     <?php include "footer.php"; ?>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <link type="text/css" rel="stylesheet" href="scheduler/helpers/demo.css?v=2018.4.3442" />
@@ -543,12 +593,7 @@ if ($_POST['id'] != "") {
 <link type="text/css" rel="stylesheet" href="scheduler/themes/scheduler_transparent.css?v=2018.4.3442" />
 
 
-
-
-
-
-
-<script>
+<!-- <script>
     var elements = {
         previous: document.getElementById("previous"),
         today: document.getElementById("today"),
@@ -588,9 +633,9 @@ if ($_POST['id'] != "") {
         ]; // provide event data for the new date range
         dp.update();
     }
-</script>
+</script> -->
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     var nav = new DayPilot.Navigator("nav");
     nav.showMonths = 1;
     nav.selectMode = "month";
@@ -912,14 +957,14 @@ if ($_POST['id'] != "") {
         var colors = ["#a4c2f4", "#b6d7a8", "#ffe599", "#ea9999"];
         return colors[i % 4];
     }
-</script>
+</script> -->
 
 
 </div>
 </div>
 </div>
 </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function() {
 
 
@@ -938,4 +983,4 @@ if ($_POST['id'] != "") {
             }
         });
     });
-</script>
+</script> -->
