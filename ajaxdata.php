@@ -40,10 +40,13 @@ if ($page == "checkprice") {
     $f = $y . '-' . $m;
     $sql = "SELECT * FROM `priceroom` WHERE date_start LIKE '%$f%'";
     $query = mysqli_query($con, $sql);
-    $results11 = mysqli_fetch_assoc($query);
+    // $results11 = mysqli_fetch_array($query);
     $arr = array();
     while ($results = mysqli_fetch_assoc($query)) {
         array_push($arr, $results);
     }
     echo json_encode($arr);
+    
+
+    
 }

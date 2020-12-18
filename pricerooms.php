@@ -106,7 +106,6 @@ if ($_POST['id'] != "") {
             width: 100%;
         }
     </style>
-    <form action="showform.php" method="POST" id="myForm">
         <div class="main-container">
             <div class="pd-ltr-20">
                 <div class="card-box pd-20 height-100-p mb-30">
@@ -150,13 +149,13 @@ if ($_POST['id'] != "") {
                     </div>
 
                     <div class="pb-20">
-
+                                    
                         <div id="main">
 
                             <input type="hidden" id="maxday" name="maxday">
                             <table style="width:100%!important;border:solid 1px #ccc!important" class="bdno">
                                 <tr>
-                                    <td colspan="2" style="text-align: center; background-image: linear-gradient(#ccc, #fff);border:solid 1px #dcdcdc;background:#1f2e5c;color:#fff;" id="showtitle"></td>
+                                    <td colspan="2" style="font-size:30px;text-align: center; background-image: linear-gradient(#ccc, #fff);border:solid 1px #dcdcdc;background:#1f2e5c;color:#fff;" id="showtitle"></td>
                                 </tr>
                                 <tr>
                                     <td style="width:100%!important">
@@ -249,20 +248,58 @@ if ($_POST['id'] != "") {
 
 
 
-
-
+                 
+          
                     <div class="footer-wrap pd-20 mb-20 card-box">Welcome Akira Lipe , Ananya Lipe , Thechic Lipe <a href="https://ananyalipe.com" target="_blank">แบบฟอร์มเช็คราคาห้องพักของแต่ละรีสอร์ท</a></div>
                 </div>
             </div>
         </div>
     </form>
 
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <input type="text" id="idr" hidden>
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">วันที่</label>
+                        <input type="date" id="date1" class="form-control" readonly format="yyyy-mm-dd">
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">วันที่</label>
+                        <input type="date" id="date2" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ราคาห้อง</label>
+                        <input type="number" id="priceroom" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="savepriceroom()" id="savesel" >เพิ่มราค้าห้อง</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+
+   
     <?php
     $dtsever = date("d");
     $mtsever = date("m");
     $ytsever = date("Y");
     $datecur = $ytsever . "-" . $mtsever . "-" . $dtsever;
     ?>
+    
     <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script src="http://jojosati.github.io/bootstrap-datepicker-thai/js/bootstrap-datepicker-thai.js"></script>
@@ -346,6 +383,13 @@ if ($_POST['id'] != "") {
             $('#showpd').html('');
             var n2 = $('#monbox').val();
             var n3 = $('#ybox').val();
+
+            var dc = new Date(datecur)
+            
+
+            
+        
+
             var maxpr = pr_room.length;
             var run = 0;
             var n1 = getDaysInMonth(n2, n3);
@@ -369,39 +413,47 @@ if ($_POST['id'] != "") {
                 txtday += "<td style='background:#1f2e5c;color:#fff;'><b>" + txtd.padStart(2, '0') + "</b></td>";
             }
             var idresort = $('#nameresort').val();
-            // console.log(idresort);
+           
             $.ajax({
                 url: "ajaxdata.php?page=pricerooms&id_resort=" + idresort,
                 type: "GET",
                 success: function(result) {
                     var getdata = JSON.parse(result);
-                    var maxday = 1;
+                    // var maxday = 1;
                     var run = 0;
-                    console.log(getdata[0]);
+                    // console.log(getdata[0]);
                     // console.log(getdata);
                     for (var rdm = 0; rdm < getdata.length; rdm++) {
                         var idrm = getdata[rdm]['id'];
+                        var namerm = getdata[rdm]['name_roomtype'];
                         txtrow += "<tr class='hoverrow' ><td style=' width: 220px!important;text-align:left!important;'>" + getdata[rdm]['name_roomtype'] + "</td>";
                         for (dayn = 1; dayn <= b; dayn++) {
                             run++;
                             var txtd = "" + dayn;
                             var prm = "";
                             var txtcd = n3 + "-" + n2.padStart(2, '0') + "-" + txtd.padStart(2, '0');
+                            var dn = new Date(txtcd)
                             // console.log(pr_room);
                             for (let ii = 0; ii < maxpr; ii++) {
                                 // console.log("pr_room=>" + pr_room[ii]['idroom'] + "txtcd=>" + idrm);
                                 if (pr_room[ii]['date_start'] == txtcd && pr_room[ii]['idroom'] == idrm) {
-
                                     prm = pr_room[ii]['price_room'];
-
                                 }
                             }
-                            txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "'></td>";
-                            maxday++;
+
+                          if(dc <=dn){
+                            txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' ondblclick=\"edit(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "'></td>";
+                          }else {
+                            txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' disabled></td>";
+                          }
+             
+                        
+                            
+                            // maxday++;
                         }
                         txtrow += "</tr>";
                     }
-                    $('#maxday').val(maxday);
+                    // $('#maxday').val(maxday);
                     $('#showpd').html("<table style='width:100%' class='tbborder'><tr><td></td>" + txtdayw + "</tr><tr style='background-image: linear-gradient(#ccc, #fff)'><td style='background:#1f2e5c;color:#fff;'>ห้องพัก</td>" + txtday + "</tr>" + txtrow + "</table><br>");
                 }
             });
@@ -414,9 +466,12 @@ if ($_POST['id'] != "") {
         function getcellprice() {
             var year = $('#ybox').val();
             var mont = $('#monbox').val();
+            var y1 = ""+year.padStart(2,'0')
+            var m1 = ""+mont.padStart(2,'0')
+            // console.log("Year:=>"+year+"Mont:=>"+m1);
             $.ajax({
                 type: 'POST',
-                url: "ajaxdata.php?page=showpriceroom&year=" + year + "&mont=" + mont,
+                url: "ajaxdata.php?page=showpriceroom&year=" + y1 + "&mont=" + m1,
                 dataType: 'json',
                 success: function(data) {
                     pr_room = [];
@@ -428,7 +483,7 @@ if ($_POST['id'] != "") {
                         }
                         pr_room.push(text);
                     });
-                    //console.log(pr_room[1]['date_start']);
+                console.log(data);
                     tocal(pr_room);
                 }
             });
@@ -510,12 +565,13 @@ if ($_POST['id'] != "") {
             var y2 = $('#ybox').val();
             var m2 = $('#monbox').val();
             var b = getDaysInMonth(m, y);
-            // reloadpagenew();
-            if (m2 != "") {
-                reloadpagenew()
-            } else {
-                reloadpage(mont, y2)
-            }
+            reloadpagenew();
+            // if (m2 != "") {
+            //     reloadpagenew()
+            // } else {
+            //     reloadpage(mont, y2)
+            // }
+            
 
         }
 
@@ -526,45 +582,133 @@ if ($_POST['id'] != "") {
             var m2 = $('#monbox').val();
             var b = getDaysInMonth(m, y);
 
-            reloadpagenew();
+            // reloadpagenew();
 
-            if (m2 != "") {
+            // if (m2 != "") {
 
                 reloadpagenew();
 
-            } else {
+            // } else {
 
-                reloadpage(mont, y2)
+            //     reloadpage(mont, y2)
+            // }
+
+        }
+
+        function saveauto(run, dy, idr) {
+            var vl = $('#prset' + run).val();
+            $.ajax({
+                type: 'POST',
+                url: 'saveroom.php',
+                data: {
+                    price: vl,
+                    dy: dy,
+                    idrm: idr
+                },
+                dataType: 'html',
+                success: function(data) {
+                    // console.log(data);
+                    getcellprice();
+                }
+            });
+        }
+
+        function edit(run,dy,idr){
+            var vl = $('#prset' + run).val();
+            if(vl != "" && vl !=null){
+
+            }else{
+                alert("!!! ไม่มีข้อมูล");
             }
-
+            // alert(vl);
+            // alert(dy);
         }
 
-        function autosave(max) {
-            var val = $('#cell' + max).val();
-            console.log("ช่องที่:" + max + "ค่า:" + val);
-            // $.ajax({ 
-            //     type: 'POST', 
-            //     url: 'saveroom.php', 
-            //     data: {
-            //         price:val,
-            //         dy:dy,
-            //         idrm:idr
-            //         }, 
-            //     dataType: 'html',
-            //     success: function (data) { 
-            //     //alert(data);
-
-            //     }
+        function mouseclick(run, dy, idr, nrm) {
+            var vl = $('#prset' + run).val();
+            if(vl!="" && vl !=null){
+                $('.modal-title').html(nrm)
+            $('#exampleModal').modal('show')
+            $('.modal-body #idr').val(idr);
+            $('.modal-body #date1').val(dy);
+            $('.modal-body #date2').val(dy);
+            document.getElementById("date2").min = dy;
+            }else{
+                alert("กรุณาเลือกราคาห้องพัก")
+            }
+            // alert(nrm);
+          
+            // $('.modal-body #date2').datepicker({
+            //     miDate: datecur
             // });
-
-
+          
+            $('.modal-body #priceroom').val(vl);
         }
-    </script>
-    <script>
 
+    function savepriceroom(){
+      let prarry =[];
+        var idr =  $('.modal-body #idr').val();
+        var day1 = $('.modal-body #date1').val();
+        var day2 = $('.modal-body #date2').val();
+        var dayf = new Date(day1)
+        
+        var d = dayf.getDate();
+        // alert(new String(d))
+        // alert(day2);
+        var proom =$('.modal-body #priceroom').val();
+       
+        var date1 = new Date(day1);
+        var date2 = new Date(day2);
+
+        var Difference_In_Time = date2.getTime() - date1.getTime(); 
+        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
+        // console.log(Difference_In_Days);
+        
+        for(let i=1 ;i<=Difference_In_Days;i++){
+        date1.setDate(date1.getDate() + 1)
+        var d = date1.getDate();
+        var y = date1.getFullYear();
+        var m = date1.getMonth()+1;
+        var y1 = ""+y;
+        var m1 = ""+m;
+        var d1 = ""+d;
+        var fdate = y1+"-"+m1.padStart(2,'0')+"-"+d1.padStart(2,'0');
+
+            
+        let data = {
+            price: proom,
+            dy: fdate,
+         }
+       prarry.push(data);
+        }
+
+        $.ajax({
+                type: 'POST',
+                url: "savesel.php",
+                data:
+                {
+                    idrm:idr,
+                     saveprice:prarry
+                },
+                dataType: 'html',
+                success: function(data) {
+                    // console.log(data);
+                    $('#exampleModal').modal('hide')
+                    getcellprice();
+                }
+            }); 
+    }
+  
+
+        $(document).contextmenu(function() {
+            return false;
+        });
     </script>
     <?php include "footer.php"; ?>
 </body>
+<!-- <div id="dialog" title="Basic dialog">
+    <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>
+</div> -->
 
 </html>
 
