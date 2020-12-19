@@ -80,7 +80,7 @@ while ($valued =  mysqli_fetch_assoc($querydriving)) {
             <style>
                 #blah {
                     border-radius: 5px;
-                    cursor: pointer;
+                    cursor: zoom-in;
                     transition: 0.3s;
                 }
 
@@ -89,7 +89,7 @@ while ($valued =  mysqli_fetch_assoc($querydriving)) {
                 }
 
                 /* The Modal (background) */
-                .popup {
+                .modalimg {
                     display: none;
                     /* Hidden by default */
                     position: fixed;
@@ -113,7 +113,7 @@ while ($valued =  mysqli_fetch_assoc($querydriving)) {
                 }
 
                 /* Modal Content (image) */
-                .popup-content {
+                .modal-contentimg {
                     margin: auto;
                     display: block;
                     width: 80%;
@@ -121,25 +121,8 @@ while ($valued =  mysqli_fetch_assoc($querydriving)) {
                 }
 
                 /* Caption of Modal Image */
-                #caption {
-                    margin: auto;
-                    display: block;
-                    width: 80%;
-                    max-width: 700px;
-                    text-align: center;
-                    color: #ccc;
-                    padding: 10px 0;
-                    height: 150px;
-                }
 
                 /* Add Animation */
-                .popup-content,
-                #caption {
-                    -webkit-animation-name: zoom;
-                    -webkit-animation-duration: 0.6s;
-                    animation-name: zoom;
-                    animation-duration: 0.6s;
-                }
 
                 @-webkit-keyframes zoom {
                     from {
@@ -162,9 +145,9 @@ while ($valued =  mysqli_fetch_assoc($querydriving)) {
                 }
 
                 /* The Close Button */
-                .close {
+                .closeimg {
                     position: absolute;
-                    top: 15px;
+                    top: 80px;
                     right: 35px;
                     color: #f1f1f1;
                     font-size: 40px;
@@ -172,16 +155,23 @@ while ($valued =  mysqli_fetch_assoc($querydriving)) {
                     transition: 0.3s;
                 }
 
-                .close:hover,
-                .close:focus {
+                .closeimg:hover,
+                .closeimg:focus {
                     color: #bbb;
                     text-decoration: none;
                     cursor: pointer;
                 }
 
+                #img01:hover,
+                #img01:focus {
+                    color: #bbb;
+                    text-decoration: none;
+                    cursor: zoom-out;
+                }
+
                 /* 100% Image Width on Smaller Screens */
                 @media only screen and (max-width: 700px) {
-                    .popup-content {
+                    .modal-contentimg {
                         width: 100%;
                     }
                 }
@@ -308,6 +298,8 @@ while ($valued =  mysqli_fetch_assoc($querydriving)) {
                     </form>
                 </div>
 
+
+
                 <!-- <style>
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting:before,
@@ -324,10 +316,27 @@ bottom: .5em;
 
                 </style> -->
 
-
+                <script>
+                    $(document).ready(function() {
+                        $("#myInput").on("keyup", function() {
+                            var value = $(this).val().toLowerCase();
+                            $("#myTable tr").filter(function() {
+                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                            });
+                        });
+                    });
+                </script>
 
 
                 <div class="pb-20 table-responsive">
+                    <div class="col-md-3 col-sm-12">
+                        <div class="form-group">
+                            <label>
+                                <h4 class="text-blue h4">ค้นหา</h4>
+                            </label>
+                            <input id="myInput" type="text" placeholder="Search..">
+                        </div>
+                    </div>
                     <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline">
                         <thead>
                             <tr align="center">
@@ -369,9 +378,7 @@ bottom: .5em;
 
                             </tr>
                         </thead>
-                        <tbody>
-
-
+                        <tbody id="myTable">
                             <?php
                             //$sql ="SELECT * FROM `tb_resort` ";
 
@@ -410,13 +417,48 @@ bottom: .5em;
                                     $txt_ser = "";
                                 }
                             ?>
+                                <script>
+                                    function ref(idb) {
+                                        // alert("sds")
+                                        $('#element' + idb).popover('show');
+                                    }
+
+                                    function refc(idb) {
+                                        $('#element' + idb).popover('hide');
+                                    }
+
+                                    var modal = document.getElementById("myModal");
+
+                                    // Get the image and insert it inside the modal - use its "alt" text as a caption
+                                    var img = document.getElementById("blah");
+                                    var modalImg = document.getElementById("img01");
+
+                                    img.onclick = function() {
+                                        modal.style.display = "block";
+                                        modalImg.src = this.src;
+                                        captionText.innerHTML = this.alt;
+                                    }
+
+                                    // Get the <span> element that closes the modal
+                                    var span = document.getElementsByClassName("closeimg")[0];
+
+                                    // When the user clicks on <span> (x), close the modal
+                                    span.onclick = function() {
+                                        modal.style.display = "none";
+                                    }
+                                    modalImg.onclick = function() {
+                                        modal.style.display = "none";
+                                    }
+                                </script>
 
                                 <tr align="center">
-                                    <td class="table-plus" style="padding-left: 40px!important;text-align:left!important"><?php echo $results["id_booking"]; ?>
+                                    <td class="table-plus" style="padding-left: 40px!important;text-align:left!important"><?php echo  "เลขที่ " . $results["id_booking"];  ?>
                                         <?php if ($results["noid_booking"] != "") { ?>
-                                            <!-- <i class='ion-plus-round' onclick='openlog()'> -->
-                                            <?php echo "Ref.(" . $results['noid_booking'] . ")"; ?>
-                                            <?php echo "&nbsp;"; ?>
+                                            <i onmouseenter="ref('<?php echo $results['id_booking']; ?>')" data-placement="top" data-toggle="popover" data-content='<?php echo "อ้างอิง เลขที่ " . $results["noid_booking"]; ?>' id="element<?php echo $results["id_booking"]; ?>" onmouseleave="refc('<?php echo $results['id_booking']; ?>')">
+                                                <font color='#17a2b8'>&#9888;</font>
+                                            </i>
+                                            <!-- <?php echo "Ref.(" . $results['noid_booking'] . ")"; ?>
+                                            <?php echo "&nbsp;"; ?> -->
                                         <?php } ?></td>
 
                                     </td>
@@ -466,15 +508,21 @@ bottom: .5em;
                                         <?php
                                         $stdata = 0;
                                         // echo "report_status:" . $results["report_status"];
+
                                         if ($results["report_status"] == 2) {
                                             $stdata = 1;
                                         ?>
+
                                             <b style="color:green"> ชำระเงินเรียบร้อย</b>
                                         <?php } elseif ($results["report_status"] == 3) {
                                             $stdata = 1;
                                         ?>
+
                                             <b style="color:green"> ชำระเงินเรียบร้อย</b>
-                                            <?php } else {
+                                        <?php } else if ($results["report_status"] == 0) { ?>
+
+                                            <b style="color:green"> ชำระเงินเรียบร้อย</b>
+                                            <?php  } else {
                                             if ($results["deposit"] != 0) {
                                             ?>
                                                 <a data-toggle="modal" data-target="#myModal<?php echo $results["id"]; ?>" type="button" class="btn btn-info" style="color:#fff">จ่ายมัดจำ</a>
@@ -531,7 +579,7 @@ bottom: .5em;
 
 
                                         <?php if ($results["boat"] == $priceboat) { ?>
-                                            <?php echo "dch2:" . $dch2; ?>
+                                            <!-- <?php echo "dch2:" . $dch2; ?> -->
                                             <?php if ($stdata == 1 && $dch2 == 1) { ?>
                                                 <a target="" data-toggle="modal" data-target="#myModalboat<?php echo $results["id"]; ?>" type="button" class="btn btn-warning">ออกใบ BOOK เรือ</a>
                                             <?php } else if ($results["deposit"] != 0 && $dch2 == 1) { ?>
@@ -550,7 +598,7 @@ bottom: .5em;
                                         <?php } ?>
 
 
-                                        <?php echo $results["diving"] . "!!!=>" . $pricedriving; ?>
+                                        <!-- <?php echo $results["diving"] . "!!!=>" . $pricedriving; ?> -->
 
                                         <?php if ($results["diving"] >= 500) { ?>
                                             <?php if ($stdata == 1) { ?>
@@ -580,11 +628,6 @@ bottom: .5em;
                                             <a target="_blank" href="addinsurance.php?id_booking=<?php echo $results['id_booking']; ?>&resort_name=<?php echo $results['room_name']; ?>" type="button" class="btn btn-info">ออกใบประกันภัย</a>
                                         <?php } ?>
                                     </td>
-
-
-
-
-
 
 
 
@@ -651,7 +694,11 @@ bottom: .5em;
                                                                 }
                                                             </script>
 
-
+                                                            <div id="myModal" class="modalimg">
+                                                                <span class="closeimg">&times;</span>
+                                                                <img class="modal-contentimg" id="img01">
+                                                                <div id="caption"></div>
+                                                            </div>
 
                                                             <div class="col-md-12 col-sm-12">
                                                                 <div class="form-group">
@@ -659,7 +706,8 @@ bottom: .5em;
                                                                         <h4 class="text-blue h4">slip </h4>
                                                                     </label>
 
-                                                                    <img id="blah" src="#" alt="your image" width="500px" />
+                                                                    <img id="blah" src="#" alt="" width="500px" class="zoom-in" />
+
 
                                                                     <input type="file" class="form-control" name="file" id="file" placeholder="ระบุ slip" onchange="readURL(this)" required>
 
@@ -854,16 +902,6 @@ bottom: .5em;
                 </div>
             </div>
 
-
-
-
-
-
-
-
-
-
-
             <div class="footer-wrap pd-20 mb-20 card-box">Welcome Akira Lipe , Ananya Lipe , Thechic Lipe <a href="https://ananyalipe.com" target="_blank">แบบฟอร์มเช็คราคาห้องพักของแต่ละรีสอร์ท</a></div>
         </div>
     </div>
@@ -873,8 +911,8 @@ bottom: .5em;
 
 </html>
 
-<div id="popupimg" class="popup">
+<!-- <div id="popupimg" class="popup">
     <span class="close">&times;</span>
     <img class="popup-content" id="img01">
     <div id="caption"></div>
-</div>
+</div> -->

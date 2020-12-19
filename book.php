@@ -75,15 +75,12 @@ if ($objQuery === TRUE) {
 			$in = " UPDATE `tb_report` SET `diving` = '1'   WHERE `tb_report`.`id` ='" . $ss['id'] . " '";
 			$in2 = " UPDATE `tb_report` SET `diving` = '1'   WHERE `tb_report`.`noid_booking` ='" . $ss['id_booking'] . " '";
 		}
-		// $in = " UPDATE `tb_report` SET `diving` = '1'   WHERE `tb_report`.`id` ='" . $ss['id'] . "'";
 	}
 
 
 	$a = mysqli_query($con, $in);
 	$b = mysqli_query($con, $in2);
 	$c = mysqli_query($con, $in3);
-
-
 
 
 	echo "<script> alert('ออกรายงานสำเร็จ');window.location.href = 'report.php';</script > ";

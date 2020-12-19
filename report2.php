@@ -61,8 +61,8 @@ while ($row1 = mysqli_fetch_array($result1)) {
   <table style="width:100%">
        <tr>
           <td width="100%" align="center">
-              <b style="font-size: 1.2em;color:black">BOOKING</b><br>
-              <b style="font-size: 1.2em;color:red;">CONFIRMATION</b><br>
+              <b style="font-size: 1.5em;color:black">BOOKING</b><br>
+              <b style="font-size: 1.5em;color:red;">CONFIRMATION</b><br>
              
             </td>
           </tr>

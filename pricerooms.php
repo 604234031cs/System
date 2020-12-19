@@ -106,84 +106,84 @@ if ($_POST['id'] != "") {
             width: 100%;
         }
     </style>
-        <div class="main-container">
-            <div class="pd-ltr-20">
-                <div class="card-box pd-20 height-100-p mb-30">
-                    <div class="row align-items-center">
-                        <div class="col-md-4">
-                            <img src="vendors/images/banner-img.png" alt="" />
-                        </div>
-                        <div class="col-md-8">
-                            <h4 class="font-20 weight-500 mb-10 text-capitalize">
-                                Welcome Akira Lipe , Ananya Lipe , Thechic Lipe
-                                <div class="weight-600 font-30 text-blue">แก้ไขราคาห้องพัก</div>
-                            </h4>
-                        </div>
+    <div class="main-container">
+        <div class="pd-ltr-20">
+            <div class="card-box pd-20 height-100-p mb-30">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <img src="vendors/images/banner-img.png" alt="" />
+                    </div>
+                    <div class="col-md-8">
+                        <h4 class="font-20 weight-500 mb-10 text-capitalize">
+                            Welcome Akira Lipe , Ananya Lipe , Thechic Lipe
+                            <div class="weight-600 font-30 text-blue">แก้ไขราคาห้องพัก</div>
+                        </h4>
                     </div>
                 </div>
+            </div>
 
 
-                <div class="card-box mb-30">
-                    <div class="pd-20">
-                        <h3 class="text-blue h3">แก้ไขราคาห้องพัก</h3>
-                    </div>
-                    <div class="col-md-4 col-sm-12" style="padding-bottom: 20px;">
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <h3 class="text-blue h3">แก้ไขราคาห้องพัก</h3>
+                </div>
+                <div class="col-md-4 col-sm-12" style="padding-bottom: 20px;">
 
-                        <div class="form-group">
-                            <label>
-                                <h4 class="text-blue h4">ที่พัก</h4>
-                            </label>
-                            <select class="custom-select col-12" id="nameresort" onchange="changroom()">
-                                <!-- <option selected="">โปรดเลือกที่พัก...</option> -->
-                                <?php
-                                $sql1 = "SELECT * FROM `tb_resort` ";
-                                $query1 = mysqli_query($con, $sql1);
-                                while ($results1 = mysqli_fetch_assoc($query1)) {  ?>
-                                    <option value="<?php echo $results1["id"]; ?>"><?php echo $results1["resort_name"]; ?></option>
-                                <?php  } ?>
-                            </select>
-
-                        </div>
-                        <!-- <button type="submit" class="btn btn-warning">ค้นหา</button> -->
+                    <div class="form-group">
+                        <label>
+                            <h4 class="text-blue h4">ที่พัก</h4>
+                        </label>
+                        <select class="custom-select col-12" id="nameresort" onchange="changroom()">
+                            <!-- <option selected="">โปรดเลือกที่พัก...</option> -->
+                            <?php
+                            $sql1 = "SELECT * FROM `tb_resort` ";
+                            $query1 = mysqli_query($con, $sql1);
+                            while ($results1 = mysqli_fetch_assoc($query1)) {  ?>
+                                <option value="<?php echo $results1["id"]; ?>"><?php echo $results1["resort_name"]; ?></option>
+                            <?php  } ?>
+                        </select>
 
                     </div>
+                    <!-- <button type="submit" class="btn btn-warning">ค้นหา</button> -->
 
-                    <div class="pb-20">
-                                    
-                        <div id="main">
+                </div>
 
-                            <input type="hidden" id="maxday" name="maxday">
-                            <table style="width:100%!important;border:solid 1px #ccc!important" class="bdno">
-                                <tr>
-                                    <td colspan="2" style="font-size:30px;text-align: center; background-image: linear-gradient(#ccc, #fff);border:solid 1px #dcdcdc;background:#1f2e5c;color:#fff;" id="showtitle"></td>
-                                </tr>
-                                <tr>
-                                    <td style="width:100%!important">
-                                        <div id="calendar" style="width:100%!important;width:100%;border:solid 1px #ccc">
+                <div class="pb-20">
 
-                                            <select class="slbox" id="ybox" style="width:10%;" onchange="changyear()"></select>
-                                            <br>
-                                            <input type="hidden" id="monbox">
-                                            <!-- <select class="slbox" id="nameresort" style="width:100%;" onchange="changroom()">
+                    <div id="main">
+
+                        <input type="hidden" id="maxday" name="maxday">
+                        <table style="width:100%!important;border:solid 1px #ccc!important" class="bdno">
+                            <tr>
+                                <td colspan="2" style="font-size:30px;text-align: center; background-image: linear-gradient(#ccc, #fff);border:solid 1px #dcdcdc;background:#1f2e5c;color:#fff;" id="showtitle"></td>
+                            </tr>
+                            <tr>
+                                <td style="width:100%!important">
+                                    <div id="calendar" style="width:100%!important;width:100%;border:solid 1px #ccc">
+
+                                        <select class="slbox" id="ybox" style="width:10%;" onchange="changyear()"></select>
+                                        <br>
+                                        <input type="hidden" id="monbox">
+                                        <!-- <select class="slbox" id="nameresort" style="width:100%;" onchange="changroom()">
                                                 <?php foreach ($all_resort as $value) : ?>
                                                     <option value="<?php echo $value['id']; ?>"><?php echo $value['resort_name']; ?></option>
                                                 <?php endforeach; ?>
                                             </select> -->
 
-                                            <div id="mbox" style="padding:5px"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width:100%!important;" valign="top">
+                                        <div id="mbox" style="padding:5px"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:100%!important;" valign="top">
 
-                                        <div id="showpd" style="width:100%;height:400px"></div>
+                                    <div id="showpd" style="width:100%;height:400px"></div>
 
-                                    </td>
-                                </tr>
-                            </table>
+                                </td>
+                            </tr>
+                        </table>
 
-                            <!-- <style>
+                        <!-- <style>
                             #dp .scheduler_default_cellparent,
                             .scheduler_default_cell.scheduler_default_cell_business.scheduler_default_cellparent {
                                 background: #f3f3f3;
@@ -243,17 +243,17 @@ if ($_POST['id'] != "") {
 
 
 
-                        </div>
                     </div>
-
-
-
-                 
-          
-                    <div class="footer-wrap pd-20 mb-20 card-box">Welcome Akira Lipe , Ananya Lipe , Thechic Lipe <a href="https://ananyalipe.com" target="_blank">แบบฟอร์มเช็คราคาห้องพักของแต่ละรีสอร์ท</a></div>
                 </div>
+
+
+
+
+
+                <div class="footer-wrap pd-20 mb-20 card-box">Welcome Akira Lipe , Ananya Lipe , Thechic Lipe <a href="https://ananyalipe.com" target="_blank">แบบฟอร์มเช็คราคาห้องพักของแต่ละรีสอร์ท</a></div>
             </div>
         </div>
+    </div>
     </form>
 
 
@@ -270,12 +270,12 @@ if ($_POST['id'] != "") {
 
                     <input type="text" id="idr" hidden>
                     <div class="form-group">
-                    <label for="exampleInputEmail1">วันที่</label>
+                        <label for="exampleInputEmail1">วันที่</label>
                         <input type="date" id="date1" class="form-control" readonly format="yyyy-mm-dd">
                     </div>
                     <div class="form-group">
-                    <label for="exampleInputEmail1">วันที่</label>
-                        <input type="date" id="date2" class="form-control" >
+                        <label for="exampleInputEmail1">วันที่</label>
+                        <input type="date" id="date2" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">ราคาห้อง</label>
@@ -284,22 +284,52 @@ if ($_POST['id'] != "") {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="savepriceroom()" id="savesel" >เพิ่มราค้าห้อง</button>
+                    <button type="button" class="btn btn-primary" onclick="savepriceroom()" id="savesel">เพิ่มราค้าห้อง</button>
                 </div>
             </div>
         </div>
     </div>
-   
 
 
-   
+    <div class="modal fade" id="modaledit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleedi">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <input type="text" id="eidr" hidden>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">วันที่</label>
+                        <input type="date" id="edate1" class="form-control" readonly format="yyyy-mm-dd">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ราคาห้อง</label>
+                        <input type="number" id="epriceroom" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveeditpriceroom()" id="savesel">เพิ่มราค้าห้อง</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <?php
     $dtsever = date("d");
     $mtsever = date("m");
     $ytsever = date("Y");
     $datecur = $ytsever . "-" . $mtsever . "-" . $dtsever;
     ?>
-    
+
     <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script src="http://jojosati.github.io/bootstrap-datepicker-thai/js/bootstrap-datepicker-thai.js"></script>
@@ -385,10 +415,10 @@ if ($_POST['id'] != "") {
             var n3 = $('#ybox').val();
 
             var dc = new Date(datecur)
-            
 
-            
-        
+
+
+
 
             var maxpr = pr_room.length;
             var run = 0;
@@ -413,7 +443,7 @@ if ($_POST['id'] != "") {
                 txtday += "<td style='background:#1f2e5c;color:#fff;'><b>" + txtd.padStart(2, '0') + "</b></td>";
             }
             var idresort = $('#nameresort').val();
-           
+
             $.ajax({
                 url: "ajaxdata.php?page=pricerooms&id_resort=" + idresort,
                 type: "GET",
@@ -441,14 +471,14 @@ if ($_POST['id'] != "") {
                                 }
                             }
 
-                          if(dc <=dn){
-                            txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' ondblclick=\"edit(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "'></td>";
-                          }else {
-                            txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' disabled></td>";
-                          }
-             
-                        
-                            
+                            if (dc <= dn) {
+                                txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' ondblclick=\"edit(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" value='" + prm + "' id='prset" + run + "'></td>";
+                            } else {
+                                txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' disabled></td>";
+                            }
+
+
+
                             // maxday++;
                         }
                         txtrow += "</tr>";
@@ -466,8 +496,8 @@ if ($_POST['id'] != "") {
         function getcellprice() {
             var year = $('#ybox').val();
             var mont = $('#monbox').val();
-            var y1 = ""+year.padStart(2,'0')
-            var m1 = ""+mont.padStart(2,'0')
+            var y1 = "" + year.padStart(2, '0')
+            var m1 = "" + mont.padStart(2, '0')
             // console.log("Year:=>"+year+"Mont:=>"+m1);
             $.ajax({
                 type: 'POST',
@@ -483,7 +513,7 @@ if ($_POST['id'] != "") {
                         }
                         pr_room.push(text);
                     });
-                console.log(data);
+                    console.log(data);
                     tocal(pr_room);
                 }
             });
@@ -571,7 +601,7 @@ if ($_POST['id'] != "") {
             // } else {
             //     reloadpage(mont, y2)
             // }
-            
+
 
         }
 
@@ -586,7 +616,7 @@ if ($_POST['id'] != "") {
 
             // if (m2 != "") {
 
-                reloadpagenew();
+            reloadpagenew();
 
             // } else {
 
@@ -613,82 +643,92 @@ if ($_POST['id'] != "") {
             });
         }
 
-        function edit(run,dy,idr){
+        function edit(run, dy, idr, nrm) {
             var vl = $('#prset' + run).val();
-            if(vl != "" && vl !=null){
+            if (vl != "" && vl != null) {
+                $('#modaledit').modal('show');
+                $('.modal-title').html(nrm + " (แก้ไข)");
+                $('.modal-body #eidr').val(idr);
+                $('.modal-body #edate1').val(dy);
+                $('.modal-body #epriceroom').val(vl);
 
-            }else{
+            } else {
                 alert("!!! ไม่มีข้อมูล");
             }
-            // alert(vl);
-            // alert(dy);
+
+        }
+
+        function saveeditpriceroom() {
+
+
+            var idr = $('.modal-body #eidr').val();
+            var day1 = $('.modal-body #edate1').val();
         }
 
         function mouseclick(run, dy, idr, nrm) {
             var vl = $('#prset' + run).val();
-            if(vl!="" && vl !=null){
+            if (vl != "" && vl != null) {
                 $('.modal-title').html(nrm)
-            $('#exampleModal').modal('show')
-            $('.modal-body #idr').val(idr);
-            $('.modal-body #date1').val(dy);
-            $('.modal-body #date2').val(dy);
-            document.getElementById("date2").min = dy;
-            }else{
+                $('#exampleModal').modal('show')
+                $('.modal-body #idr').val(idr);
+                $('.modal-body #date1').val(dy);
+                $('.modal-body #date2').val(dy);
+                document.getElementById("date2").min = dy;
+            } else {
                 alert("กรุณาเลือกราคาห้องพัก")
             }
             // alert(nrm);
-          
+
             // $('.modal-body #date2').datepicker({
             //     miDate: datecur
             // });
-          
+
             $('.modal-body #priceroom').val(vl);
         }
 
-    function savepriceroom(){
-      let prarry =[];
-        var idr =  $('.modal-body #idr').val();
-        var day1 = $('.modal-body #date1').val();
-        var day2 = $('.modal-body #date2').val();
-        var dayf = new Date(day1)
-        
-        var d = dayf.getDate();
-        // alert(new String(d))
-        // alert(day2);
-        var proom =$('.modal-body #priceroom').val();
-       
-        var date1 = new Date(day1);
-        var date2 = new Date(day2);
+        function savepriceroom() {
+            let prarry = [];
+            var idr = $('.modal-body #idr').val();
+            var day1 = $('.modal-body #date1').val();
+            var day2 = $('.modal-body #date2').val();
+            var dayf = new Date(day1)
 
-        var Difference_In_Time = date2.getTime() - date1.getTime(); 
-        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
-        // console.log(Difference_In_Days);
-        
-        for(let i=1 ;i<=Difference_In_Days;i++){
-        date1.setDate(date1.getDate() + 1)
-        var d = date1.getDate();
-        var y = date1.getFullYear();
-        var m = date1.getMonth()+1;
-        var y1 = ""+y;
-        var m1 = ""+m;
-        var d1 = ""+d;
-        var fdate = y1+"-"+m1.padStart(2,'0')+"-"+d1.padStart(2,'0');
+            var d = dayf.getDate();
+            // alert(new String(d))
+            // alert(day2);
+            var proom = $('.modal-body #priceroom').val();
 
-            
-        let data = {
-            price: proom,
-            dy: fdate,
-         }
-       prarry.push(data);
-        }
+            var date1 = new Date(day1);
+            var date2 = new Date(day2);
 
-        $.ajax({
+            var Difference_In_Time = date2.getTime() - date1.getTime();
+            var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+            // console.log(Difference_In_Days);
+
+            for (let i = 1; i <= Difference_In_Days; i++) {
+                date1.setDate(date1.getDate() + 1)
+                var d = date1.getDate();
+                var y = date1.getFullYear();
+                var m = date1.getMonth() + 1;
+                var y1 = "" + y;
+                var m1 = "" + m;
+                var d1 = "" + d;
+                var fdate = y1 + "-" + m1.padStart(2, '0') + "-" + d1.padStart(2, '0');
+
+
+                let data = {
+                    price: proom,
+                    dy: fdate,
+                }
+                prarry.push(data);
+            }
+
+            $.ajax({
                 type: 'POST',
                 url: "savesel.php",
-                data:
-                {
-                    idrm:idr,
-                     saveprice:prarry
+                data: {
+                    idrm: idr,
+                    saveprice: prarry
                 },
                 dataType: 'html',
                 success: function(data) {
@@ -696,9 +736,9 @@ if ($_POST['id'] != "") {
                     $('#exampleModal').modal('hide')
                     getcellprice();
                 }
-            }); 
-    }
-  
+            });
+        }
+
 
         $(document).contextmenu(function() {
             return false;

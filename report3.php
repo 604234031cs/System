@@ -70,8 +70,8 @@ $obj_pdf->setCellPaddings($left = '0', $top = '0', $right = '0', $bottom = '0');
      <table style="width:100%">
           <tr>
              <td width="100%" align="center">
-                 <b style="font-size: 1.2em;color:black">BOOKING</b><br>
-                 <b style="font-size: 1.2em;color:red;">CONFIRMATION</b><br>
+                 <b style="font-size: 1.5em;color:black">BOOKING</b><br>
+                 <b style="font-size: 1.5em;color:red;">CONFIRMATION</b><br>
                 
                </td>
              </tr>

@@ -71,8 +71,8 @@ $obj_pdf->setCellPaddings($left = '0', $top = '0', $right = '0', $bottom = '0');
   <table style="width:100%">
        <tr>
           <td width="100%" align="center">
-              <b style="font-size: 1.2em;color:black">BOOKING</b><br>
-              <b style="font-size: 1.2em;color:red;">CONFIRMATION</b><br>
+              <b style="font-size: 1.5em;color:black">BOOKING</b><br>
+              <b style="font-size: 1.5em;color:red;">CONFIRMATION</b><br>
              
             </td>
           </tr>
@@ -112,7 +112,7 @@ $obj_pdf->setCellPaddings($left = '0', $top = '0', $right = '0', $bottom = '0');
  </tr>
  <tr>
  <td width="25%" ><p style="font-size: 1em;color:black">เลขที่เอกสาร : <br>Booking ID  :</p></td>
- <td width="25%"  align="center" ><b style="font-size: 1.2em;">'.$row2['id_bookink'].'</b></td>
+ <td width="25%"  align="center" ><b style="font-size: 1.2em;">'.$row1['id_booking'].'</b></td>
  <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">จำนวนห้อง : <br>Number of Room  :</p></td>
  <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">'.$row1['number_of_rooms'].'</b></td></tr></table></td>
  </tr>

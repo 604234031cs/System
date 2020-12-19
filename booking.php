@@ -3,6 +3,7 @@
 <?php include "head.php";
 include_once('connectdb.php');
 
+error_reporting(0);
 $name =  $_POST['name'];
 $name_roomtype =  $_POST['name_roomtype'];
 $days =  $_POST['days'];
@@ -117,16 +118,19 @@ $typser = $_POST["typser"];
                         </div>
                         <link rel="stylesheet" href="/path/to/dist/css/image-zoom.css" />
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.20/jquery.zoom.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.20/jquery.zoom.min.js"></script>
                         <script language="JavaScript">
-                        $(document).ready(function(){
-			                    $('#produto').zoom();
+                            $(document).ready(function() {
+                                $(window).keydown(function(event) {
 
-                                
+                                    if (event.keyCode == 13) {
+                                        event.preventDefault();
+                                        return false;
+                                    }
+                                });
+                            });
 
-		                        });
-                           
-                                function readURL(input) {
+                            function readURL(input) {
                                 if (input.files && input.files[0]) {
                                     console.log(input.files);
                                     var reader = new FileReader();
@@ -140,20 +144,121 @@ $typser = $_POST["typser"];
                                 //     $('#blah').hide();
                                 // }
                             }
-                            
                         </script>
 
 
-<style>
-		.zoom {
-			display:inline-block;
-			position: relative;
-		}
+                        <style>
+                            .zoom {
+                                display: inline-block;
+                                position: relative;
+                            }
 
-		.zoom img {
-			display: block;
-		}
-	</style>
+                            .zoom img {
+                                display: block;
+                            }
+
+
+                            body {
+                                font-family: Arial, Helvetica, sans-serif;
+                            }
+
+                            #blah {
+                                border-radius: 5px;
+                                cursor: zoom-in;
+                                transition: 0.3s;
+                            }
+
+                            #blah:hover {
+                                opacity: 0.7;
+                            }
+
+                            /* The Modal (background) */
+                            .modal {
+                                display: none;
+                                /* Hidden by default */
+                                position: fixed;
+                                /* Stay in place */
+                                z-index: 1;
+                                /* Sit on top */
+                                padding-top: 100px;
+                                /* Location of the box */
+                                left: 0;
+                                top: 0;
+                                width: 100%;
+                                /* Full width */
+                                height: 100%;
+                                /* Full height */
+                                overflow: auto;
+                                /* Enable scroll if needed */
+                                background-color: rgb(0, 0, 0);
+                                /* Fallback color */
+                                background-color: rgba(0, 0, 0, 0.9);
+                                /* Black w/ opacity */
+                            }
+
+                            /* Modal Content (image) */
+                            .modal-content {
+                                margin: auto;
+                                display: block;
+                                width: 80%;
+                                max-width: 700px;
+                            }
+
+
+
+                            @-webkit-keyframes zoom {
+                                from {
+                                    -webkit-transform: scale(0)
+                                }
+
+                                to {
+                                    -webkit-transform: scale(1)
+                                }
+                            }
+
+                            @keyframes zoom {
+                                from {
+                                    transform: scale(0)
+                                }
+
+                                to {
+                                    transform: scale(1)
+                                }
+                            }
+
+                            /* The Close Button */
+                            .close {
+                                position: absolute;
+                                top: 80px;
+                                right: 35px;
+                                color: #f1f1f1;
+                                font-size: 40px;
+                                font-weight: bold;
+                                transition: 0.3s;
+                            }
+
+                            .close:hover,
+                            .close:focus {
+                                color: #bbb;
+                                text-decoration: none;
+                                cursor: pointer;
+                            }
+
+                            #img01:hover,
+                            #img01:focus {
+                                color: #bbb;
+                                text-decoration: none;
+                                cursor: zoom-out;
+                            }
+
+                            /* 100% Image Width on Smaller Screens */
+                            @media only screen and (max-width: 700px) {
+                                .modal-content {
+                                    width: 100%;
+                                }
+                            }
+                        </style>
+
 
 
 
@@ -163,11 +268,15 @@ $typser = $_POST["typser"];
                                     <h4 class="text-blue h4">slip </h4>
                                 </label>
                                 <!-- <img id="image<a href='https://www.jqueryscript.net/zoom/'>Zoom </a>" src="https://source.unsplash.com/CkW90N_oro8/1200x900" /> -->
-                                <div class="zoom" id="produto">
-                          
-                                <img id="blah" src="#" alt="your image"  width="500px"/>
+
+                                <img id="blah" src="#" alt="" width="100px" />
+
+                                <div id="myModal" class="modal">
+                                    <span class="close">&times;</span>
+                                    <img class="modal-content" id="img01">
                                 </div>
-                              
+
+
                                 <input type="file" class="form-control" name="file" id="file" placeholder="ระบุ slip" onchange="readURL(this);" required>
                             </div>
                         </div>
@@ -192,6 +301,31 @@ $typser = $_POST["typser"];
 
                             </div>
                         </div>
+
+                        <script>
+                            // Get the modal
+                            var modal = document.getElementById("myModal");
+
+                            // Get the image and insert it inside the modal - use its "alt" text as a caption
+                            var img = document.getElementById("blah");
+                            var modalImg = document.getElementById("img01");
+                            img.onclick = function() {
+                                modal.style.display = "block";
+                                modalImg.src = this.src;
+                                captionText.innerHTML = this.alt;
+                            }
+
+                            // Get the <span> element that closes the modal
+                            var span = document.getElementsByClassName("close")[0];
+
+                            // When the user clicks on <span> (x), close the modal
+                            span.onclick = function() {
+                                modal.style.display = "none";
+                            }
+                            modalImg.onclick = function() {
+                                modal.style.display = "none";
+                            }
+                        </script>
 
 
 
@@ -350,8 +484,12 @@ $typser = $_POST["typser"];
                             <input type="text" name="type" id="type" hidden="" value="addresort">
                             <button type="submit" class="btn btn-warning">บันทึก</button>
                         </div>
-                        <!-- onclick="submit();" -->
 
+                        <!-- <script>
+                            $("#target").keydown(function() {
+                                alert("Handler for .keydown() called.");
+                            });
+                        </script> -->
                     </div>
                 </form>
             </div>
@@ -361,11 +499,16 @@ $typser = $_POST["typser"];
             <div class="footer-wrap pd-20 mb-20 card-box">Welcome Akira Lipe , Ananya Lipe , Thechic Lipe <a href="https://ananyalipe.com" target="_blank">แบบฟอร์มเช็คราคาห้องพักของแต่ละรีสอร์ท</a></div>
         </div>
     </div>
-    <!-- <script type="text/javascript">
-        function submit() {
-            document.getElementById('form1').submit();
-        }
-    </script> -->
+    <script type="text/javascript">
+        $('input').keydown(function(event) {
+            // var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+       
+    </script>
 
     <?php include "footer.php"; ?>
 </body>

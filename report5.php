@@ -53,13 +53,17 @@ while ($row1 = mysqli_fetch_array($result1)) {
     } else if ($row1["report_status"] == '1') {
         $in = '';
     } else {
-        $in = "เลขที่  " . $row1["noid_booking"];
+        if ($row1['noid_booking'] != "" && $row1['noid_booking'] != null) {
+            $in = "อ้างอิง  เลขที่  " . $row1["noid_booking"];
+        } else {
+            $in = "";
+        }
     }
 
 
-    if ($row1["extrabed"] == '0') {
-        $bed = '';
-    }
+    // if ($row1["extrabed"] == '0') {
+    //     $bed = '';
+    // }
 
 
 
@@ -72,9 +76,9 @@ while ($row1 = mysqli_fetch_array($result1)) {
 <table style="width:100%">
      <tr>
         <td width="100%" align="center">
-            <b style="font-size: 1.2em;color:black">BOOKING</b><br>
-            <b style="font-size: 1.2em;color:red;">CONFIRMATION</b><br>
-            <b style="font-size: 1.2em;color:red;"> อ้างอิงเลขที่ ' . $in . '</b>
+            <b style="font-size: 1.5em;color:black">BOOKING</b><br>
+            <b style="font-size: 1.5em;color:red;">CONFIRMATION</b><br>
+            <b style="font-size: 1.0em;color:red;"> ' . $in . '</b>
         </td>
         </tr>
     </table>
@@ -130,7 +134,7 @@ while ($row1 = mysqli_fetch_array($result1)) {
         <td width="25%" ><p style="font-size: 1em;color:black">วันที่เขาพัก :<br>Arrival  :</p></td>
         <td width="25%" ><table  style="border:solid 1px #ccc;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['checkin'] . '</b></td></tr></table></td>
         <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">เตียงเสริม :<br>Number of Extra Beds :</p></td>
-        <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $bed . '</b></td></tr></table></td>
+        <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $row1["extrabed"] . '</b></td></tr></table></td>
     </tr>
     <tr>
         <td width="25%" ><p style="font-size: 1em;color:black">วันที่เช็ดเอาท :<br>Number of Extra Beds  :</p></td>
@@ -145,6 +149,7 @@ while ($row1 = mysqli_fetch_array($result1)) {
       <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">เด็ก อายุ 4-10 ปี :<br>Age for 4-10 Yrs:</p></td>
       <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $row1['ch1'] . '</b></td></tr></table></td>
     </tr>
+    
     <tr>
         <td width="25%" ><p style="font-size: 1em;color:black">บริการโดย :<br>Trip By :</p></td>
         <td width="25%" ><table  style="border:solid 1px #ccc;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['Byyy'] . '</b></td></tr></table></td>
@@ -153,6 +158,7 @@ while ($row1 = mysqli_fetch_array($result1)) {
         <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $row1['ch2'] . '</b></td></tr></table></td>
     </tr>
 </table>
+
 <table cellpadding="0" cellspacing="0.1" width="100%"><tr><td ></td></tr></table>
 <table class="first" cellpadding="4" cellspacing="0" width="100%"><tr><td>
 <table cellpadding="2" cellspacing="0" width="100%">
@@ -163,27 +169,26 @@ while ($row1 = mysqli_fetch_array($result1)) {
 </table>
 </td></tr></table>
 
-<table class="first"  width="100%" ><tr><td>
-    <table class="first" cellpadding="4" cellspacing="0" width="100%" >
-    <tr><td colspan="6"><b>รายละเอียดการชำระเงิน(Payment Detail:)</b></td></tr>
+
+    <table class="first" cellpadding="4" cellspacing="3" width="100%" >
+    <tr><td colspan="4"><b>รายละเอียดการชำระเงิน (Payment Detail:)</b></td></tr>
     <tr>
-        <td width="12%" ><b style="font-size: 1em;color:black">มัดจำ / Dep. :</b></td>
+        <td width="12% " ><b style="font-size: 1em;color:black">มัดจำ / Dep. :</b></td>
         <td width="15%" style="background-color: #DCDCDC;color:black;text-align:right">' . number_format($row1['Sales'], 2) . '</td>
         <td width="15%" ><b style="font-size: 1em;color:black">ราคาสุทธิ/ Price :</b></td>
         <td width="20%" style="background-color: #DCDCDC;color:black;text-align:right">' . number_format($row1['sum'], 2) . '</td>
         <td width="18%" ><b style="font-size: 1em;color:black">ค้างชำระ / Remain :</b></td>
-        <td width="20%" style="background-color: #DCDCDC;color:red;text-align:right">' . number_format($row1['deposit'], 2) . '</td>
+        <td width="19%" style="background-color: #DCDCDC;color:red;text-align:right">' . number_format($row1['deposit'], 2) . '</td>
     </tr>
     </table>
- </td></tr></table>
- <table class="first" cellpadding="4" cellspacing="0" width="100%"><tr><td>   
-     <table class="first" cellpadding="4" cellspacing="0" style="width:100%">
+
+     <table class="first" cellpadding="4" cellspacing="3" style="width:100%">
     <tr style="background-color: #DCDCDC">
-        <td width="12%" style="background-color:#fff"><b style="font-size: 1em;color:black">รายละเอียดอื่น   :</b></td>
-        <td width="88%" ></td>
+        <td width="11.75%" style="background-color:#fff"><b style="font-size: 1em;color:black">รายละเอียดอื่น   :</b></td>
+        <td width="88.25%" ></td>
     </tr>
 </table>
-</td></tr></table>
+<br>
     <div style="border: 1px solid gray;font-size: 0.9em;color:black;">
       <b>ข้อกำหนดเเละเงื่อนไข</b><br>
         1. คุณลูกค้าต้องสำรองห้องพักล่วงหน้า 30 วันก่อนเดินทาง<br>

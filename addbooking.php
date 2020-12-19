@@ -45,7 +45,7 @@ if ($deposit > 0) {
     $d = "จ่ายเต็ม";
 }
 
-
+$ytsever = date("Y");
 $sum =  $_POST['sum'];
 $car =  $_POST['car_num'];
 $boat =  $_POST['boat_num'];
@@ -100,10 +100,13 @@ if ($objQuery === TRUE) {
     $re = mysqli_query($con, $last);
     $ss = mysqli_fetch_assoc($re);
     $resort_name = $ss['room_name'];
+   
+    $ytsever = substr(date("Y") + 543, -2);
+
 
     $num = substr("0000" . $ss['id'], -4);
-    $text = "" . $num;
-    $text1 = "" . $num;
+    $text = "" . $num . "-" . $ytsever;
+    // $text1 = "" . $num;
 
 
 
