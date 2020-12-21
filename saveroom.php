@@ -4,6 +4,9 @@ $val = $_REQUEST['price'];
 $dy  = $_REQUEST['dy'];
 $idr = $_REQUEST['idrm'];
 
+
+
+
 $sql = "INSERT INTO `priceroom`(`id_priceroom`, `date_start`, `ID_room`, `price_room`) VALUES(null,'$dy','$idr','$val')";
 $arr  = array();
 $query = mysqli_query($con, $sql);

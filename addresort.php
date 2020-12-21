@@ -4,18 +4,6 @@
 include_once('connectdb.php'); ?>
 
 <body>
-    <!-- 	<div class="pre-loader">
-		<div class="pre-loader-box">
-			<div class="loader-logo"><img src="vendors/images/deskapp-logo.svg" alt=""></div>
-			<div class='loader-progress' id="progress_div">
-				<div class='bar' id='bar1'></div>
-			</div>
-			<div class='percent' id='percent1'>0%</div>
-			<div class="loading-text">
-				Loading...
-			</div>
-		</div>
-	</div> -->
     <?php include "header.php"; ?>
 
     <div class="main-container">
@@ -38,28 +26,53 @@ include_once('connectdb.php'); ?>
 
                     if ($('#resort_name').val() != "") {
                         $('#submitformadd').removeAttr('disabled');
-                       
+
                     } else {
                         $('#submitformadd').prop('disabled', 'true');
-                       
+
                     }
 
                     $('#resort_name').keyup(function() {
                         if ($('#resort_name').val() != '') {
                             $('#submitformadd').removeAttr('disabled');
-                          
+
                         } else {
                             $('#submitformadd').prop('disabled', 'true');
-                            
                         }
-                        
+                    });
+                });
+
+                function checkDel(id) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "add_1.php",
+                        data: {
+                            id: id,
+                            type: "deleteresort",
+                        },
+                        dataType: 'html',
+                        success: function(result) {
+                            // console.log(result);
+                            if (result == 1) {
+                                // swal("ซ้ำ");
+                            } else {
+                                // swal("ไม่ซ้ำ");
+                            }
+                            // pr_room = [];
+                            // $.each(data, function(index, element) {
+                            //     let text = {
+                            //         'idroom': element.ID_room,
+                            //         'date_start': element.date_start,
+                            //         'price_room': element.price_room,
+                            //     }
+                            //     pr_room.push(text);
+                            // });
+                            // console.log(data);
+                            // tocal(pr_room);
+                        }
                     });
 
-                    // $('#submitformadd').click(function(){
-
-                    // });
-
-                });
+                }
             </script>
             <div class="pd-20 card-box mb-30">
 
@@ -77,6 +90,7 @@ include_once('connectdb.php'); ?>
                         <div class="col-md-12 col-sm-12">
                             <input type="text" name="type" id="type" hidden="" value="addresort">
                             <button type="submit" class="btn btn-warning" id="submitformadd">บันทึก</button>
+
                         </div>
 
 
@@ -147,13 +161,11 @@ include_once('connectdb.php'); ?>
                                     <a target="_blank" data-toggle="modal" data-target="#myModal<?php echo $results["id"]; ?>" type="button" class="btn btn-success">แก้ไข</a>
                                 </td>
                                 <td>
-                                    <form action="add_1.php" method="POST">
-                                        <input hidden="" class="form-control" name="id" id="id" value="<?php echo $results["id"]; ?>" />
-                                        <input hidden="" class="form-control" name="type" id="type" value="deleteresort" />
-                                        <input class="btn btn-danger" type="submit" value="ลบ" style="color: #fff;" onclick="return confirm('ต้องการจะลบข้อมูลนี้หรือไม่ !!')">
-
-                                    </form>
-
+                                    <!-- <form action="add_1.php" method="POST"> -->
+                                    <!-- <input hidden="" class="form-control" name="id" id="iddel" value="<?php echo $results["id"]; ?>" />
+                                    <input hidden="" class="form-control" name="type" id="type" value="deleteresort" /> -->
+                                    <input class="btn btn-danger" type="button" value="ลบ" style="color: #fff;" onclick="checkDel('<?php echo $results['id']; ?>')">
+                                    <!-- </form> -->
                                 </td>
                             </tr>
 

@@ -100,7 +100,7 @@ if ($objQuery === TRUE) {
     $re = mysqli_query($con, $last);
     $ss = mysqli_fetch_assoc($re);
     $resort_name = $ss['room_name'];
-   
+
     $ytsever = substr(date("Y") + 543, -2);
 
 
@@ -113,7 +113,7 @@ if ($objQuery === TRUE) {
     $in = " UPDATE `tb_report` SET `id_booking` = '" . $text . "' WHERE `tb_report`.`id` ='" . $ss['id'] . "'";
     $a = mysqli_query($con, $in);
 }
-echo "<script> window.location.href = 'report.php'</script > ";
+echo "<script>alert('บันทึกสำเร็จ');window.location.href = 'report.php'</script > ";
 
 
 /*

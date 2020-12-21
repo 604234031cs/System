@@ -120,16 +120,6 @@ $typser = $_POST["typser"];
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.20/jquery.zoom.min.js"></script>
                         <script language="JavaScript">
-                            $(document).ready(function() {
-                                $(window).keydown(function(event) {
-
-                                    if (event.keyCode == 13) {
-                                        event.preventDefault();
-                                        return false;
-                                    }
-                                });
-                            });
-
                             function readURL(input) {
                                 if (input.files && input.files[0]) {
                                     console.log(input.files);
@@ -482,18 +472,13 @@ $typser = $_POST["typser"];
 
                         <div class="col-md-4 col-sm-12">
                             <input type="text" name="type" id="type" hidden="" value="addresort">
-                            <button type="submit" class="btn btn-warning">บันทึก</button>
+                            <button type="submit" class="btn btn-warning"  tabindex="-1">บันทึก</button>
                         </div>
 
-                        <!-- <script>
-                            $("#target").keydown(function() {
-                                alert("Handler for .keydown() called.");
-                            });
-                        </script> -->
+
                     </div>
                 </form>
             </div>
-
 
 
             <div class="footer-wrap pd-20 mb-20 card-box">Welcome Akira Lipe , Ananya Lipe , Thechic Lipe <a href="https://ananyalipe.com" target="_blank">แบบฟอร์มเช็คราคาห้องพักของแต่ละรีสอร์ท</a></div>
@@ -507,7 +492,6 @@ $typser = $_POST["typser"];
                 return false;
             }
         });
-       
     </script>
 
     <?php include "footer.php"; ?>

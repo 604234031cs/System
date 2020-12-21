@@ -335,6 +335,7 @@ if ($_POST['id'] != "") {
     <script src="http://jojosati.github.io/bootstrap-datepicker-thai/js/bootstrap-datepicker-thai.js"></script>
     <script src="http://jojosati.github.io/bootstrap-datepicker-thai/js/locales/bootstrap-datepicker.th.js"></script>
     <script id="example_script" type="text/javascript">
+    
         var datecur = '<?php echo $datecur ?>';
         var year = <?php echo $ytsever ?>;
         var mont = <?php echo $mtsever ?>;
@@ -687,8 +688,10 @@ if ($_POST['id'] != "") {
         }
 
         function savepriceroom() {
+
             let prarry = [];
             var idr = $('.modal-body #idr').val();
+            
             var day1 = $('.modal-body #date1').val();
             var day2 = $('.modal-body #date2').val();
             var dayf = new Date(day1)
@@ -714,8 +717,6 @@ if ($_POST['id'] != "") {
                 var m1 = "" + m;
                 var d1 = "" + d;
                 var fdate = y1 + "-" + m1.padStart(2, '0') + "-" + d1.padStart(2, '0');
-
-
                 let data = {
                     price: proom,
                     dy: fdate,

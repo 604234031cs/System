@@ -3,6 +3,7 @@
 <?php
 
 include_once("connectdb.php");
+// require "head.php";
 
 $type = $_REQUEST['type'];
 
@@ -13,11 +14,13 @@ if ($type == "addresort") {
 	$results = mysqli_query($con, $sqlcheck);
 	$results11 = mysqli_fetch_assoc($results);
 	if ($results11 != null) {
-		echo "<script> alert('เกิดข้อผิดพลาด!! มีข้อมูลซ้ำ!!');window.location.href='addresort.php';</script>";
+		echo "<div><script>swal('เกิดข้อผิดพลาด!! มีข้อมูลซ้ำ!!');</script></div>";
 	} else {
 		$sql = "INSERT INTO tb_resort (id, resort_name, resort_status) VALUES (NULL,  '$resort_name', '1')";
 		if (mysqli_query($con, $sql)) {
-			echo "<script> alert('ได้ทำการเพิ่มรีสอร์ทรียบร้อย!!');window.location.href='addresort.php';</script>";
+			echo "<script>swal('ได้ทำการเพิ่มรีสอร์ทรียบร้อย!!');window.location.href='addresort.php'</script>";
+			// echo "<script>'</script>";
+
 		} else {
 			echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
 		}
@@ -153,18 +156,30 @@ if ($type == "addresort") {
 		echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
 	}
 } else if ($type == "deleteresort") {
-
 	// ลบชื่อรีสอร์ท
 	$id = $_REQUEST['id'];
-
-
-	$sql = "DELETE FROM `tb_resort` WHERE `tb_resort`.`id` = $id;";
-
-	if (mysqli_query($con, $sql)) {
-		echo "<script> alert('ได้ทำการลบชื่อรีสอร์ท เรียบร้อย!!');window.location.href='addresort.php';</script>";
+	$sql = "SELECT * FROM tb_roomtype WHERE id_resort ='$id'";
+	$results = mysqli_query($con, $sql);
+	$results11 = mysqli_fetch_array($results);
+	$statusdel;
+	if ($results11 != null) {
+		$statusdel = 1;
+		// echo json_encode($statusdel);
 	} else {
-		echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
+		$statusdel = 0;
+		// echo json_encode($statusdel);
 	}
+	echo $statusdel;
+	// echo json_encode($results11);
+
+
+	// $sql = "DELETE FROM `tb_resort` WHERE `tb_resort`.`id` = $id;";
+
+	// if (mysqli_query($con, $sql)) {
+	// 	echo "<script> alert('ได้ทำการลบชื่อรีสอร์ท เรียบร้อย!!');window.location.href='addresort.php';</script>";
+	// } else {
+	// 	echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
+	// }
 } else if ($type == "deletepersonal") {
 
 	// ลบชื่อรีสอร์ท
