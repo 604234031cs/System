@@ -205,15 +205,16 @@ while ($row1 = mysqli_fetch_array($result1)) {
  <table class="first" cellpadding="4" cellspacing="0" width="100%">
  <tr>
  <td style="text-align:center">   
+
  <center>
- ..................................................................<br>
+ ' . $row1['name'] . ' <br>
  ลูกค้า<br>
  Client
  </center>
  </td>
  <td style="text-align:center">   
   <center>
-  ..................................................................<br>
+  ' . $_SESSION["Name"] . '<br>
  ฝ่ายขาย<br>
  Sales
  </center>

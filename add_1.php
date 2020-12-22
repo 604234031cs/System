@@ -18,7 +18,7 @@ if ($type == "addresort") {
 	} else {
 		$sql = "INSERT INTO tb_resort (id, resort_name, resort_status) VALUES (NULL,  '$resort_name', '1')";
 		if (mysqli_query($con, $sql)) {
-			echo "<script>swal('ได้ทำการเพิ่มรีสอร์ทรียบร้อย!!');window.location.href='addresort.php'</script>";
+			echo "<script>alert('ได้ทำการเพิ่มรีสอร์ทรียบร้อย!!');window.location.href='addresort.php'</script>";
 			// echo "<script>'</script>";
 
 		} else {
@@ -164,22 +164,26 @@ if ($type == "addresort") {
 	$statusdel;
 	if ($results11 != null) {
 		$statusdel = 1;
-		// echo json_encode($statusdel);
+		echo json_encode($statusdel);
 	} else {
 		$statusdel = 0;
-		// echo json_encode($statusdel);
+		echo json_encode($statusdel);
 	}
-	echo $statusdel;
+	// echo $statusdel;
 	// echo json_encode($results11);
 
 
-	// $sql = "DELETE FROM `tb_resort` WHERE `tb_resort`.`id` = $id;";
 
-	// if (mysqli_query($con, $sql)) {
-	// 	echo "<script> alert('ได้ทำการลบชื่อรีสอร์ท เรียบร้อย!!');window.location.href='addresort.php';</script>";
-	// } else {
-	// 	echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
-	// }
+} elseif ($type == "delresort") {
+	$id = $_REQUEST['id'];
+	$sql = "DELETE FROM `tb_resort` WHERE `tb_resort`.`id` = '$id'";
+
+	if (mysqli_query($con, $sql)) {
+
+		// echo "<script>window.location.href='addresort.php';</script>";
+	} else {
+		echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
+	}
 } else if ($type == "deletepersonal") {
 
 	// ลบชื่อรีสอร์ท
@@ -197,9 +201,22 @@ if ($type == "addresort") {
 
 	// ลบชื่อรีสอร์ท
 	$id = $_REQUEST['id'];
-	$resort_name = $_REQUEST['resort_name'];
 
-	$sql = "DELETE FROM `tb_roomtype` WHERE `tb_roomtype`.`id` = $id;";
+	$sql = "SELECT * FROM priceroom WHERE ID_room ='$id'";
+	$results = mysqli_query($con, $sql);
+	$results11 = mysqli_fetch_array($results);
+	$statusdel;
+	if ($results11 != null) {
+		$statusdel = 1;
+		echo json_encode($statusdel);
+	} else {
+		$statusdel = 0;
+		echo json_encode($statusdel);
+	}
+} else if ($type == "delroomtype") {
+	$id = $_REQUEST['id'];
+
+	$sql = "DELETE FROM `tb_roomtype` WHERE `tb_roomtype`.`id` = $id";
 
 	if (mysqli_query($con, $sql)) {
 		echo "<script> alert('ได้ทำการลบประเภทรีสอร์ท เรียบร้อย!!');window.location.href='edit.php?id=$resort_name';</script>";

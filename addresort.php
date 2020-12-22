@@ -52,23 +52,34 @@ include_once('connectdb.php'); ?>
                         },
                         dataType: 'html',
                         success: function(result) {
-                            // console.log(result);
+                            console.log(result);
                             if (result == 1) {
-                                // swal("ซ้ำ");
+                                swal("ไม่สามารถลบข้อมูลได้ กรุณาตรวจสอบข้อมูลก่อน !!");
+
                             } else {
-                                // swal("ไม่ซ้ำ");
+                                var txt;
+
+                                var r = confirm("Press a button!");
+                                if (r == true) {
+                                    $.ajax({
+                                        type: "post",
+                                        url: "add_1.php",
+                                        data: {
+                                            id: id,
+                                            type: "delresort"
+                                        },
+                                        dataType: 'html',
+                                        success: function(value) {
+                                            alert("Good job!", "You clicked the button!", "success");
+                                            window.location.reload();
+
+                                        }
+                                    })
+                                } else {
+                                    txt = "You pressed Cancel!";
+                                }
                             }
-                            // pr_room = [];
-                            // $.each(data, function(index, element) {
-                            //     let text = {
-                            //         'idroom': element.ID_room,
-                            //         'date_start': element.date_start,
-                            //         'price_room': element.price_room,
-                            //     }
-                            //     pr_room.push(text);
-                            // });
-                            // console.log(data);
-                            // tocal(pr_room);
+
                         }
                     });
 

@@ -64,7 +64,10 @@ if ($_REQUEST['id'] != "") {
                 }
             </script>
             <div class="card-box mb-30">
+
                 <div class="pd-20">
+                    <a type="button" class="btn btn-success float-right" href="addroomtype.php">
+                        เพิ่มข้อมูลห้องพัก</a>
                     <h4 class="text-blue h4">แก้ไขราคาห้องพัก</h4>
                 </div>
                 <div class="col-md-4 col-sm-12" style="padding-bottom: 20px;">
@@ -84,7 +87,7 @@ if ($_REQUEST['id'] != "") {
                             </select>
 
                         </div>
-                        <!-- <button type="submit" class="btn btn-warning">ค้นหา</button> -->
+
                     </form>
 
                 </div>
@@ -104,7 +107,51 @@ if ($_REQUEST['id'] != "") {
                             </tr>
                         </thead>
                         <tbody>
+                            <script>
+                                function delcheck(id) {
+                                    console.log(id)
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: "add_1.php",
+                                        data: {
+                                            id: id,
+                                            type: "deletename_roomtypet",
+                                        },
+                                        dataType: 'html',
+                                        success: function(result) {
+                                            // console.log(result);
+                                            if (result == 1) {
+                                                swal("ไม่สามารถลบข้อมูลได้ กรุณาตรวจสอบข้อมูลก่อน !!");
 
+                                            } else {
+                                                var txt;
+
+                                                var r = confirm("คุณต้องการลบข้อมูลนี้หรือไม่!");
+                                                if (r == true) {
+                                                    $.ajax({
+                                                        type: "post",
+                                                        url: "add_1.php",
+                                                        data: {
+                                                            id: id,
+                                                            type: "delroomtype"
+                                                        },
+                                                        dataType: 'html',
+                                                        success: function(value) {
+                                                            alert("Good job!", "You clicked the button!", "success");
+                                                            window.location.reload();
+
+                                                        }
+                                                    })
+                                                } else {
+                                                    txt = "You pressed Cancel!";
+                                                }
+                                            }
+
+                                        }
+                                    });
+
+                                }
+                            </script>
 
                             <?php
                             //$sql ="SELECT * FROM `tb_resort` ";
@@ -122,13 +169,13 @@ if ($_REQUEST['id'] != "") {
                                     <td><?php echo $results["capacity"]; ?></td>
                                     <td><button type="button" data-toggle="modal" data-target="#myModal<?php echo $results["id"]; ?>" class="btn btn-warning">แก้ไข</button></td>
                                     <td>
-                                        <form action="add_1.php" method="POST">
-                                            <input hidden="" class="form-control" name="id" id="id" value="<?php echo $results["id"]; ?>" />
-                                            <input hidden type="text" name="resort_name" value="<?php echo $results["resort_name"]; ?>">
-                                            <input hidden="" class="form-control" name="type" id="type" value="deletename_roomtypet" />
-                                            <input class="btn btn-danger" type="submit" value="ลบ" style="color: #fff;" onclick="return confirm('ต้องการลบข้อมูลนี้หรือไม่!!')">
+                                        <!-- <form action="add_1.php" method="POST"> -->
+                                        <!-- <input hidden="" class="form-control" name="id" id="id" value="<?php echo $results["id"]; ?>" />
+                                            <input hidden type="text" name="resort_name" value="<?php echo $results["resort_name"]; ?>"> -->
+                                        <!-- <input hidden="" class="form-control" name="type" id="type" value="deletename_roomtypet" /> -->
+                                        <input class="btn btn-danger" type="button" value="ลบ" style="color: #fff;" onclick="delcheck('<?php echo $results['id']; ?>')">
 
-                                        </form>
+                                        <!-- </form> -->
 
                                     </td>
 
@@ -203,7 +250,7 @@ if ($_REQUEST['id'] != "") {
 
                                 </tr>
 
-                                <?php  $i++; ?>
+                                <?php $i++; ?>
 
                             <?php  } ?>
 

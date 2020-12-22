@@ -283,15 +283,17 @@ if ($_POST['id'] != "") {
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="delPriceroom()" id="delsel">ลบราค้าห้องพัก</button>
+
+                    <button type="button" class="btn btn-primary" onclick="savepriceroom()" id="savesel">เพิ่ม/แก้ไขราค้าห้องพัก</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="savepriceroom()" id="savesel">เพิ่มราค้าห้อง</button>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <div class="modal fade" id="modaledit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="modaledit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -318,7 +320,7 @@ if ($_POST['id'] != "") {
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -335,7 +337,6 @@ if ($_POST['id'] != "") {
     <script src="http://jojosati.github.io/bootstrap-datepicker-thai/js/bootstrap-datepicker-thai.js"></script>
     <script src="http://jojosati.github.io/bootstrap-datepicker-thai/js/locales/bootstrap-datepicker.th.js"></script>
     <script id="example_script" type="text/javascript">
-    
         var datecur = '<?php echo $datecur ?>';
         var year = <?php echo $ytsever ?>;
         var mont = <?php echo $mtsever ?>;
@@ -473,7 +474,7 @@ if ($_POST['id'] != "") {
                             }
 
                             if (dc <= dn) {
-                                txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' ondblclick=\"edit(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" value='" + prm + "' id='prset" + run + "'></td>";
+                                txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' ondblclick=\"del(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" value='" + prm + "' id='prset" + run + "'></td>";
                             } else {
                                 txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' disabled></td>";
                             }
@@ -514,7 +515,7 @@ if ($_POST['id'] != "") {
                         }
                         pr_room.push(text);
                     });
-                    console.log(data);
+                    // console.log(data);
                     tocal(pr_room);
                 }
             });
@@ -638,33 +639,37 @@ if ($_POST['id'] != "") {
                 },
                 dataType: 'html',
                 success: function(data) {
-                    // console.log(data);
+                    let json = JSON.parse(data);
+                    if (json.status == 200) {
+                        swal("เพิ่มข้อมูลสำเร็จ!", {
+                            icon: "success",
+                        });
+                    }
+                    console.log(data);
                     getcellprice();
                 }
             });
         }
 
-        function edit(run, dy, idr, nrm) {
-            var vl = $('#prset' + run).val();
-            if (vl != "" && vl != null) {
-                $('#modaledit').modal('show');
-                $('.modal-title').html(nrm + " (แก้ไข)");
-                $('.modal-body #eidr').val(idr);
-                $('.modal-body #edate1').val(dy);
-                $('.modal-body #epriceroom').val(vl);
+        // function del(run, dy, idr, nrm) {
+        //     var vl = $('#prset' + run).val();
+        //     if (vl != "" && vl != null) {
+        //         $('#modaledit').modal('show');
+        //         $('.modal-title').html(nrm + " (แก้ไข)");
+        //         $('.modal-body #didr').val(idr);
+        //         $('.modal-body #ddate1').val(dy);
+        //         $('.modal-body #dpriceroom').val(vl);
 
-            } else {
-                alert("!!! ไม่มีข้อมูล");
-            }
+        //     } else {
+        //         swal("!!! ไม่มีข้อมูล");
+        //     }
 
-        }
+        // }
 
-        function saveeditpriceroom() {
-
-
-            var idr = $('.modal-body #eidr').val();
-            var day1 = $('.modal-body #edate1').val();
-        }
+        // function saveeditpriceroom() {
+        //     var idr = $('.modal-body #eidr').val();
+        //     var day1 = $('.modal-body #edate1').val();
+        // }
 
         function mouseclick(run, dy, idr, nrm) {
             var vl = $('#prset' + run).val();
@@ -676,7 +681,7 @@ if ($_POST['id'] != "") {
                 $('.modal-body #date2').val(dy);
                 document.getElementById("date2").min = dy;
             } else {
-                alert("กรุณาเลือกราคาห้องพัก")
+                swal("กรุณาเลือกราคาห้องพัก")
             }
             // alert(nrm);
 
@@ -691,7 +696,7 @@ if ($_POST['id'] != "") {
 
             let prarry = [];
             var idr = $('.modal-body #idr').val();
-            
+
             var day1 = $('.modal-body #date1').val();
             var day2 = $('.modal-body #date2').val();
             var dayf = new Date(day1)
@@ -703,6 +708,8 @@ if ($_POST['id'] != "") {
 
             var date1 = new Date(day1);
             var date2 = new Date(day2);
+
+
 
             var Difference_In_Time = date2.getTime() - date1.getTime();
             var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
@@ -720,10 +727,18 @@ if ($_POST['id'] != "") {
                 let data = {
                     price: proom,
                     dy: fdate,
+
                 }
                 prarry.push(data);
             }
+            data = {
+                price: proom,
+                dy: day1,
+            }
+            prarry.push(data);
+            // console.log(prarry);
 
+            // console.log(prarry);
             $.ajax({
                 type: 'POST',
                 url: "savesel.php",
@@ -733,13 +748,142 @@ if ($_POST['id'] != "") {
                 },
                 dataType: 'html',
                 success: function(data) {
-                    // console.log(data);
+                    let json = JSON.parse(data);
+                    console.log(data);
+                    if (json.status == 200) {
+                        swal("สำเร็จ!", {
+                            icon: "success",
+                        });
+                    }
                     $('#exampleModal').modal('hide')
                     getcellprice();
                 }
             });
         }
 
+
+        function delPriceroom() {
+
+            swal({
+                    title: "คุณต้องการลบหรือไม่?",
+                    text: "เมื่อลบแล้วคุณจะไม่สามารถกู้คืนไฟล์จินตภาพนี้ได้!!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        let prarry = [];
+                        var idr = $('.modal-body #idr').val();
+                        var day1 = $('.modal-body #date1').val();
+                        var day2 = $('.modal-body #date2').val();
+                        var dayf = new Date(day1)
+
+                        var d = dayf.getDate();
+                        // alert(new String(d))
+                        // alert(day2);
+                        var proom = $('.modal-body #priceroom').val();
+
+                        var date1 = new Date(day1);
+                        var date2 = new Date(day2);
+
+                        var Difference_In_Time = date2.getTime() - date1.getTime();
+                        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+                        // console.log(Difference_In_Days);
+
+                        for (let i = 1; i <= Difference_In_Days; i++) {
+                            date1.setDate(date1.getDate() + 1)
+                            var d = date1.getDate();
+                            var y = date1.getFullYear();
+                            var m = date1.getMonth() + 1;
+                            var y1 = "" + y;
+                            var m1 = "" + m;
+                            var d1 = "" + d;
+                            var fdate = y1 + "-" + m1.padStart(2, '0') + "-" + d1.padStart(2, '0');
+                            let data = {
+                                price: proom,
+                                dy: fdate,
+
+                            }
+                            prarry.push(data);
+                        }
+                        data = {
+                            price: proom,
+                            dy: day1,
+                        }
+                        prarry.push(data);
+                        // console.log(prarry);
+
+                        // console.log(prarry);
+                        $.ajax({
+                            type: 'POST',
+                            url: "delpriceroom.php",
+                            data: {
+                                idrm: idr,
+                                saveprice: prarry
+                            },
+                            dataType: 'html',
+                            success: function(data) {
+                                let json = JSON.parse(data);
+                                // console.log(json.status);
+                                if (json.status == 200) {
+                                    swal("ลบราค้าห้องพักสำเร็จ", {
+                                        icon: "success",
+                                    });
+                                }
+                                $('#exampleModal').modal('hide');
+                                getcellprice();
+                            }
+                        });
+
+
+
+
+
+
+
+
+
+
+                        // swal("Poof! Your imaginary file has been deleted!", {
+                        //     icon: "success",
+                        // });
+                    } else {
+                        // swal("Your imaginary file is safe!");
+                    }
+                })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // var txt;
+            // var r = confirm("ยืนยันการลบ ");
+            // if (r == true) {
+            //     
+            // } else {
+
+            // }
+
+
+        }
 
         $(document).contextmenu(function() {
             return false;

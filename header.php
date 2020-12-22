@@ -1,12 +1,10 @@
-	
-<?php 
+	<?php
 	$page = 'index';
-	session_start(); 
-	if($_SESSION['Username'] == "")
-{
-	echo "<script> alert('Please Login!!');window.location.href='login.php';</script>";
-	exit();
-}?>
+	session_start();
+	if ($_SESSION['Username'] == "") {
+		echo "<script> alert('Please Login!!');window.location.href='login.php';</script>";
+		exit();
+	} ?>
 	<div class="header">
 		<div class="header-left">
 			<div class="menu-icon dw dw-menu"></div>
@@ -56,14 +54,14 @@
 					</a>
 				</div>
 			</div>
-		
+
 			<div class="user-info-dropdown">
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
 						<span class="user-icon">
 							<img src="vendors/images/photo1.jpg" alt="">
 						</span>
-						<span class="user-name"><?php echo $_SESSION["Name"];?></span>
+						<span class="user-name"><?php echo $_SESSION["Name"]; ?></span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 						<a class="dropdown-item" href="edit_personal.php"><i class="dw dw-user"></i>แก้ไขข้อมูลส่วนตัว</a>
@@ -71,14 +69,14 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 
 
 
 
-		<div class="right-sidebar">
+	<div class="right-sidebar">
 		<div class="sidebar-title">
 			<h3 class="weight-600 font-16 text-blue">
 				Layout Settings
@@ -168,76 +166,77 @@
 				<ul id="accordion-menu">
 
 					<?php if ($_SESSION["status"] == '1') { ?>
-					<li class="dropdown">
-						<a href="javascript:;" class="dropdown-toggle">
-							<span class="micon dw dw-house-1"></span><span class="mtext">ราคาห้องพัก</span>
-						</a>
-						<ul class="submenu">
-							<li><a href="addresort.php">เพิ่มรีสอร์ท</a></li>
-							<li><a href="addroomtype.php">เพิ่มห้องพักของรีสอร์ท</a></li>
-							<li><a href="pricerooms.php">เพิ่มราคาห้องพัก</a></li>
-							<li><a href="editprice.php">แก้ไขราคาต่างๆ</a></li>
-							<li><a href="edit.php">แก้ไขข้อมูลห้องพัก</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" class="dropdown-toggle">
-							<span class="micon dw dw-edit2"></span><span class="mtext">เช็ดราคาห้องพัก</span>
-						</a>
-						<ul class="submenu">
-							<li><a href="Checkpricec.php">เช็ดราคาห้องพัก</a></li>
-							
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" class="dropdown-toggle">
-							<span class="micon dw dw-apartment"></span><span class="mtext">รายงาน</span>
-						</a>
-						<ul class="submenu">
-							<li><a href="report.php">รายงานการจอง</a></li>
-							
-						</ul>
-					</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon dw dw-house-1"></span><span class="mtext">ราคาห้องพัก</span>
+							</a>
+							<ul class="submenu">
+								<li><a href="addresort.php">เพิ่มรีสอร์ท</a></li>
+								<li><a href="edit.php">แก้ไขข้อมูลห้องพัก</a></li>
+								<!-- <li><a href="addroomtype.php">เพิ่มห้องพักของรีสอร์ท</a></li> -->
+								<li><a href="pricerooms.php">เพิ่มราคาห้องพัก</a></li>
+								<li><a href="editprice.php">แก้ไขราคาต่างๆ</a></li>
+
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon dw dw-edit2"></span><span class="mtext">เช็ดราคาห้องพัก</span>
+							</a>
+							<ul class="submenu">
+								<li><a href="Checkpricec.php">เช็ดราคาห้องพัก</a></li>
+
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon dw dw-apartment"></span><span class="mtext">รายงาน</span>
+							</a>
+							<ul class="submenu">
+								<li><a href="report.php">รายงานการจอง</a></li>
+
+							</ul>
+						</li>
 					<?php } else if ($_SESSION["status"] == '0') { ?>
 						<li class="dropdown">
-						<a href="javascript:;" class="dropdown-toggle">
-							<span class="micon dw dw-house-1"></span><span class="mtext">ราคาห้องพัก</span>
-						</a>
-						<ul class="submenu">
-							<li><a href="addresort.php">เพิ่มรีสอร์ท</a></li>
-							<li><a href="addroomtype.php">เพิ่มห้องพักของรีสอร์ท</a></li>
-							<li><a href="pricerooms.php">เพิ่มราคาห้องพัก</a></li>
-							<li><a href="editprice.php">แก้ไขราคาต่างๆ</a></li>
-							<li><a href="edit.php">แก้ไขข้อมูลห้องพัก</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" class="dropdown-toggle">
-							<span class="micon dw dw-edit2"></span><span class="mtext">เช็ดราคาห้องพัก</span>
-						</a>
-						<ul class="submenu">
-							<li><a href="Checkpricec.php">เช็ดราคาห้องพัก</a></li>
-							
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" class="dropdown-toggle">
-							<span class="micon dw dw-apartment"></span><span class="mtext">รายงาน</span>
-						</a>
-						<ul class="submenu">
-							<li><a href="report.php">รายงานการจอง</a></li>
-							
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" class="dropdown-toggle">
-							<span class="micon dw dw-user"></span><span class="mtext">ผู้ดูเเลระบบ</span>
-						</a>
-						<ul class="submenu">
-							<li><a href="personal.php">รายชื่อผู้ดูเเล</a></li>
-							
-						</ul>
-					</li>
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon dw dw-house-1"></span><span class="mtext">ราคาห้องพัก</span>
+							</a>
+							<ul class="submenu">
+								<li><a href="addresort.php">เพิ่มรีสอร์ท</a></li>
+								<li><a href="edit.php">แก้ไขข้อมูลห้องพัก</a></li>
+								<!-- <li><a href="addroomtype.php">เพิ่มห้องพักของรีสอร์ท</a></li> -->
+								<li><a href="pricerooms.php">เพิ่มราคาห้องพัก</a></li>
+								<li><a href="editprice.php">แก้ไขราคาต่างๆ</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon dw dw-edit2"></span><span class="mtext">เช็ดราคาห้องพัก</span>
+							</a>
+							<ul class="submenu">
+								<li><a href="Checkpricec.php">เช็ดราคาห้องพัก</a></li>
+
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon dw dw-apartment"></span><span class="mtext">รายงาน</span>
+							</a>
+							<ul class="submenu">
+								<li><a href="report.php">รายงานการจอง</a></li>
+
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon dw dw-user"></span><span class="mtext">ผู้ดูเเลระบบ</span>
+							</a>
+							<ul class="submenu">
+								<li><a href="personal.php">รายชื่อผู้ดูเเล</a></li>
+
+							</ul>
+						</li>
 					<?php } else { ?>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
@@ -245,12 +244,12 @@
 							</a>
 							<ul class="submenu">
 								<li><a href="Checkpricec.php">เช็ดราคาห้องพัก</a></li>
-								
+
 							</ul>
 						</li>
 					<?php } ?>
-					
-					
+
+
 					<!-- <li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon dw dw-library"></span><span class="mtext">Tables</span>

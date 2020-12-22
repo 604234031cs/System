@@ -1,43 +1,45 @@
 <?php
 require 'connectdb.php';
-// $val = $_REQUEST['price'];
-// $dy  = $_REQUEST['dy'];
+
 $idr = $_REQUEST['idrm'];
 $addpriceroom = $_REQUEST['saveprice'];
+for ($j = 0; $j < count($addpriceroom); $j++) {
+    $val = $addpriceroom[$j]['price'];
+    $dy = $addpriceroom[$j]['dy'];
+    $sql = "SELECT * FROM priceroom where ID_room = '$idr' and date_start ='$dy'";
+    $query = mysqli_query($con, $sql);
+    $rows = mysqli_fetch_assoc($query);
 
-
-
-
-$sql = "SELECT * FROM priecroom where ID_room = '$idr'";
-$query = mysqli_query($con, $sql);
-while ($rows = mysqli_fetch_assoc($query)) {
-
-    for ($i = 0; $i < count($addpriceroom); $i++) {
-        $val = $addpriceroom[$i]['price'];
-        $dy = $addpriceroom[$i]['dy'];
-
-        if($rows['date_start'] == "" &&  ){
-
+    if ($rows != null) {
+        $sql = "UPDATE priceroom set price_room = '$val' where ID_room ='$idr' and date_start ='$dy'";
+        $arr  = array();
+        if ($query = mysqli_query($con, $sql)) {
+            $arr = [
+                'status' => 200,
+                'val' => 'SuccesEdit'
+            ];
+            echo json_encode($arr);
+        } else {
+            $arr = [
+                'status' => 404,
+                'val' => 'FailEdit'
+            ];
+            echo json_encode($arr);
         }
-
-
-
-
-
-
+    } else {
         $sql = "INSERT INTO `priceroom`(`id_priceroom`, `date_start`, `ID_room`, `price_room`) VALUES(null,'$dy','$idr','$val')";
         $arr  = array();
         $query = mysqli_query($con, $sql);
         if ($query === TRUE) {
             $arr = [
                 'status' => 200,
-                'val' => 'Succes'
+                'val' => 'SuccesInsert'
             ];
             echo json_encode($arr);
         } else {
             $arr = [
                 'status' => 404,
-                'val' => 'Fail'
+                'val' => 'FailInsert'
             ];
             echo json_encode($arr);
         }
