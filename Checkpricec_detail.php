@@ -2174,7 +2174,7 @@ if ($older_children >= "1") {
                   <?php if ($car != "") { ?>
                     <tr>
                       <th scope="row">ค่ารถ</th>
-                      <th scope="row"><?php echo $car ?></th>
+                      <th scope="row"><?php echo $car_num1; ?></th>
 
 
                     </tr>
@@ -2184,7 +2184,7 @@ if ($older_children >= "1") {
                   <?php if ($boat != "") { ?>
                     <tr>
                       <th scope="row">ค่าเรือ</th>
-                      <th scope="row"><?php echo $boat ?></th>
+                      <th scope="row"><?php echo $boat_num1 ?></th>
 
 
                     </tr>
@@ -2194,7 +2194,7 @@ if ($older_children >= "1") {
                   <?php if ($diving != "") { ?>
                     <tr>
                       <th scope="row">ค่าดำน้ำ</th>
-                      <th scope="row"><?php echo $diving ?></th>
+                      <th scope="row"><?php echo $diving_num ?></th>
 
 
                     </tr>
@@ -2307,7 +2307,7 @@ if ($older_children >= "1") {
                   <?php if ($car != "") { ?>
                     <tr>
                       <th scope="row">ค่ารถ</th>
-                      <th scope="row"><?php echo $car ?></th>
+                      <th scope="row"><?php echo $car_num1; ?></th>
 
 
                     </tr>
@@ -2317,7 +2317,7 @@ if ($older_children >= "1") {
                   <?php if ($boat != "") { ?>
                     <tr>
                       <th scope="row">ค่าเรือ</th>
-                      <th scope="row"><?php echo $boat ?></th>
+                      <th scope="row"><?php echo $boat_num1 ?></th>
 
 
                     </tr>
@@ -2327,7 +2327,7 @@ if ($older_children >= "1") {
                   <?php if ($diving != "") { ?>
                     <tr>
                       <th scope="row">ค่าดำน้ำ</th>
-                      <th scope="row"><?php echo $diving ?></th>
+                      <th scope="row"><?php echo $diving_num ?></th>
 
 
                     </tr>
