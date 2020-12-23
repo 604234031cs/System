@@ -3,6 +3,7 @@ require("PHPMailer/class.phpmailer.php");
 require("PHPMailer/PHPMailerAutoload.php");
 include_once('connectdb.php');
 
+require_once ('head.php');
 error_reporting(0);
 $month =  date('m');
 $transaction_date =  date('d-m-Y');
@@ -45,8 +46,6 @@ if ($objQuery === TRUE) {
 	$noid_booking = $ss['noid_booking'];
 	if ($type == '1') {
 		if ($ss['noid_booking'] != "" && $ss['noid_booking'] != null) {
-
-
 			$in = " UPDATE `tb_report` SET `car` = '1'   WHERE `tb_report`.`id` ='" . $ss['id'] . " '";
 			$in2 = " UPDATE `tb_report` SET `car` = '1'   WHERE `tb_report`.`id_booking` ='" . $ss['noid_booking'] . " '";
 			$in3 = "UPDATE `tb_voucher` SET `id_bookink` = '$noid_booking' where `id_bookink` = '$id_booking'";
@@ -67,7 +66,6 @@ if ($objQuery === TRUE) {
 		}
 	} else {
 		if ($ss['noid_booking'] != "" && $ss['noid_booking'] != null) {
-
 			$in = " UPDATE `tb_report` SET `diving` = '1'   WHERE `tb_report`.`id` ='" . $ss['id'] . " '";
 			$in2 = " UPDATE `tb_report` SET `diving` = '1'   WHERE `tb_report`.`id_booking` ='" . $ss['noid_booking'] . " '";
 			$in3 = "UPDATE `tb_voucher` SET `id_bookink` = '$noid_booking' where `id_bookink` = '$id_booking'";
@@ -77,11 +75,25 @@ if ($objQuery === TRUE) {
 		}
 	}
 
+	echo "<div><script>
+	swal('สำเร็จ!','บันทึกสำเร็จ', 'success')
+	.then(() => {
+		setTimeout(function(){ 
+			window.location.href='report.php'
+		}, 1000);
+	});</script></div>";
 
 	$a = mysqli_query($con, $in);
 	$b = mysqli_query($con, $in2);
 	$c = mysqli_query($con, $in3);
 
 
-	echo "<script> alert('ออกรายงานสำเร็จ');window.location.href = 'report.php';</script > ";
+	// echo "<script> alert('ออกรายงานสำเร็จ');window.location.href = 'report.php';</script > ";
+	echo "<div><script>
+	swal('สำเร็จ!','ออกรายงานสำเร็จ', 'success')
+	.then(() => {
+		setTimeout(function(){ 
+			window.location.href='report.php'
+		}, 1000);
+	});</script></div>";
 }

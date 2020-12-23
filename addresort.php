@@ -40,6 +40,7 @@ include_once('connectdb.php'); ?>
                             $('#submitformadd').prop('disabled', 'true');
                         }
                     });
+
                 });
 
                 function checkDel(id) {
@@ -52,32 +53,77 @@ include_once('connectdb.php'); ?>
                         },
                         dataType: 'html',
                         success: function(result) {
-                            console.log(result);
-                            if (result == 1) {
-                                swal("ไม่สามารถลบข้อมูลได้ กรุณาตรวจสอบข้อมูลก่อน !!");
+
+                            console.log(result.slice(-1) == 1);
+                            if (result.slice(-1) == 1) {
+                                swal("เกิดข้อผิดพลาด!", "ไม่สามารถลบข้อมูลได้ กรุณาตรวจสอบข้อมูลอีกครั้ง", "error");
 
                             } else {
-                                var txt;
 
-                                var r = confirm("Press a button!");
-                                if (r == true) {
-                                    $.ajax({
-                                        type: "post",
-                                        url: "add_1.php",
-                                        data: {
-                                            id: id,
-                                            type: "delresort"
-                                        },
-                                        dataType: 'html',
-                                        success: function(value) {
-                                            alert("Good job!", "You clicked the button!", "success");
-                                            window.location.reload();
+                                swal({
+                                        title: "คุณต้องการลบข้อมูลนี้หรือไม่?",
+                                        text: "เมื่อลบแล้วคุณจะไม่สามารถกู้ข้อมูลนี้ได้!",
+                                        icon: "warning",
+                                        buttons: true,
+                                        dangerMode: true,
+                                    })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
+                                            $.ajax({
+                                                type: "post",
+                                                url: "add_1.php",
+                                                data: {
+                                                    id: id,
+                                                    type: "delresort"
+                                                },
+                                                dataType: 'html',
+                                                success: function(value) {
+                                                    swal('สำเร็จ!', 'ลบข้อมูลสำเร็จ', 'success')
+                                                        .then(() => {
+                                                            setTimeout(function() {
+                                                                window.location.reload();
+                                                            }, 1000);
+                                                        });
 
+                                                }
+                                            })
                                         }
                                     })
-                                } else {
-                                    txt = "You pressed Cancel!";
-                                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                // var txt;
+
+                                // var r = confirm("Press a button!");
+                                // if (r == true) {
+                                //     $.ajax({
+                                //         type: "post",
+                                //         url: "add_1.php",
+                                //         data: {
+                                //             id: id,
+                                //             type: "delresort"
+                                //         },
+                                //         dataType: 'html',
+                                //         success: function(value) {
+                                //             alert("Good job!", "You clicked the button!", "success");
+                                //             window.location.reload();
+
+                                //         }
+                                //     })
+                                // } else {
+                                //     txt = "You pressed Cancel!";
+                                // }
                             }
 
                         }
@@ -95,16 +141,12 @@ include_once('connectdb.php'); ?>
                                     <h4 class="text-blue h4">เพิ่มรีสอร์ท</h4>
                                 </label>
                                 <input type="text" class="form-control" name="resort_name" id="resort_name" placeholder="ชื่อรีสอร์ท" required>
-
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <input type="text" name="type" id="type" hidden="" value="addresort">
                             <button type="submit" class="btn btn-warning" id="submitformadd">บันทึก</button>
-
                         </div>
-
-
                     </div>
                 </form>
 

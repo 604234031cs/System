@@ -300,21 +300,9 @@ while ($valued =  mysqli_fetch_assoc($querydriving)) {
 
 
 
-                <!-- <style>
-table.dataTable thead .sorting:after,
-table.dataTable thead .sorting:before,
-table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_asc:before,
-table.dataTable thead .sorting_asc_disabled:after,
-table.dataTable thead .sorting_asc_disabled:before,
-table.dataTable thead .sorting_desc:after,
-table.dataTable thead .sorting_desc:before,
-table.dataTable thead .sorting_desc_disabled:after,
-table.dataTable thead .sorting_desc_disabled:before {
-bottom: .5em;
-}
 
-                </style> -->
+
+
 
                 <script>
                     $(document).ready(function() {
@@ -622,6 +610,7 @@ bottom: .5em;
 
                                         <a target="_blank" href="report2.php?id=<?php echo $results['id']; ?>" type="button" class="btn btn-success">รายงานห้องพัก</a>
                                         <a target="_blank" href="report5.php?id=<?php echo $results['id']; ?>" type="button" class="btn btn-success">รายงาน</a>
+
                                         <?php if ($results['insurance'] == "9") { ?>
                                             <a target="_blank" href="reportinsurance.php?id_booking=<?php echo $results['id_booking']; ?>" type="button" class="btn btn-success">รายงานประกันภัย</a>
                                         <?php } else { ?>
@@ -755,7 +744,7 @@ bottom: .5em;
                                                                     <label>
                                                                         <h4 class="text-blue h4">ผู้ให้บริการ</h4>
                                                                     </label>
-                                                                    <input type="text" class="form-control" name="service_name" id="service_name" value="" />
+                                                                    <input type="text" class="form-control" name="service_name" id="service_name" value="" required />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-sm-12">
@@ -763,7 +752,7 @@ bottom: .5em;
                                                                     <label>
                                                                         <h4 class="text-blue h4">วันเข้าพัก</h4>
                                                                     </label>
-                                                                    <input type="date" class="form-control" name="voucher_date" id="voucher_date" value="" />
+                                                                    <input type="date" class="form-control" name="voucher_date" id="voucher_date" value="" required />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-sm-12">
@@ -805,7 +794,7 @@ bottom: .5em;
                                                                     <label>
                                                                         <h4 class="text-blue h4">ผู้ให้บริการ</h4>
                                                                     </label>
-                                                                    <input type="text" class="form-control" name="service_name" id="service_name" value="" />
+                                                                    <input type="text" class="form-control" name="service_name" id="service_name" value="" required />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-sm-12">
@@ -813,7 +802,7 @@ bottom: .5em;
                                                                     <label>
                                                                         <h4 class="text-blue h4">วันเข้าพัก</h4>
                                                                     </label>
-                                                                    <input type="date" class="form-control" name="voucher_date" id="voucher_date" value="" />
+                                                                    <input type="date" class="form-control" name="voucher_date" id="voucher_date" value="" required />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-sm-12">
@@ -910,9 +899,3 @@ bottom: .5em;
 </body>
 
 </html>
-
-<!-- <div id="popupimg" class="popup">
-    <span class="close">&times;</span>
-    <img class="popup-content" id="img01">
-    <div id="caption"></div>
-</div> -->

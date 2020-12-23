@@ -145,6 +145,7 @@ if ($_POST['id'] != "") {
                         $('#myTable > tbody:last').append(tr);
                         rows = rows + 1;
                         $('#hdnCount').val(rows);
+                        
                         if($("#id_resort").val() !="" && rows !=0){
                             document.getElementById("save").disabled = false;
                         }else{

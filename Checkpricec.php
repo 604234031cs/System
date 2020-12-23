@@ -53,7 +53,7 @@ $_SESSION['tdiving'] = $results33["name"];
           </div>
           <div class="col-md-8">
             <h4 class="font-20 weight-500 mb-10 text-capitalize">
-              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe 
+              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe
               <div class="weight-600 font-30 text-blue">เช็คราคาห้องพักของแต่ละรีสอร์ท</div>
             </h4>
           </div>
@@ -1388,9 +1388,26 @@ $_SESSION['tdiving'] = $results33["name"];
                           $("#diving2").prop("checked", false);
                           $("#diving3").prop("checked", false);
                         });
+
+                        $('input[type=radio]').click(function() {
+                          if ($('#diving1').prop('checked')) {
+                            // swal("D1 Check")
+                            $("#statusdiving").val(1);
+                            let sd = $("#statusdiving").val();
+                            // swal("status:=>" + sd)
+                          } else if ($('#diving2').prop('checked')) {
+                            $("#statusdiving").val(2);
+                            let sd = $("#statusdiving").val();
+                            // swal("status:=>" + sd)
+                          } else if ($('#diving3').prop('checked')) {
+                            $("#statusdiving").val(3);
+                            let sd = $("#statusdiving").val();
+                            // swal("status:=>" + sd)
+                          }
+                        })
                       });
                     </script>
-
+                    <input type="text" id='statusdiving' name="statusdiving" value=''hidden>
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1 ?>">
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>

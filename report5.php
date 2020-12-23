@@ -2,6 +2,7 @@
 session_start();
 header('Content-Type: text/html; charset=utf-8');
 require_once('tcpdf/tcpdf.php');
+
 $obj_pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', true);
 $obj_pdf->SetCreator(PDF_CREATOR);
 $obj_pdf->SetTitle("voucher รวม");
@@ -60,7 +61,18 @@ while ($row1 = mysqli_fetch_array($result1)) {
         }
     }
 
+    if ($row1['ch1'] == '') {
+        $ch1 = 0;
+    }else{
+        $ch1 = $row1['ch1'];
+    
+    }
 
+    if ($row1['ch2'] == '') {
+        $ch2 = 0;
+    }else{
+        $ch2 = $row1['ch2'];
+    }
     // if ($row1["extrabed"] == '0') {
     //     $bed = '';
     // }
@@ -147,7 +159,7 @@ while ($row1 = mysqli_fetch_array($result1)) {
       <td width="25%" ><p style="font-size: 1em;color:black">ทริปเที่ยว  :<br>Trip :</p></td>
       <td width="25%" ><table  style="border:solid 1px #ccc;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['adult'] . '</b></td></tr></table></td>
       <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">เด็ก อายุ 4-10 ปี :<br>Age for 4-10 Yrs:</p></td>
-      <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $row1['ch1'] . '</b></td></tr></table></td>
+      <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $ch1 . '</b></td></tr></table></td>
     </tr>
     
     <tr>
@@ -155,7 +167,7 @@ while ($row1 = mysqli_fetch_array($result1)) {
         <td width="25%" ><table  style="border:solid 1px #ccc;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['Byyy'] . '</b></td></tr></table></td>
         <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">
 เด็ก อายุ 0-3 ปี :<br>Age for 0-3 Yrs:</p></td>
-        <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $row1['ch2'] . '</b></td></tr></table></td>
+        <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $ch2 . '</b></td></tr></table></td>
     </tr>
 </table>
 

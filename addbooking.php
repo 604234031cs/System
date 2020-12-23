@@ -3,8 +3,8 @@
 //require( "PHPMailer/PHPMailerAutoload.php" );
 // include_once('connectdb.php');
 require 'connectdb.php';
-
-
+require_once('head.php');
+error_reporting(0);
 
 
 
@@ -17,8 +17,8 @@ $line =  $_POST['line'];
 $room_name =  $_POST['room_name'];
 $typser = $_POST['typser'];
 
-echo $ch1 =  $_POST['older_children'];
-echo $ch2 =  $_POST['child'];
+// echo $ch1 =  $_POST['older_children'];
+// echo $ch2 =  $_POST['child'];
 $package =  $_POST['package'];
 $number_of_rooms =  $_POST['number_of_rooms'];
 // $extrabed =  $_REQUEST['extrabed'];
@@ -113,7 +113,14 @@ if ($objQuery === TRUE) {
     $in = " UPDATE `tb_report` SET `id_booking` = '" . $text . "' WHERE `tb_report`.`id` ='" . $ss['id'] . "'";
     $a = mysqli_query($con, $in);
 }
-echo "<script>alert('บันทึกสำเร็จ');window.location.href = 'report.php'</script > ";
+// echo "<script>alert('บันทึกสำเร็จ');window.location.href = 'report.php'</script > ";
+echo "<div><script>
+			swal('สำเร็จ!','บันทึกสำเร็จ', 'success')
+			.then(() => {
+				setTimeout(function(){ 
+					window.location.href='report.php'
+				}, 1000);
+			});</script></div>";
 
 
 /*

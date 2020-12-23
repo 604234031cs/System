@@ -34,6 +34,28 @@ include_once('connectdb.php'); ?>
                 </div>
             </div>
 
+            <script>
+                $(document).ready(function() {
+
+                    if ($('#Username1').val() != "" && $('#Password').val() != "" && $('#Name').val() != "" && $('#status').val() != "") {
+                        $('#sumbitform').removeAttr('disabled');
+
+                    } else {
+                        $('#sumbitform').prop('disabled', 'true');
+
+                    }
+
+                    $('input').keyup(function() {
+                        if ($('#Username').val() != "" && $('#Password').val() != "" && $('#Name').val() != "") {
+                            $('#sumbitform').removeAttr('disabled');
+                        } else {
+                            $('#sumbitform').prop('disabled', 'true');
+                        }
+                    });
+
+                });
+            </script>
+
             <div class="pd-20 card-box mb-30">
 
                 <form action="add_1.php" method="POST">
@@ -43,7 +65,7 @@ include_once('connectdb.php'); ?>
                                 <label>
                                     <h4 class="text-blue h4">Username </h4>
                                 </label>
-                                <input type="text" name="Username" id="Username " value="" class="form-control">
+                                <input type="text" name="Username" id="Username1 " class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-12">
@@ -51,7 +73,7 @@ include_once('connectdb.php'); ?>
                                 <label>
                                     <h4 class="text-blue h4">Password </h4>
                                 </label>
-                                <input type="text" name="Password" id="Password" value="" class="form-control">
+                                <input type="text" name="Password" id="Password" value="" class="form-control" required>
                             </div>
                         </div>
 
@@ -60,7 +82,7 @@ include_once('connectdb.php'); ?>
                                 <label>
                                     <h4 class="text-blue h4">Name </h4>
                                 </label>
-                                <input type="text" name="Name" id="Name" value="" class="form-control">
+                                <input type="text" name="Name" id="Name" value="" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-12">
@@ -68,7 +90,7 @@ include_once('connectdb.php'); ?>
                                 <label>
                                     <h4 class="text-blue h4">Name </h4>
                                 </label>
-                                <select class="custom-select col-12" name="status">
+                                <select class="custom-select col-12" name="status" id="status" required>
                                     <option value="0">ใหญ่สุด</option>
                                     <option value="1">เซลล์</option>
                                     <option value="2">ฝั่งเกาะ</option>
@@ -77,7 +99,7 @@ include_once('connectdb.php'); ?>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <input type="text" name="type" id="type" hidden="" value="addpersonal">
-                            <button type="submit" class="btn btn-warning">บันทึก</button>
+                            <button type="submit" class="btn btn-warning" id="sumbitform">บันทึก</button>
                         </div>
 
 
@@ -116,7 +138,20 @@ include_once('connectdb.php'); ?>
                                     <form action="add_1.php" method="POST">
                                         <input hidden="" class="form-control" name="UserID" id="UserID" value="<?php echo $results["UserID"]; ?>" />
                                         <input hidden="" class="form-control" name="type" id="type" value="deletepersonal" />
-                                        <input class="btn btn-danger" type="submit" value="ลบ" style="color: #fff;" onclick="return confirm('ต้องการจะลบข้อมูลนี้หรือไม่ !!')">
+                                        <input class="btn btn-danger" type="submit" value="ลบ" style="color: #fff;" onclick=" return swal({
+                                        title: ' Are you sure?', 
+                                        text: 'Once deleted, you will not be able to recover this imaginary file!' , 
+                                        icon: 'warning' ,
+                                         buttons: true, 
+                                         dangerMode: true, 
+                                         }) .then((willDelete)=> {
+                                        if (willDelete) {
+                                        swal(' Poof! Your imaginary file has been deleted!' , { icon: ' success' , }); 
+                                        } else 
+                                        { 
+                                            swal(' Your imaginary file is safe!' );
+                                             } 
+                                             });">
 
                                     </form>
 

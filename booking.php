@@ -46,7 +46,6 @@ $typser = $_POST["typser"];
     <?php include "header.php"; ?>
 
     <div class="main-container">
-
         <div class="pd-ltr-20">
             <div class="card-box pd-20 height-100-p mb-30">
                 <div class="row align-items-center">
@@ -63,7 +62,6 @@ $typser = $_POST["typser"];
             </div>
 
             <div class="pd-20 card-box mb-30">
-
                 <form action="addbooking.php" enctype="multipart/form-data" method="post" name="form1" id="form1">
                     <div class="row" style="padding-top: 35px;">
                         <div class="col-md-4 col-sm-12">
@@ -472,7 +470,7 @@ $typser = $_POST["typser"];
 
                         <div class="col-md-4 col-sm-12">
                             <input type="text" name="type" id="type" hidden="" value="addresort">
-                            <button type="submit" class="btn btn-warning"  tabindex="-1">บันทึก</button>
+                            <button type="submit" class="btn btn-warning" tabindex="-1">บันทึก</button>
                         </div>
 
 

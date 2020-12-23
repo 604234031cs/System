@@ -1,10 +1,8 @@
-
-
 <?php
-
+include_once('head.php');
 include_once("connectdb.php");
-// require "head.php";
 
+error_reporting(0);
 $type = $_REQUEST['type'];
 
 if ($type == "addresort") {
@@ -14,13 +12,25 @@ if ($type == "addresort") {
 	$results = mysqli_query($con, $sqlcheck);
 	$results11 = mysqli_fetch_assoc($results);
 	if ($results11 != null) {
-		echo "<div><script>swal('เกิดข้อผิดพลาด!! มีข้อมูลซ้ำ!!');</script></div>";
+		echo "<div>
+		<script>
+		swal('เกิดข้อผิดพลาด!!','มีข้อมูลอยู่ในระบบแล้ว','error')
+		.then(() => {
+			setTimeout(function(){ 
+				window.location.href='addresort.php'
+			}, 1000);
+		});
+		</script></div>";
 	} else {
 		$sql = "INSERT INTO tb_resort (id, resort_name, resort_status) VALUES (NULL,  '$resort_name', '1')";
 		if (mysqli_query($con, $sql)) {
-			echo "<script>alert('ได้ทำการเพิ่มรีสอร์ทรียบร้อย!!');window.location.href='addresort.php'</script>";
-			// echo "<script>'</script>";
-
+			echo "<div><script>
+			swal('สำเร็จ!','เพิ่มข้อมูลรีสอร์ทเรียบร้อย', 'success')
+			.then(() => {
+				setTimeout(function(){ 
+					window.location.href='addresort.php'
+				}, 1000);
+			});</script></div>";
 		} else {
 			echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
 		}
@@ -50,13 +60,25 @@ if ($type == "addresort") {
 
 				$sql = "INSERT INTO `tb_roomtype` (`id`, `name_roomtype`, `price_roomtype`, `price_monday`, `price_friday`, `extrabed`, `high_season1`, `peak_season`, `high_season2`, `green_season`, `id_resort`, `capacity`, `status`) VALUES (NULL, '" . $_POST["name_roomtype$i"] . "', '" . $_POST["price_roomtype$i"] . "', '0', '0', '" . $_POST["extrabed$i"] . "', '0', '0', '0', '0', '" . $id_resort . "', '" . $_POST["capacity$i"] . "', '1');";
 				$query = mysqli_query($con, $sql);
-				echo "<script> alert('ได้ทำการเพิ่มประเภทห้องพัก , ราคาห้องพัก เรียบร้อย!!');window.location.href='addroomtype.php';</script>";
+				// echo "<script> alert('ได้ทำการเพิ่มประเภทห้องพัก , ราคาห้องพัก เรียบร้อย!!');window.location.href='addroomtype.php';</script>";
+				echo "<div><script>
+			swal('สำเร็จ!','เพิ่มข้อมูลห้องพักเรียบร้อย', 'success')
+			.then(() => {
+				setTimeout(function(){ 
+					window.location.href='edit.php'
+				}, 1000);
+			});</script></div>";
 			} else {
 				// echo "Err";
-				echo "<script> alert('!!เกิดข้อผิดพลาด ไม่มีข้อมูล , ราคาห้องพัก เรียบร้อย!!');window.location.href='addroomtype.php';</script>";
+				// echo "<script> alert('!!เกิดข้อผิดพลาด ไม่มีข้อมูล , ราคาห้องพัก เรียบร้อย!!');window.location.href='addroomtype.php';</script>";
+				// 	echo "<div><script>
+				// swal('เกิดข้อผิดพลาด!','เพิ่มข้อมูลห้องพักเรียบร้อย', 'success')
+				// .then(() => {
+				// 	setTimeout(function(){ 
+				// 		window.location.href='addroomtype.php'
+				// 	}, 1000);
+				// });</script></div>";
 			}
-		} else {
-			echo "ไม่มีข้อมูลห้อง";
 		}
 	}
 } else if ($type == "addprice") {
@@ -68,7 +90,7 @@ if ($type == "addresort") {
 
 	$sql = "INSERT INTO tb_car_boat_diving(id,name,price,status) VALUE(null,'$name','$price','1')";
 	$query = mysqli_query($con, $sql);
-	echo "<script> alert('ได้ทำการเพิ่มแพจเกจเสริมเรียบร้อย!!');window.location.href='editprice.php';</script>";
+	// echo "<script> alert('ได้ทำการเพิ่มแพจเกจเสริมเรียบร้อย!!');window.location.href='editprice.php';</script>";
 } else if ($type == "editprice") {
 	$name = $_POST['name'];
 	$price = $_POST['price'];
@@ -76,7 +98,16 @@ if ($type == "addresort") {
 	$sql = "UPDATE tb_car_boat_diving SET name='$name',price='$price' where id='$id'";
 	if (mysqli_query($con, $sql)) {
 
-		echo "<script> alert('ได้ทำการแก้ไขข้อมูล เรียบร้อย!!');window.location.href='editprice.php';</script>";
+		// echo "<script> alert('ได้ทำการแก้ไขข้อมูล เรียบร้อย!!');window.location.href='editprice.php';</script>";
+		echo "<div>
+		<script>
+		swal('สำเร็จ!!','อัพเดทข้อมูลเรียบร้อย','success')
+		.then(() => {
+			setTimeout(function(){ 
+				window.location.href='editprice.php'
+			}, 1000);
+		});
+		</script></div>";
 	} else {
 		echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
 	}
@@ -97,7 +128,16 @@ if ($type == "addresort") {
 	$sql = "UPDATE `tb_roomtype` SET `name_roomtype` = '$name_roomtype', `price_roomtype` = '$price_roomtype', `extrabed` = '$extrabed', `capacity` = '$capacity' WHERE `tb_roomtype`.`id` = $id;";
 
 	if (mysqli_query($con, $sql)) {
-		echo "<script> alert('ได้ทำการแก้ไขข้อมูลห้องพัก เรียบร้อย!!');window.location.href='edit.php?id=$resort_name';</script>";
+		// echo "<script> alert('ได้ทำการแก้ไขข้อมูลห้องพัก เรียบร้อย!!');window.location.href='edit.php?id=$resort_name';</script>";
+		echo "<div>
+		<script>
+		swal('สำเร็จ!!','อัพเดทข้อมูลห้องพักเรียบร้อย','success')
+		.then(() => {
+			setTimeout(function(){ 
+				window.location.href='edit.php'
+			}, 1000);
+		});
+		</script></div>";
 	} else {
 		echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
 	}
@@ -110,12 +150,26 @@ if ($type == "addresort") {
 	$results = mysqli_query($con, $sqlcheck);
 	$results11 = mysqli_fetch_assoc($results);
 	if ($results11 != null) {
-		echo "<script> alert('เกิดข้อผิดพลาด!! มีข้อมูลซ้ำ!!');window.location.href='addresort.php';</script>";
+		echo "<div>
+		<script>
+		swal('เกิดข้อผิดพลาด!!','มีข้อมูลอยู่ในระบบแล้ว','error')
+		.then(() => {
+			setTimeout(function(){ 
+				window.location.href='addresort.php'
+			}, 1000);
+		});
+		</script></div>";
 	} else {
 		$sql = "UPDATE `tb_resort` SET `resort_name` = '$resort_name' WHERE `tb_resort`.`id` = $id;";
 
 		if (mysqli_query($con, $sql)) {
-			echo "<script> alert('ได้ทำการแก้ไขชื่อรีสอร์ท เรียบร้อย!!');window.location.href='addresort.php';</script>";
+			echo "<div><script>
+			swal('สำเร็จ!','อัพเดทข้อมูลเรียบร้อย', 'success')
+			.then(() => {
+				setTimeout(function(){ 
+					window.location.href='addresort.php'
+				}, 1000);
+			});</script></div>";
 		} else {
 			echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
 		}
@@ -132,7 +186,14 @@ if ($type == "addresort") {
 	$sql = "UPDATE `adminlog` SET `Password` = '$Password',`Name` = '$Name' WHERE `adminlog`.`UserID` = $UserID;";
 
 	if (mysqli_query($con, $sql)) {
-		echo "<script> alert('ได้ทำการแก้ไขข้อมูลของท่านเรียบร้อย!!');window.location.href='edit_personal.php';</script>";
+		// echo "<script> alert('ได้ทำการแก้ไขข้อมูลของท่านเรียบร้อย!!');window.location.href='edit_personal.php';</script>";
+		echo "<div><script>
+			swal('สำเร็จ!','อัพเดทข้อมูลเรียบร้อย', 'success')
+			.then(() => {
+				setTimeout(function(){ 
+					window.location.href='edit_personal.php'
+				}, 1000);
+			});</script></div>";
 	} else {
 		echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
 	}
@@ -151,7 +212,14 @@ if ($type == "addresort") {
 
 
 	if (mysqli_query($con, $sql)) {
-		echo "<script> alert('ได้ทำการเพิ่มเรียบร้อย!!');window.location.href='personal.php';</script>";
+		// echo "<script> alert('ได้ทำการเพิ่มเรียบร้อย!!');window.location.href='personal.php';</script>";
+		echo "<div><script>
+			swal('สำเร็จ!','ได้ทำการเพิ่มเรียบร้อย', 'success')
+			.then(() => {
+				setTimeout(function(){ 
+					window.location.href='personal.php'
+				}, 1000);
+			});</script></div>";
 	} else {
 		echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
 	}
@@ -169,11 +237,6 @@ if ($type == "addresort") {
 		$statusdel = 0;
 		echo json_encode($statusdel);
 	}
-	// echo $statusdel;
-	// echo json_encode($results11);
-
-
-
 } elseif ($type == "delresort") {
 	$id = $_REQUEST['id'];
 	$sql = "DELETE FROM `tb_resort` WHERE `tb_resort`.`id` = '$id'";
@@ -193,7 +256,8 @@ if ($type == "addresort") {
 	$sql = "DELETE FROM `adminlog` WHERE `adminlog`.`UserID` = $UserID;";
 
 	if (mysqli_query($con, $sql)) {
-		echo "<script> alert('ได้ทำการลบชื่อผู้ดูเเล เรียบร้อย!!');window.location.href='personal.php';</script>";
+		// echo "<script> alert('ได้ทำการลบชื่อผู้ดูเเล เรียบร้อย!!');window.location.href='personal.php';</script>";
+
 	} else {
 		echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
 	}
@@ -219,7 +283,7 @@ if ($type == "addresort") {
 	$sql = "DELETE FROM `tb_roomtype` WHERE `tb_roomtype`.`id` = $id";
 
 	if (mysqli_query($con, $sql)) {
-		echo "<script> alert('ได้ทำการลบประเภทรีสอร์ท เรียบร้อย!!');window.location.href='edit.php?id=$resort_name';</script>";
+		// echo "<script> alert('ได้ทำการลบประเภทรีสอร์ท เรียบร้อย!!');window.location.href='edit.php?id=$resort_name';</script>";
 	} else {
 		echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
 	}
@@ -346,7 +410,14 @@ if ($type == "addresort") {
 
 
 
-				echo "<script> alert('ได้ทำการจ่ายยอดที่เหลือ เรียบร้อย!!');window.location.href='report.php?';</script>";
+				// echo "<script> alert('ได้ทำการจ่ายยอดที่เหลือ เรียบร้อย!!');window.location.href='report.php?';</script>";
+				echo "<div><script>
+			swal('สำเร็จ!','ได้ทำการจ่ายยอดที่เหลือ เรียบร้อย', 'success')
+			.then(() => {
+				setTimeout(function(){ 
+					window.location.href='report.php'
+				}, 1000);
+			});</script></div>";
 			}
 		}
 
@@ -356,5 +427,3 @@ if ($type == "addresort") {
 
 
 mysqli_close($con);
-
-?>

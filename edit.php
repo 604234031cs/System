@@ -44,25 +44,7 @@ if ($_REQUEST['id'] != "") {
                 </div>
             </div>
 
-            <script>
-                function autotable(value) {
-                    // console.log(value);
-                    $.ajax({
-                        url: "ajaxdata.php?page=edit&&name=" + value,
-                        type: "GET",
-                        success: function(result) {
-                            let ajaxdata = JSON.parse(result);
-                            console.log(ajaxdata);
-                            // $("#name_roomtype").empty();
-                            // for (let i = 0; i < ajaxdata.length; i++) {
-                            //     // console.log(ajaxdata[i]);
-                            //     $("#name_roomtype").append("<option value=" + ajaxdata[i]['id'] + ">" + ajaxdata[i]['name_roomtype'] + "</option>");
-                            // }
-                            // console.log(result);
-                        }
-                    });
-                }
-            </script>
+
             <div class="card-box mb-30">
 
                 <div class="pd-20">
@@ -85,13 +67,9 @@ if ($_REQUEST['id'] != "") {
                                     <option value="<?php echo $results1["resort_name"]; ?>"><?php echo $results1["resort_name"]; ?></option>
                                 <?php  } ?>
                             </select>
-
                         </div>
-
                     </form>
-
                 </div>
-
                 <div class="pb-20">
                     <table class="data-table table hover multiple-select-row nowrap" id="mytable">
                         <thead>
@@ -109,7 +87,7 @@ if ($_REQUEST['id'] != "") {
                         <tbody>
                             <script>
                                 function delcheck(id) {
-                                    console.log(id)
+                                    // console.log(id)
                                     $.ajax({
                                         type: 'POST',
                                         url: "add_1.php",
@@ -117,34 +95,45 @@ if ($_REQUEST['id'] != "") {
                                             id: id,
                                             type: "deletename_roomtypet",
                                         },
-                                        dataType: 'html',
+                                        dataType: 'text',
                                         success: function(result) {
-                                            // console.log(result);
-                                            if (result == 1) {
-                                                swal("ไม่สามารถลบข้อมูลได้ กรุณาตรวจสอบข้อมูลก่อน !!");
+                                            // let json = JSON.parse(result);
+                                            // console.log(result.slice(-1));
+
+                                            if (result.slice(-1) == 1) {
+                                                swal("เกิดข้อผิดพลาด!", "ไม่สามารถลบข้อมูลได้ กรุณาตรวจสอบข้อมูลอีกครั้ง", "error");
 
                                             } else {
-                                                var txt;
 
-                                                var r = confirm("คุณต้องการลบข้อมูลนี้หรือไม่!");
-                                                if (r == true) {
-                                                    $.ajax({
-                                                        type: "post",
-                                                        url: "add_1.php",
-                                                        data: {
-                                                            id: id,
-                                                            type: "delroomtype"
-                                                        },
-                                                        dataType: 'html',
-                                                        success: function(value) {
-                                                            alert("Good job!", "You clicked the button!", "success");
-                                                            window.location.reload();
+                                                swal({
+                                                        title: "คุณต้องการลบข้อมูลนี้หรือไม่?",
+                                                        text: "เมื่อลบแล้วคุณจะไม่สามารถกู้ข้อมูลนี้ได้!",
+                                                        icon: "warning",
+                                                        buttons: true,
+                                                        dangerMode: true,
+                                                    })
+                                                    .then((willDelete) => {
+                                                        if (willDelete) {
+                                                            $.ajax({
+                                                                type: "post",
+                                                                url: "add_1.php",
+                                                                data: {
+                                                                    id: id,
+                                                                    type: "delroomtype"
+                                                                },
+                                                                dataType: 'html',
+                                                                success: function(value) {
+                                                                    swal('สำเร็จ!', 'ลบข้อมูลสำเร็จ', 'success')
+                                                                        .then(() => {
+                                                                            setTimeout(function() {
+                                                                                window.location.href = 'edit.php'
+                                                                            }, 1000);
+                                                                        });
 
+                                                                }
+                                                            })
                                                         }
                                                     })
-                                                } else {
-                                                    txt = "You pressed Cancel!";
-                                                }
                                             }
 
                                         }
@@ -152,7 +141,6 @@ if ($_REQUEST['id'] != "") {
 
                                 }
                             </script>
-
                             <?php
                             //$sql ="SELECT * FROM `tb_resort` ";
                             $sql = "SELECT * FROM tb_resort INNER JOIN tb_roomtype ON tb_resort.id=tb_roomtype.id_resort WHERE tb_resort.resort_name = '" . $id . "' ";

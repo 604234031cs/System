@@ -51,6 +51,17 @@ while ($row1 = mysqli_fetch_array($result1)) {
         $bed = "";
     }
 
+    if ($row1['ch1'] == '') {
+        $ch1 = 0;
+    } else {
+        $ch1 = $row1['ch1'];
+    }
+    if ($row1['ch2'] == '') {
+        $ch2 = 0;
+    } else {
+        $ch2 = $row1['ch2'];
+    }
+
     $content .= '
     
     <table style="padding:0px!important;margin:0px!important;width:100%" cellspacing="0" cellpadding="0">
@@ -132,7 +143,7 @@ while ($row1 = mysqli_fetch_array($result1)) {
         <td width="25%" ><p style="font-size: 1em;color:black">วันที่เขาพัก : <br> Arrival :</p></td>
         <td width="25%" align="center"><b style="font-size: 1.2em;">' . $row1['checkin'] . '</b></td>
         <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">เด็ก : <br>Number of Children :</p></td>
-        <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $row1['ch1'] . '</b></td></tr></table></td>
+        <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $ch1 . '</b></td></tr></table></td>
         
     </tr>
     <tr>
@@ -140,7 +151,7 @@ while ($row1 = mysqli_fetch_array($result1)) {
         <td width="25%"><p style="font-size: 1em;color:black">วันที่เช็ดเอาท : <br> Departure  :</p></td>
         <td width="25%" align="center"><b style="font-size: 1.2em;">' . $row1['checkout'] . '</b></td>
         <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">อายุของเด็ก  : <br>Age of Children  :</p></td>
-        <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $row1['ch2'] . '</b></td></tr></table></td>
+        <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $ch2 . '</b></td></tr></table></td>
     </tr>
     <table cellpadding="0" cellspacing="0.1" width="100%"><tr><td ></td></tr></table>
     <table class="first" cellpadding="4" cellspacing="0" width="100%"><tr><td>

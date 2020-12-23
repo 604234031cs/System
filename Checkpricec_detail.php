@@ -166,7 +166,7 @@ if ($older_children >= "1") {
   <?php include "header.php"; ?>
 
   <div class="main-container">
-    <?php echo $_POST['boat']; ?>
+   
     <div class="pd-ltr-20">
       <div class="card-box pd-20 height-100-p mb-30">
         <div class="row align-items-center">
@@ -175,7 +175,7 @@ if ($older_children >= "1") {
           </div>
           <div class="col-md-8">
             <h4 class="font-20 weight-500 mb-10 text-capitalize">
-              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe <?php echo $_SESSION['tcar']; ?>
+              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe 
               <div class="weight-600 font-30 text-blue">รายละเอียดเช็คราคาห้องพักของแต่ละรีสอร์ท</div>
             </h4>
           </div>
@@ -275,7 +275,7 @@ if ($older_children >= "1") {
                 <div class="form-group">
 
                   <label>
-                    <h4 class="text-blue h4">ที่พัก </h4>
+                    <h4 class="text-blue h4">ที่พัก <?php echo $name_roomtype; ?></h4>
                   </label>
                   <!-- <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" readonly=""> -->
                   <select class="custom-select col-12" id="id" name="id" onchange="autoselect(this.value)">
@@ -1491,21 +1491,43 @@ if ($older_children >= "1") {
 
                   <script>
                     $(document).ready(function() {
+                      // if ($('input[type=radio]').prop('checked') == false) {
+                      //   swal("Radio Click")
+                      // } else {
+                      //   $("#statusdiving").val(0);
+                      // }
+                      console.log($("#statusdiving").val());
                       $("#clearradio").click(function() {
                         $("#diving1").prop("checked", false);
                         $("#diving2").prop("checked", false);
                         $("#diving3").prop("checked", false);
-                        console.log("Clear Radio Success");
+                        // console.log("Clear Radio Success")
+                        $("#statusdiving").val(null);
                       });
+
+                      $('input[type=radio]').click(function() {
+                        if ($('#diving1').prop('checked')) {
+                          // swal("D1 Check")
+                          $("#statusdiving").val(1);
+                          let sd = $("#statusdiving").val();
+                          // swal("status:=>" + sd)
+                        } else if ($('#diving2').prop('checked')) {
+                          $("#statusdiving").val(2);
+                          let sd = $("#statusdiving").val();
+                          // swal("status:=>" + sd)
+                        } else if ($('#diving3').prop('checked')) {
+                          $("#statusdiving").val(3);
+                          let sd = $("#statusdiving").val();
+                          // swal("status:=>" + sd)
+                        }
+                      })
                     });
                   </script>
-
+                  <input type="text" id='statusdiving' name="statusdiving" value='' hidden>
                   <?php
 
 
-
-
-                  if ($diving_num == $diving1) { ?>
+                  if ($diving_num == $diving1 && $_REQUEST['statusdiving'] == 1) { ?>
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>" checked>
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
@@ -1519,7 +1541,8 @@ if ($older_children >= "1") {
                       <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก</label>
                     </div>
                     <button type="button" id="clearradio" class="btn btn-warning form-control" style="color:#fff">ยกเลิกดำน้ำ</button>
-                  <?php } else if ($diving_num == $diving2) { ?>
+
+                  <?php } else if ($diving_num == $diving2 && $_REQUEST['statusdiving'] == 2) { ?>
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>">
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
@@ -1533,8 +1556,10 @@ if ($older_children >= "1") {
                       <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก</label>
                     </div>
                     <button type="button" id="clearradio" class="btn btn-warning form-control" style="color:#fff">ยกเลิกดำน้ำ</button>
+
                     <!-- <?php $diving_num; ?> -->
-                  <?php } else if ($diving_num == $diving3) { ?>
+                  <?php } else if ($diving_num == $diving3 && $_REQUEST['statusdiving'] == 3) { ?>
+
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>">
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
@@ -1548,7 +1573,9 @@ if ($older_children >= "1") {
                       <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก</label>
                     </div>
                     <button type="button" id="clearradio" class="btn btn-warning form-control" style="color:#fff">ยกเลิกดำน้ำ</button>
+
                   <?php } else { ?>
+
                     <div class="custom-control custom-radio mb-5">
                       <input type="radio" id="diving1" name="diving" class="custom-control-input" value="<?php echo $diving1; ?>">
                       <label class="custom-control-label" for="diving1">ดำน้ำโซนใน</label>
@@ -1563,7 +1590,9 @@ if ($older_children >= "1") {
                       <label class="custom-control-label" for="diving3">ดำน้ำโซนในโซนนอก</label>
 
                     </div>
+
                     <button type="button" id="clearradio" class="btn btn-warning form-control" style="color:#fff">ยกเลิกดำน้ำ</button>
+
                   <?php } ?>
 
 

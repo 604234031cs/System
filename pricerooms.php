@@ -641,9 +641,7 @@ if ($_POST['id'] != "") {
                 success: function(data) {
                     let json = JSON.parse(data);
                     if (json.status == 200) {
-                        swal("เพิ่มข้อมูลสำเร็จ!", {
-                            icon: "success",
-                        });
+                        swal("สำเร็จ!", "เพิ่มข้อมูลเรียบร้อย", "success");
                     }
                     console.log(data);
                     getcellprice();
@@ -681,7 +679,7 @@ if ($_POST['id'] != "") {
                 $('.modal-body #date2').val(dy);
                 document.getElementById("date2").min = dy;
             } else {
-                swal("กรุณาเลือกราคาห้องพัก")
+                swal("ข้อควรระวัง!", "กรุณาเลือกราคาห้องพัก", "info")
             }
             // alert(nrm);
 
@@ -746,15 +744,10 @@ if ($_POST['id'] != "") {
                     idrm: idr,
                     saveprice: prarry
                 },
-                dataType: 'html',
+                dataType: 'text',
                 success: function(data) {
-                    let json = JSON.parse(data);
-                    console.log(data);
-                    if (json.status == 200) {
-                        swal("สำเร็จ!", {
-                            icon: "success",
-                        });
-                    }
+                    // let josn = JSON.parse();
+                        swal("สำเร็จ!", "", "success");
                     $('#exampleModal').modal('hide')
                     getcellprice();
                 }
@@ -763,7 +756,6 @@ if ($_POST['id'] != "") {
 
 
         function delPriceroom() {
-
             swal({
                     title: "คุณต้องการลบหรือไม่?",
                     text: "เมื่อลบแล้วคุณจะไม่สามารถกู้คืนไฟล์จินตภาพนี้ได้!!",
@@ -778,19 +770,12 @@ if ($_POST['id'] != "") {
                         var day1 = $('.modal-body #date1').val();
                         var day2 = $('.modal-body #date2').val();
                         var dayf = new Date(day1)
-
                         var d = dayf.getDate();
-                        // alert(new String(d))
-                        // alert(day2);
                         var proom = $('.modal-body #priceroom').val();
-
                         var date1 = new Date(day1);
                         var date2 = new Date(day2);
-
                         var Difference_In_Time = date2.getTime() - date1.getTime();
                         var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-                        // console.log(Difference_In_Days);
-
                         for (let i = 1; i <= Difference_In_Days; i++) {
                             date1.setDate(date1.getDate() + 1)
                             var d = date1.getDate();
@@ -803,7 +788,6 @@ if ($_POST['id'] != "") {
                             let data = {
                                 price: proom,
                                 dy: fdate,
-
                             }
                             prarry.push(data);
                         }
@@ -812,9 +796,6 @@ if ($_POST['id'] != "") {
                             dy: day1,
                         }
                         prarry.push(data);
-                        // console.log(prarry);
-
-                        // console.log(prarry);
                         $.ajax({
                             type: 'POST',
                             url: "delpriceroom.php",
@@ -824,22 +805,13 @@ if ($_POST['id'] != "") {
                             },
                             dataType: 'html',
                             success: function(data) {
-                                let json = JSON.parse(data);
-                                // console.log(json.status);
-                                if (json.status == 200) {
-                                    swal("ลบราค้าห้องพักสำเร็จ", {
-                                        icon: "success",
-                                    });
-                                }
+                                
+                                    swal("สำเร็จ!", "ลบราค้าห้องพักสำเร็จ", "success");
+                                
                                 $('#exampleModal').modal('hide');
                                 getcellprice();
                             }
                         });
-
-
-
-
-
 
 
 
