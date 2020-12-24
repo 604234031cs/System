@@ -144,27 +144,27 @@ while ($row1 = mysqli_fetch_array($result1)) {
     </tr>
     <tr>
         <td width="25%" ><p style="font-size: 1em;color:black">วันที่เขาพัก :<br>Arrival  :</p></td>
-        <td width="25%" ><table  style="border:solid 1px #ccc;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['checkin'] . '</b></td></tr></table></td>
+        <td width="25%" ><table  ><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['checkin'] . '</b></td></tr></table></td>
         <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">เตียงเสริม :<br>Number of Extra Beds :</p></td>
         <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $row1["extrabed"] . '</b></td></tr></table></td>
     </tr>
     <tr>
         <td width="25%" ><p style="font-size: 1em;color:black">วันที่เช็ดเอาท :<br>Number of Extra Beds  :</p></td>
-        <td width="25%" ><table  style="border:solid 1px #ccc;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['checkout'] . '</b></td></tr></table></td>
+        <td width="25%" ><table  ><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['checkout'] . '</b></td></tr></table></td>
         <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">จํานวนผู้ใหญ่  :<br>Number of Adults  :</p></td>
         <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $row1['customers'] . '</b></td></tr></table></td>
       
     </tr>
     <tr>
       <td width="25%" ><p style="font-size: 1em;color:black">ทริปเที่ยว  :<br>Trip :</p></td>
-      <td width="25%" ><table  style="border:solid 1px #ccc;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['adult'] . '</b></td></tr></table></td>
+      <td width="25%" ><table  ><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['adult'] . '</b></td></tr></table></td>
       <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">เด็ก อายุ 4-10 ปี :<br>Age for 4-10 Yrs:</p></td>
       <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $ch1 . '</b></td></tr></table></td>
     </tr>
     
     <tr>
         <td width="25%" ><p style="font-size: 1em;color:black">บริการโดย :<br>Trip By :</p></td>
-        <td width="25%" ><table  style="border:solid 1px #ccc;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['Byyy'] . '</b></td></tr></table></td>
+        <td width="25%" ><table  ><tr><td><b style="font-size: 1.2em;color:black"> ' . $row1['Byyy'] . '</b></td></tr></table></td>
         <td width="25%" style="background-color: #DCDCDC" ><p style="font-size: 1em;color:black">
 เด็ก อายุ 0-3 ปี :<br>Age for 0-3 Yrs:</p></td>
         <td width="25%" style="background-color: #DCDCDC" ><table  style="border:solid 1px #fff;padding:3px;"><tr><td><b style="font-size: 1.2em;color:black">' . $ch2 . '</b></td></tr></table></td>
@@ -183,9 +183,9 @@ while ($row1 = mysqli_fetch_array($result1)) {
 
 
     <table class="first" cellpadding="4" cellspacing="3" width="100%" >
-    <tr><td colspan="4"><b>รายละเอียดการชำระเงิน (Payment Detail:)</b></td></tr>
+    <tr><td colspan="4"><b>รายละเอียดการชำระเงิน (Payment Detail) :</b></td></tr>
     <tr>
-        <td width="12% " ><b style="font-size: 1em;color:black">มัดจำ / Dep. :</b></td>
+        <td width="12% " ><b style="font-size: 1em;color:black">มัดจำ / Dep :</b></td>
         <td width="15%" style="background-color: #DCDCDC;color:black;text-align:right">' . number_format($row1['Sales'], 2) . '</td>
         <td width="15%" ><b style="font-size: 1em;color:black">ราคาสุทธิ/ Price :</b></td>
         <td width="20%" style="background-color: #DCDCDC;color:black;text-align:right">' . number_format($row1['sum'], 2) . '</td>

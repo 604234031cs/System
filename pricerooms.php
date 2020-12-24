@@ -463,22 +463,32 @@ if ($_POST['id'] != "") {
                             run++;
                             var txtd = "" + dayn;
                             var prm = "";
+                            var npr = '';
                             var txtcd = n3 + "-" + n2.padStart(2, '0') + "-" + txtd.padStart(2, '0');
                             var dn = new Date(txtcd)
-                            // console.log(pr_room);
+                            // console.log(pr_room[0]['date_start'].length);
                             for (let ii = 0; ii < maxpr; ii++) {
-                                // console.log("pr_room=>" + pr_room[ii]['idroom'] + "txtcd=>" + idrm);
-                                if (pr_room[ii]['date_start'] == txtcd && pr_room[ii]['idroom'] == idrm) {
-                                    prm = pr_room[ii]['price_room'];
+
+                                for (let jj = 0; jj < pr_room[ii]['date_start']; j++) {
+                                    // echo $key['date_start'][$i].
+                                    // "=>".$key['priceDay'][$i].
+                                    // "<br>";
+                                    if (pr_room[ii]['date_start'] == txtcd && pr_room[ii]['idroom'] == idrm) {
+                                        prm = pr_room[ii]['price_room'];
+                                    }
+
                                 }
+                                // console.log("pr_room=>" + pr_room[ii]['idroom'] + "txtcd=>" + idrm);
+                            
+
                             }
+
 
                             if (dc <= dn) {
-                                txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' ondblclick=\"del(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" value='" + prm + "' id='prset" + run + "'></td>";
+                                txtrow += "<td><input type='text' placeholder='" + npr + "' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "'></td>";
                             } else {
-                                txtrow += "<td><input type='text' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' disabled></td>";
+                                txtrow += "<td><input type='text' placeholder='" + npr + "' style='width:100%;font-size:12px!important;text-align:right!important' oncontextmenu=\"mouseclick(" + run + ",'" + txtcd + "'," + idrm + ",'" + namerm + "'" + ")\" onchange=\"saveauto(" + run + ",'" + txtcd + "'," + idrm + ")\" value='" + prm + "' id='prset" + run + "' disabled></td>";
                             }
-
 
 
                             // maxday++;
@@ -498,26 +508,30 @@ if ($_POST['id'] != "") {
         function getcellprice() {
             var year = $('#ybox').val();
             var mont = $('#monbox').val();
+            var idreosrt = $('#nameresort').val();
+            console.log("id=>" + idreosrt);
             var y1 = "" + year.padStart(2, '0')
             var m1 = "" + mont.padStart(2, '0')
             // console.log("Year:=>"+year+"Mont:=>"+m1);
             $.ajax({
                 type: 'POST',
-                url: "ajaxdata.php?page=showpriceroom&year=" + y1 + "&mont=" + m1,
+                url: "ajaxdata.php?page=showpriceroom&year=" + y1 + "&mont=" + m1 + "&idresort=" + idreosrt,
                 dataType: 'json',
                 success: function(data) {
                     pr_room = [];
                     $.each(data, function(index, element) {
                         let text = {
-                            'idroom': element.ID_room,
+                            'idroom': element.id,
                             'date_start': element.date_start,
-                            'price_room': element.price_room,
+                            'price_room': element.priceDay,
+                            'price_roomtype': element.price_roomtype
                         }
                         pr_room.push(text);
                     });
-                    // console.log(data);
+                    console.log(pr_room);
                     tocal(pr_room);
                 }
+
             });
         }
 
@@ -747,7 +761,7 @@ if ($_POST['id'] != "") {
                 dataType: 'text',
                 success: function(data) {
                     // let josn = JSON.parse();
-                        swal("สำเร็จ!", "", "success");
+                    swal("สำเร็จ!", "", "success");
                     $('#exampleModal').modal('hide')
                     getcellprice();
                 }
@@ -805,9 +819,9 @@ if ($_POST['id'] != "") {
                             },
                             dataType: 'html',
                             success: function(data) {
-                                
-                                    swal("สำเร็จ!", "ลบราค้าห้องพักสำเร็จ", "success");
-                                
+
+                                swal("สำเร็จ!", "ลบราค้าห้องพักสำเร็จ", "success");
+
                                 $('#exampleModal').modal('hide');
                                 getcellprice();
                             }

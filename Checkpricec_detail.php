@@ -166,7 +166,7 @@ if ($older_children >= "1") {
   <?php include "header.php"; ?>
 
   <div class="main-container">
-   
+
     <div class="pd-ltr-20">
       <div class="card-box pd-20 height-100-p mb-30">
         <div class="row align-items-center">
@@ -175,7 +175,7 @@ if ($older_children >= "1") {
           </div>
           <div class="col-md-8">
             <h4 class="font-20 weight-500 mb-10 text-capitalize">
-              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe 
+              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe
               <div class="weight-600 font-30 text-blue">รายละเอียดเช็คราคาห้องพักของแต่ละรีสอร์ท</div>
             </h4>
           </div>
@@ -2145,6 +2145,7 @@ if ($older_children >= "1") {
 
 
 
+
             <div id="table15" style="height: 90%;display: none;">
               <h4 class="text-blue h4" align="center">ราคา 15%</h4>
               <table class="table table-bordered">
@@ -2174,7 +2175,7 @@ if ($older_children >= "1") {
                   <?php if ($car != "") { ?>
                     <tr>
                       <th scope="row">ค่ารถ</th>
-                      <th scope="row"><?php echo $car ?></th>
+                      <th scope="row"><?php echo $car_num1; ?></th>
 
 
                     </tr>
@@ -2184,7 +2185,7 @@ if ($older_children >= "1") {
                   <?php if ($boat != "") { ?>
                     <tr>
                       <th scope="row">ค่าเรือ</th>
-                      <th scope="row"><?php echo $boat ?></th>
+                      <th scope="row"> <?php echo $boat_num1 ?></th>
 
 
                     </tr>
@@ -2194,7 +2195,7 @@ if ($older_children >= "1") {
                   <?php if ($diving != "") { ?>
                     <tr>
                       <th scope="row">ค่าดำน้ำ</th>
-                      <th scope="row"><?php echo $diving ?></th>
+                      <th scope="row"> <?php echo $diving_num ?></th>
 
 
                     </tr>
@@ -2307,7 +2308,7 @@ if ($older_children >= "1") {
                   <?php if ($car != "") { ?>
                     <tr>
                       <th scope="row">ค่ารถ</th>
-                      <th scope="row"><?php echo $car ?></th>
+                      <th scope="row"><?php echo $car_num1; ?></th>
 
 
                     </tr>
@@ -2317,7 +2318,7 @@ if ($older_children >= "1") {
                   <?php if ($boat != "") { ?>
                     <tr>
                       <th scope="row">ค่าเรือ</th>
-                      <th scope="row"><?php echo $boat ?></th>
+                      <th scope="row"><?php echo $boat_num1 ?></th>
 
 
                     </tr>
@@ -2327,7 +2328,7 @@ if ($older_children >= "1") {
                   <?php if ($diving != "") { ?>
                     <tr>
                       <th scope="row">ค่าดำน้ำ</th>
-                      <th scope="row"><?php echo $diving ?></th>
+                      <th scope="row"><?php echo $diving_num ?></th>
 
 
                     </tr>
