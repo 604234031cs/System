@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 header('Content-Type: text/html; charset=utf-8');
 require_once('tcpdf/tcpdf.php');
 
@@ -29,15 +28,20 @@ $obj_pdf->Image($image_file, 18, 4, 100, '', 'png', '', 'c', false, 400, '', fal
 
 
 
-$date = date("d-m-Y");
+$date = date("Y-m-d");
+
 
 
 // $date = "12-12-2020";
 
 $connect = '';
-
-$content = '
-    <table class="first" cellpadding="4" cellspacing="6">
+$connect = mysqli_connect("localhost", "root", "", "booking");   //("localhost", "istadium_01", "Aa123654", "istadium_01");
+$sql1 = "SELECT * FROM tb_report   WHERE id_booking ='" . $_GET["id_booking"] . "'";
+$result1 = mysqli_query($connect, $sql1);
+while ($row1 = mysqli_fetch_assoc($result1)) {
+  $day = substr($row1['package'], 0, 1);
+  $content = '
+    <table class="first" cellpadding="4" cellspacing="1">
     <tr>
         <td width="30%" > </td>
         <td width="40%"> </td> 
@@ -46,89 +50,87 @@ $content = '
         </td>
     </tr>
     </table>
-    <table class="first" cellpadding="4" cellspacing="6">
+  <table><tr><td></td></tr></table>
+  
+    <table class="first" cellpadding="4" cellspacing="4">
     <tr>
-        
-        <td  width="20%" ><b style="font-size: 1em;">ชื่อผู้ถือกรรมธรรม์</b></td>
+        <td  width="19%" ><b style="font-size: 1em;">ชื่อผู้ถือกรรมธรรม์</b></td>
         <td  width="30%" align="center;">บริษัท เข็มทิศ ไอทินเนอระรี จำกัด</td>
-        <td  width="25%" ><b style="font-size: 1em;">เลขกรรมธรรม์</b></td>
-        <td  width="25%" align="center">04519-20181/POL/000005-557</td> 
+        <td  width="16%" ><b style="font-size: 1em;">เลขกรรมธรรม์</b></td>
+        <td  width="30%" align="center">04519-20181/POL/000005-557</td> 
     </tr>
      <tr>
         <td  width="19%" ><b style="font-size: 1em;">จำนวนนักท่องเที่ยว</b></td>
-        <td  width="6%" align="center">2</td>
-        <td  width="10%" ><b style="font-size: 1em;">คน</b></td>
+        <td  width="3.5%" align="center">' . $row1['customers'] . '</td>
+        <td  width="6.5%" ><b style="font-size: 1em;">คน</b></td>
         <td  width="15%" align="center"><b style="font-size: 1em;">จำนวนมัคคุเทศก์</b></td>  
         <td  width="10%" align="center">0</td>  
-        <td  width="10%" align="center"><b style="font-size: 1em;">คน</b></td>  
+        <td  width="4%" align="center"><b style="font-size: 1em;">คน</b></td>  
         <td  width="10%" align="center"><b style="font-size: 1em;">รวม</b></td>  
-        <td  width="10%" align="center">2</td>  
+        <td  width="10%" align="center">0</td>  
         <td  width="10%" align="center"><b style="font-size: 1em;">คน</b></td>  
-
     </tr>
     <tr>
       <td  width="30%" ><b style="font-size: 1em;">วันคุ้มครองตามโปรแกรมทัวร์ จำนวน</b></td>
-      <td  width="10%" align="center">3</td>
-      <td  width="15%" ><b style="font-size: 1em;">วัน          วันที่เริ่ม</b></td>
-      <td  width="20%" align="center">11/12/63 เวลา 08.30 น.</td>
-      <td  width="10%" align="center"><b style="font-size: 1em;">สิ้นสุดวันที่</b></td>
-      <td  width="20%" align="center">13/12/63 เวลา 17.30 น.</td>
-
-
+      <td  width="5%" align="center">' . $day . '</td>
+      <td  width="10.5%" ><b style="font-size: 1em;">วัน   วันที่เริ่ม</b></td>
+      <td  width="21%" align="center">' . $row1['checkin'] . ' เวลา 08.30 น.</td>
+      <td  width="10%" align="center"><b style="font-size: 1em;">วันที่สิ้นสุด</b></td>
+      <td  width="21%" align="center">' . $row1['checkout'] . ' เวลา 17.30 น.</td>
     </tr>
-
-  
 </table>
     ';
+}
 
-// $content .= '
-
-
-
-//   ';
-
-
-
-$connect = mysqli_connect("localhost", "root", "", "booking");   //("localhost", "istadium_01", "Aa123654", "istadium_01");
 $sql1 = "SELECT * FROM tb_voucher   WHERE id_bookink ='" . $_GET["id_booking"] . "' AND status ='9'";
 $result1 = mysqli_query($connect, $sql1);
 
 
-$content1 = '';
 
-while ($row1 = mysqli_fetch_array($result1)) {
-  $id_booking = $row1['id_bookink'];
+$content1 = ' <style>
 
-
-  $content1 .= '
-<br><br><br>
-<style>
 .tdd tr th{
   border: 1px solid black;
   border-collapse: collapse;
+  margin-left: auto; 
+  margin-right: auto;
 }
+
 </style>
 
-<table style="width:100%" class="tdd">
-<tr >
-    <th >ลำดับ</th>
-    <th >ชื่อ - สกุล</th> 
-    <th >อายุ</th>
-  </tr>
+<table style="margin:0px!important;width:100%!important;" class="tdd" align="center">
   <tr >
-    <th >1</th>
-    <th >' . $row1['service_name'] . '</th> 
-    <th >' . $row1['note'] . '</th>
-  </tr>  
-  </table>';
+      <th style="width:25%;">ลำดับ</th>
+      <th style="width:50%;">ชื่อ - สกุล</th> 
+      <th style="width:25%;">อายุ</th>
+    </tr>';
 
-  // $content1 .= '   <tr >
-  //   <th >1</th>
-  //   <th >' . $row1['service_name'] . '</th> 
-  //   <th >' . $row1['note'] . '</th>
-  // </tr> ';
-}
+$i = 0;
+while ($row1 = mysqli_fetch_assoc($result1)) {
+  // echo $i;
+  $id_booking = $row1['id_bookink'];
+  $i++;
+  $content1 .= '
   
+    <tr >
+      <th style="width:25%;">' . $i . '</th>
+      <th style="width:50%;" >' . $row1['service_name'] . '</th> 
+      <th style="width:25%;">' . $row1['note'] . '</th>
+    </tr>  
+   ';
+}
+
+if ($i < 10) {
+  for ($j = $i + 1; $j <= 10; $j++) {
+    $content1 .= '
+                <tr>
+                  <th style="width:25%;"></th>
+                  <th style="width:50%;"></th>
+                  <th style="width:25%;"></th>
+                </tr>';
+  }
+}
+$content1 .= ' </table>';
 //$content1 .= fetch_data();  
 
 

@@ -12,7 +12,7 @@ if ($resurt == true) {
     $sql = "UPDATE priceroom set price_room ='$val' where ID_room ='$idr' and date_start='$dy'";
     if ($query = mysqli_query($con, $sql)) {
         $arr = [
-            'status' => 200,
+            'status' => 201,
             'val' => 'SuccesEdit'
         ];
         echo json_encode($arr);

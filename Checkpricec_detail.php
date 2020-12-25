@@ -175,7 +175,7 @@ if ($older_children >= "1") {
           </div>
           <div class="col-md-8">
             <h4 class="font-20 weight-500 mb-10 text-capitalize">
-              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe
+              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe <?php echo $t3; ?>
               <div class="weight-600 font-30 text-blue">รายละเอียดเช็คราคาห้องพักของแต่ละรีสอร์ท</div>
             </h4>
           </div>
@@ -199,8 +199,6 @@ if ($older_children >= "1") {
         $diff = $diff_result - 1;
         $arrDate = [];
         for ($i = 0; $i <= $diff; $i++) {
-
-
           array_push($arrDate,  date("Y-m-d", strtotime("+$i days", strtotime($Checkin))));
           $datedate55 = date("Y-m-d", strtotime("+$diff days", strtotime($Checkin)));
           $sql55 = "SELECT * FROM `priceroom` WHERE `date_start` = '" . $datedate55 . "' AND `ID_room` = '" . $name_roomtype . "'";
@@ -1265,36 +1263,6 @@ if ($older_children >= "1") {
                   } else {
                     nextDateField.value = full2day;
                   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                   nextWidget.click();
                   nextWidget.focus();
                   return;

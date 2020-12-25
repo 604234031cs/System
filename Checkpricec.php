@@ -6,25 +6,25 @@ session_start();
 error_reporting(0);
 ?>
 <?php
-$sql11 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '9'";
+$sql11 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '1'";
 $query11 = mysqli_query($con, $sql11);
 $results11 = mysqli_fetch_assoc($query11);
 $diving1 = $results11["price"];
 // $tcar = $results11["name"];
 $_SESSION['tcar'] = $results11["name"];
 
-$sql22 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '99'";
+$sql22 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '2'";
 $query22 = mysqli_query($con, $sql22);
 $results22 = mysqli_fetch_assoc($query22);
 $diving2 = $results22["price"];
 $_SESSION['tboast'] = $results22["name"];
 
-$sql33 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '999'";
-$query33 = mysqli_query($con, $sql33);
-$results33 = mysqli_fetch_assoc($query33);
-$diving3 = $results33["price"];
-// $tdiving = $results33["name"];
-$_SESSION['tdiving'] = $results33["name"];
+// $sql33 = "SELECT * FROM `tb_car_boat_diving` WHERE `status` = '3'";
+// $query33 = mysqli_query($con, $sql33);
+// $results33 = mysqli_fetch_assoc($query33);
+// $diving3 = $results33["price"];
+// // $tdiving = $results33["name"];
+// $_SESSION['tdiving'] = $results33["name"];
 
 ?>
 
