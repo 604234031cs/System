@@ -2153,7 +2153,11 @@ if ($older_children >= "1") {
                   <?php if ($boat != "") { ?>
                     <tr>
                       <th scope="row">ค่าเรือ</th>
+<<<<<<< HEAD
                       <th scope="row"> <?php echo $boat_num1 ?></th>
+=======
+                      <th scope="row"><?php echo $boat_num1 ?></th>
+>>>>>>> d2e00438a94fbbf18ad342ccf6e0ce071b1eb79d
 
 
                     </tr>
@@ -2163,7 +2167,11 @@ if ($older_children >= "1") {
                   <?php if ($diving != "") { ?>
                     <tr>
                       <th scope="row">ค่าดำน้ำ</th>
+<<<<<<< HEAD
                       <th scope="row"> <?php echo $diving_num ?></th>
+=======
+                      <th scope="row"><?php echo $diving_num ?></th>
+>>>>>>> d2e00438a94fbbf18ad342ccf6e0ce071b1eb79d
 
 
                     </tr>
