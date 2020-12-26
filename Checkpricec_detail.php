@@ -175,7 +175,7 @@ if ($older_children >= "1") {
           </div>
           <div class="col-md-8">
             <h4 class="font-20 weight-500 mb-10 text-capitalize">
-              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe <?php echo $t3; ?>
+              Welcome Akira Lipe , Ananya Lipe , Thechic Lipe
               <div class="weight-600 font-30 text-blue">รายละเอียดเช็คราคาห้องพักของแต่ละรีสอร์ท</div>
             </h4>
           </div>
@@ -273,7 +273,7 @@ if ($older_children >= "1") {
                 <div class="form-group">
 
                   <label>
-                    <h4 class="text-blue h4">ที่พัก <?php echo $name_roomtype; ?></h4>
+                    <h4 class="text-blue h4">ที่พัก</h4>
                   </label>
                   <!-- <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" readonly=""> -->
                   <select class="custom-select col-12" id="id" name="id" onchange="autoselect(this.value)">
@@ -2153,13 +2153,9 @@ if ($older_children >= "1") {
                   <?php if ($boat != "") { ?>
                     <tr>
                       <th scope="row">ค่าเรือ</th>
-<<<<<<< HEAD
+
                       <th scope="row"> <?php echo $boat_num1 ?></th>
-=======
-                      <th scope="row"><?php echo $boat_num1 ?></th>
->>>>>>> d2e00438a94fbbf18ad342ccf6e0ce071b1eb79d
-
-
+                      <!-- <th scope="row"><?php echo $boat_num1 ?></th> -->
                     </tr>
                   <?php } else {
                   } ?>
@@ -2167,13 +2163,8 @@ if ($older_children >= "1") {
                   <?php if ($diving != "") { ?>
                     <tr>
                       <th scope="row">ค่าดำน้ำ</th>
-<<<<<<< HEAD
                       <th scope="row"> <?php echo $diving_num ?></th>
-=======
-                      <th scope="row"><?php echo $diving_num ?></th>
->>>>>>> d2e00438a94fbbf18ad342ccf6e0ce071b1eb79d
-
-
+                      <!-- <th scope="row"><?php echo $diving_num ?></th> -->
                     </tr>
                   <?php } else {
                   } ?>

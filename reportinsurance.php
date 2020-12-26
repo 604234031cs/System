@@ -37,8 +37,14 @@ $date = date("Y-m-d");
 $connect = '';
 $connect = mysqli_connect("localhost", "root", "", "booking");   //("localhost", "istadium_01", "Aa123654", "istadium_01");
 $sql1 = "SELECT * FROM tb_report   WHERE id_booking ='" . $_GET["id_booking"] . "'";
+
 $result1 = mysqli_query($connect, $sql1);
+// $row2 = mysqli_fetch_assoc($result1);
+
+
 while ($row1 = mysqli_fetch_assoc($result1)) {
+  $noid_booking = $row1['noid_booking'];
+  $id_booking = $row1['id_booking'];
   $day = substr($row1['package'], 0, 1);
   $content = '
     <table class="first" cellpadding="4" cellspacing="1">
@@ -81,11 +87,14 @@ while ($row1 = mysqli_fetch_assoc($result1)) {
 </table>
     ';
 }
+if ($noid_booking != null && $noid_booking != "") {
+  $idb = $noid_booking;
+} else {
+  $idb = $id_booking;
+}
 
-$sql1 = "SELECT * FROM tb_voucher   WHERE id_bookink ='" . $_GET["id_booking"] . "' AND status ='9'";
-$result1 = mysqli_query($connect, $sql1);
-
-
+$sql1 = "SELECT * FROM tb_voucher   WHERE id_bookink ='$idb' AND status ='9'";
+$result2 = mysqli_query($connect, $sql1);
 
 $content1 = ' <style>
 
@@ -106,9 +115,9 @@ $content1 = ' <style>
     </tr>';
 
 $i = 0;
-while ($row1 = mysqli_fetch_assoc($result1)) {
+while ($row1 = mysqli_fetch_assoc($result2)) {
   // echo $i;
-  $id_booking = $row1['id_bookink'];
+  // $id_booking = $row1['id_bookink'];
   $i++;
   $content1 .= '
   
@@ -136,5 +145,5 @@ $content1 .= ' </table>';
 
 $obj_pdf->writeHTML($content);
 $obj_pdf->writeHTML($content1);
-$name = 'Invoice-' . $id_booking . '.pdf';
-$obj_pdf->Output($name, 'I');
+// $name = 'Invoice-' . $id_booking . '.pdf';
+$obj_pdf->Output("PP", 'I');
