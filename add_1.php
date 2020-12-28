@@ -201,7 +201,7 @@ if ($type == "addresort") {
 
 	// แก้ไขชื่อรีสอร์ท
 	$Username = $_REQUEST['Username'];
-	$Password = md5($_REQUEST['Password']);
+	$Password = $_REQUEST['Password'];
 	$Name = $_REQUEST['Name'];
 	$status = $_REQUEST['status'];
 
@@ -321,6 +321,7 @@ if ($type == "addresort") {
 		$extrabed = $ss5['extrabed'];
 		$customers = $ss5['customers'];
 		$checkin = $ss5['checkin'];
+
 		$checkout = $ss5['checkout'];
 		$deposit = $ss5['deposit'];
 		$car = $ss5['car'];
@@ -376,36 +377,37 @@ if ($type == "addresort") {
 
 				//----------------------- LINE-------------------
 				// $Token = "LLHQCmiOVjOjpwiAAiblUjOONK5kUqEVyObBCNwdTIL";
+				$Token = "etxmEbZ2cY5OvNGJtUS5dJcaR1gXVbdmpiJ0tuRCVTY";
 				// $message = "\nเลขที่ " . $text . "\nชื่อลูกค้า :" . $name . " \nโรงเเรมที่จอง: " . $room_name . "\nวันที่เช็คอิน: " . $checkin . "\nวันที่เช็คเอาท์: " . $checkout . "\nยอดคงเหลือ 0\nยอดเงินในการชำระ: " . $deposit1 . "\nยอดสุทธิ: " . $sum;
+				$message = "\nเลขที่ " . $text . "\nชื่อลูกค้า :" . $name . " \nโรงเเรมที่จอง: " . $room_name . "\nวันที่เช็คอิน: " . $checkin . "\nวันที่เช็คเอาท์: " . $checkout . "\nยอดคงเหลือ 0\nยอดเงินในการชำระ: " . $deposit1 . "\nยอดสุทธิ: " . $sum;
 
 
 
-				// $lineapi = $Token; // ใส่ token key ที่ได้มา
-				// $mms = trim($message); // ข้อความที่ต้องการส่ง
+				 $lineapi = $Token; // ใส่ token key ที่ได้มา
+				$mms = trim($message); // ข้อความที่ต้องการส่ง
 
-				// date_default_timezone_set("Asia/Bangkok");
-				// $chOne = curl_init();
-				// curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
-				// // SSL USE 
-				// curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
-				// curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
-				// //POST 
-				// curl_setopt($chOne, CURLOPT_POST, 1);
-				// curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=$mms");
-				// curl_setopt($chOne, CURLOPT_FOLLOWLOCATION, 1);
-				// $headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer ' . $lineapi . '',);
-				// curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
-				// curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
-				// $result = curl_exec($chOne);
-				// //Check error 
-				// if (curl_error($chOne)) {
-				// 	echo "<script> alert(''error:'" . curl_error($chOne) . "');</script>";
-				// } else {
-				// 	$result_ = json_decode($result, true);
-				// 	// echo "status : ".$result_['status']; echo "message : ". $result_['message'];
-				// }
-				// curl_close($chOne);
-
+				date_default_timezone_set("Asia/Bangkok");
+				$chOne = curl_init();
+				curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
+				// SSL USE 
+				curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
+				curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
+				//POST 
+				curl_setopt($chOne, CURLOPT_POST, 1);
+				curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=$mms");
+				curl_setopt($chOne, CURLOPT_FOLLOWLOCATION, 1);
+				$headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer ' . $lineapi . '',);
+				curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
+				curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
+				$result = curl_exec($chOne);
+				//Check error 
+				if (curl_error($chOne)) {
+					echo "<script> alert(''error:'" . curl_error($chOne) . "');</script>";
+				} else {
+					$result_ = json_decode($result, true);
+					// echo "status : ".$result_['status']; echo "message : ". $result_['message'];
+				}
+				curl_close($chOne);
 				//------------------------------------end LINE----------------------------------------------
 
 

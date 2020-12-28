@@ -377,9 +377,9 @@ while ($valued =  mysqli_fetch_assoc($querydriving)) {
                                 $sql = "SELECT * FROM tb_report where checkin like '%$datenow%' ORDER BY id DESC";
                             } else {
                                 if ($_REQUEST["resort_name"] == "1") {
-                                    $sql = "SELECT *  FROM tb_report  WHERE transaction_date >= '$date_star' AND transaction_date <= '$date_end' ";
+                                    $sql = "SELECT *  FROM tb_report  WHERE checkin >= '$date_star' AND checkout <= '$date_end' ";
                                 } else {
-                                    $sql = "SELECT *  FROM tb_report  WHERE transaction_date >= '$date_star' AND transaction_date <= '$date_end' AND room_name = '$resort_name'";
+                                    $sql = "SELECT *  FROM tb_report  WHERE checkin >= '$date_star' AND checkout <= '$date_end' AND room_name = '$resort_name'";
                                 }
                             }
 
